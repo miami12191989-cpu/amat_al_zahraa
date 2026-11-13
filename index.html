@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>amat_al_zahraa — InfoSec Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e17;--surface:#111a2b;--surface-2:#182338;--border:#233149;--text:#e8eefb;--muted:#8fa1bf;--accent:#4f8cff;--accent-2:#22d3ee;--green:#34d399;--amber:#fbbf24;--red:#f87171;--sidebar-w:290px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(1100px 620px at 85% -12%,#14233d 0%,transparent 62%),radial-gradient(900px 520px at 5% 110%,#10233a 0%,transparent 60%),var(--bg);color:var(--text);min-height:100vh;display:flex;line-height:1.85;font-size:15.5px;-webkit-font-smoothing:antialiased}
+html[dir="rtl"] body{font-family:'Cairo',system-ui,sans-serif}
+html[dir="ltr"] body{font-family:'Inter',system-ui,sans-serif}
+.sidebar{width:var(--sidebar-w);flex:0 0 var(--sidebar-w);height:100vh;position:sticky;top:0;background:linear-gradient(180deg,#0d1526 0%,#080d17 100%);border-inline-end:1px solid var(--border);display:flex;flex-direction:column;padding:18px 14px 20px;overflow-y:auto;z-index:60}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-thumb{background:#1d2a42;border-radius:6px}
+.brand{display:flex;align-items:center;gap:12px;padding:6px 8px 18px;border-bottom:1px solid var(--border);margin-bottom:14px}
+.logo{width:44px;height:44px;border-radius:12px;flex:0 0 44px;background:linear-gradient(135deg,#4f8cff,#22d3ee);display:grid;place-items:center;font-weight:800;font-size:1rem;color:#04101f;font-family:'JetBrains Mono',monospace}
+.brand strong{display:block;font-size:.85rem;line-height:1.3;font-family:'JetBrains Mono',monospace;color:#fff}
+.brand small{display:block;color:var(--muted);font-size:.68rem;line-height:1.4}
+.nav{display:flex;flex-direction:column;gap:3px;flex:1}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:11px;cursor:pointer;color:var(--muted);font-size:.83rem;font-weight:600;background:transparent;border:1px solid transparent;font-family:inherit;text-align:start;width:100%;transition:all .18s;line-height:1.5}
+.nav-item:hover{background:var(--surface);color:var(--text);border-color:var(--border)}
+.nav-item.active{background:linear-gradient(90deg,rgba(79,140,255,.2),rgba(34,211,238,.05));color:#fff;border-color:rgba(79,140,255,.4)}
+html[dir="rtl"] .nav-item.active{background:linear-gradient(270deg,rgba(79,140,255,.2),rgba(34,211,238,.05))}
+.nav-icon{font-size:1.05rem;flex:0 0 auto}
+.nav-badge{font-size:.65rem;background:rgba(79,140,255,.15);color:#9cc4ff;padding:1px 7px;border-radius:10px;margin-inline-start:auto;font-weight:700}
+.sidebar-foot{margin-top:14px;padding:12px;border-radius:12px;background:var(--surface);border:1px solid var(--border);font-size:.72rem;color:var(--muted);text-align:center;line-height:1.8}
+.sidebar-foot .author{color:#4f8cff;font-weight:700;font-size:.78rem;display:block;margin-top:4px;font-family:'JetBrains Mono',monospace}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;padding:12px 26px;background:rgba(10,14,23,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.topbar-title{font-weight:700;font-size:.92rem;color:#cfe0ff;flex:1;min-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-spacer{flex:1}
+.icon-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap}
+.icon-btn:hover{border-color:var(--accent);background:var(--surface-2);color:#fff}
+.icon-btn.on{background:linear-gradient(135deg,rgba(79,140,255,.28),rgba(34,211,238,.18));border-color:rgba(79,140,255,.55);color:#fff}
+.hamburger{display:none;font-size:1.1rem;padding:8px 12px}
+.content{padding:30px 34px 100px;max-width:1020px;width:100%;margin:0 auto;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{display:flex;align-items:center;gap:16px;padding:20px 22px;margin-bottom:26px;border-radius:16px;background:linear-gradient(135deg,rgba(79,140,255,.14),rgba(34,211,238,.05));border:1px solid rgba(79,140,255,.28)}
+.hero-icon{width:56px;height:56px;flex:0 0 56px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.35)}
+.hero h1{font-size:1.4rem;letter-spacing:-.3px;line-height:1.4;margin-bottom:2px}
+.hero p{color:var(--muted);font-size:.86rem;line-height:1.5}
+.lec-badge{display:inline-block;padding:2px 10px;border-radius:20px;background:rgba(79,140,255,.18);color:#9cc4ff;font-size:.72rem;font-weight:700;margin-bottom:6px;border:1px solid rgba(79,140,255,.3)}
+.content h3{font-size:1.16rem;margin:30px 0 12px;color:#cfe0ff;padding-inline-start:12px;border-inline-start:3px solid var(--accent);line-height:1.5}
+.content h3:first-child{margin-top:0}
+.content h4{font-size:.96rem;margin:16px 0 6px;color:#dbe7ff}
+.content p{margin:0 0 14px;color:#bdcbe2}
+.content ul,.content ol{margin:0 0 16px;padding-inline-start:22px;color:#bdcbe2}
+.content li{margin-bottom:7px}
+.content strong{color:#fff}
+code{font-family:'JetBrains Mono',monospace;background:rgba(79,140,255,.13);color:#9cc4ff;padding:2px 7px;border-radius:6px;font-size:.83em;direction:ltr;display:inline-block;border:1px solid rgba(79,140,255,.16)}
+pre.code{background:#070c15;border:1px solid var(--border);border-radius:12px;padding:16px 18px;overflow-x:auto;direction:ltr;text-align:left;margin:0 0 20px;line-height:1.75}
+pre.code code{background:none;padding:0;border:none;border-radius:0;color:#c9d9f5;font-size:.82rem;display:block;white-space:pre}
+.callout{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:12px;margin:0 0 18px;border:1px solid;font-size:.88rem;line-height:1.8}
+.callout > span:first-child{font-size:1.1rem;line-height:1.4}
+.callout.info{background:rgba(79,140,255,.08);border-color:rgba(79,140,255,.28);color:#c3d6f5}
+.callout.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.28);color:#f2dfae}
+.callout.good{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.28);color:#b5ecd6}
+.callout.deep{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.28);color:#c4b5fd}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:0 0 20px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:0 0 20px}
+.mini-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:.2s}
+.mini-card:hover{border-color:rgba(79,140,255,.45);transform:translateY(-2px)}
+.mini-card p{font-size:.85rem;margin:0;color:#a9b9d4;line-height:1.7}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:0 0 20px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:400px}
+th{background:var(--surface-2);text-align:start;padding:12px 15px;font-weight:700;color:#dbe7ff;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:11px 15px;border-bottom:1px solid rgba(35,49,73,.6);color:#b3c2da;vertical-align:top;line-height:1.7}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(79,140,255,.05)}
+.flow{display:flex;flex-direction:column;margin:0 0 22px}
+.flow-step{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:.2s}
+.flow-step:hover{border-color:rgba(79,140,255,.45)}
+.flow-step .num{flex:0 0 30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04101f;font-weight:800;display:grid;place-items:center;font-size:.82rem;font-family:'JetBrains Mono',monospace}
+.flow-step > div{flex:1;min-width:0}
+.flow-step p{font-size:.85rem;margin:0;color:#a9b9d4}
+.flow-arrow{display:grid;place-items:center;color:var(--accent);font-size:1rem;height:26px;opacity:.75}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:0 0 22px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 12px;text-align:center;transition:.2s}
+.step:hover{border-color:rgba(79,140,255,.5);transform:translateY(-2px)}
+.step .badge{width:32px;height:32px;border-radius:50%;margin:0 auto 9px;display:grid;place-items:center;font-weight:800;font-size:.82rem;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#04101f;font-family:'JetBrains Mono',monospace}
+.step h4{font-size:.84rem;margin-bottom:3px}
+.step p{font-size:.76rem;color:var(--muted);margin:0;line-height:1.6}
+.exam-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.exam-top span{font-size:.85rem;color:var(--muted)}
+.question{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;transition:.2s}
+.question.answered{border-color:rgba(79,140,255,.35)}
+.q-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:6px}
+.q-num{flex:0 0 28px;height:28px;border-radius:8px;display:grid;place-items:center;background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.35);color:#9cc4ff;font-weight:800;font-size:.8rem;font-family:'JetBrains Mono',monospace}
+.q-head h4{font-size:.95rem;line-height:1.7;color:#e2eaf8;margin:0;padding-top:3px}
+.opt{display:flex;gap:11px;align-items:center;padding:10px 13px;border-radius:10px;border:1px solid var(--border);margin-top:8px;cursor:pointer;transition:.15s;font-size:.88rem;color:#bdcbe2}
+.opt:hover{border-color:rgba(79,140,255,.5);background:rgba(79,140,255,.06)}
+.opt input{accent-color:var(--accent);cursor:pointer;width:16px;height:16px;flex:0 0 auto}
+.opt.correct{border-color:var(--green);background:rgba(52,211,153,.13);color:#b5ecd6}
+.opt.wrong{border-color:var(--red);background:rgba(248,113,113,.13);color:#f9c3c3}
+.why{margin-top:12px;padding:11px 14px;border-radius:10px;background:rgba(79,140,255,.08);border:1px solid rgba(79,140,255,.24);font-size:.83rem;color:#c3d6f5;line-height:1.8}
+.exam-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--accent);color:#fff;transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,#4f8cff,#22d3ee);border:none;color:#04101f;box-shadow:0 10px 26px -12px rgba(79,140,255,.9)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.result{margin-top:20px;padding:22px;border-radius:14px;text-align:center;background:linear-gradient(135deg,rgba(79,140,255,.16),rgba(34,211,238,.07));border:1px solid rgba(79,140,255,.35)}
+.result .score{font-size:2.4rem;font-weight:800;color:#fff;line-height:1.2;font-family:'JetBrains Mono',monospace}
+.result .score small{font-size:1rem;color:var(--muted);font-weight:600}
+.result p{font-size:.9rem;color:#c3d6f5;margin:6px 0 0}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-bottom:24px}
+.game-card{background:linear-gradient(135deg,var(--surface),var(--surface-2));border:1px solid var(--border);border-radius:16px;padding:22px;cursor:pointer;transition:all .22s;position:relative;overflow:hidden}
+.game-card::before{content:'';position:absolute;top:0;inset-inline-start:0;width:4px;height:100%;background:var(--game-color,var(--accent));opacity:.9}
+.game-card:hover{border-color:var(--game-color,var(--accent));transform:translateY(-4px);box-shadow:0 14px 40px -18px var(--game-color,rgba(79,140,255,.5))}
+.game-card .icon{font-size:2.4rem;margin-bottom:10px;line-height:1}
+.game-card .title{font-size:1.08rem;font-weight:800;margin-bottom:5px;color:#fff}
+.game-card .desc{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:14px;min-height:44px}
+.game-card .meta{display:flex;justify-content:space-between;align-items:center;font-size:.76rem;color:#9cc4ff;padding-top:12px;border-top:1px solid var(--border)}
+.game-card .meta span:last-child{color:var(--amber);font-weight:700;font-family:'JetBrains Mono',monospace}
+.game-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:14px}
+.game-stat{display:flex;flex-direction:column;align-items:center;min-width:60px;gap:2px}
+.game-stat .lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.game-stat .val{font-size:1.05rem;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace;line-height:1.2}
+.game-stat .val.timer{color:var(--amber)}
+.game-stat .val.timer.danger{color:var(--red);animation:pulse 1s infinite}
+.game-stat .val.score{color:var(--green)}
+.game-stat .val.lives{color:var(--red);font-size:1rem;letter-spacing:1px}
+.game-stat .val.streak{color:var(--amber);font-size:.95rem}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.game-progress-bar{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:22px}
+.game-progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .35s;border-radius:3px}
+.game-question{font-size:1.08rem;font-weight:600;line-height:1.8;margin-bottom:18px;color:#e2eaf8;padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:center}
+.game-options{display:grid;gap:11px;margin-bottom:16px}
+.game-opt{padding:15px 20px;background:var(--surface);border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all .18s;font-size:.95rem;display:flex;align-items:center;gap:14px;color:var(--text);font-family:inherit;text-align:start;width:100%;line-height:1.5}
+.game-opt:not(.locked):hover{border-color:var(--accent);background:rgba(79,140,255,.08);transform:translateY(-1px)}
+.game-opt .letter{flex:0 0 34px;height:34px;border-radius:9px;background:var(--surface-2);display:grid;place-items:center;font-weight:800;font-family:'JetBrains Mono',monospace;font-size:.9rem;border:1px solid var(--border);transition:.2s}
+.game-opt.correct{border-color:var(--green);background:rgba(52,211,153,.14)}
+.game-opt.correct .letter{background:var(--green);color:#04101f;border-color:var(--green)}
+.game-opt.wrong{border-color:var(--red);background:rgba(248,113,113,.14)}
+.game-opt.wrong .letter{background:var(--red);color:#04101f;border-color:var(--red)}
+.game-opt.locked{cursor:default;opacity:.95}
+.game-feedback{padding:14px 18px;border-radius:12px;margin-bottom:16px;font-size:.9rem;line-height:1.85;animation:fade .3s}
+.game-feedback.good{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.42);color:#b5ecd6}
+.game-feedback.bad{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.42);color:#f9c3c3}
+.game-feedback strong{display:block;margin-bottom:5px;font-size:.95rem}
+.game-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.result-screen{text-align:center;padding:44px 22px;background:linear-gradient(135deg,rgba(79,140,255,.16),rgba(34,211,238,.06));border:1px solid rgba(79,140,255,.35);border-radius:18px;margin-bottom:20px;animation:fade .4s}
+.result-screen .emoji{font-size:4.5rem;line-height:1;margin-bottom:8px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.result-screen h2{font-size:1.55rem;margin-bottom:6px;color:#fff}
+.result-screen .big-score{font-size:3.5rem;font-weight:900;color:#fff;font-family:'JetBrains Mono',monospace;line-height:1;margin:18px 0 4px;text-shadow:0 0 40px rgba(79,140,255,.6)}
+.result-screen .sub{color:var(--muted);margin-bottom:22px;font-size:.9rem}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px auto;max-width:520px}
+.result-stat{background:rgba(255,255,255,.05);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.08)}
+.result-stat .lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.result-stat .val{font-size:1.4rem;font-weight:800;font-family:'JetBrains Mono',monospace}
+.new-high{display:inline-block;padding:7px 16px;background:linear-gradient(135deg,var(--amber),#f59e0b);color:#04101f;border-radius:20px;font-weight:800;font-size:.82rem;margin:8px 0;animation:pulse 1.5s infinite}
+body.focus .sidebar{display:none}
+body.focus .content{max-width:840px;padding-top:40px}
+body.focus .topbar{background:transparent;backdrop-filter:none;border-bottom-color:transparent}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:55;backdrop-filter:blur(2px)}
+.lecture-filter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px}
+.lecture-filter h4{font-size:.9rem;margin-bottom:12px;color:#dbe7ff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.lecture-filter h4 span:last-child{color:var(--muted);font-weight:600;font-size:.78rem;font-family:'JetBrains Mono',monospace}
+.lecture-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.lec-chip{padding:7px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:6px}
+.lec-chip:hover{border-color:var(--accent);color:#fff}
+.lec-chip.active{background:linear-gradient(135deg,rgba(79,140,255,.3),rgba(34,211,238,.2));border-color:var(--accent);color:#fff}
+.lec-chip .count{font-size:.7rem;background:rgba(255,255,255,.1);padding:1px 6px;border-radius:10px;font-family:'JetBrains Mono',monospace}
+.lec-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.lec-actions button{padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:inherit;font-size:.74rem;cursor:pointer;font-weight:600;transition:all .15s}
+.lec-actions button:hover{color:#fff;border-color:var(--accent);background:rgba(79,140,255,.08)}
+.q-total{font-size:.76rem;color:var(--amber);font-weight:700;margin-top:10px;font-family:'JetBrains Mono',monospace}
+.q-total.low{color:var(--red)}
+@media (max-width:900px){
+  .hamburger{display:inline-flex}
+  .sidebar{position:fixed;top:0;bottom:0;inset-inline-start:0;height:100dvh;width:280px;transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 0 60px rgba(0,0,0,.7)}
+  html[dir="rtl"] .sidebar{transform:translateX(105%)}
+  html[dir="ltr"] .sidebar{transform:translateX(-105%)}
+  body.nav-open .sidebar{transform:translateX(0)}
+  body.nav-open .overlay{display:block}
+  .content{padding:22px 18px 90px}
+  .hero{padding:16px;gap:12px}
+  .hero-icon{width:46px;height:46px;flex:0 0 46px;font-size:1.3rem}
+  .hero h1{font-size:1.15rem}
+  .topbar{padding:10px 16px}
+  .games-grid{grid-template-columns:1fr}
+  .result-stats{grid-template-columns:1fr}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .icon-btn .lbl{display:none}
+  .icon-btn{padding:8px 11px}
+  .game-top{padding:10px 12px;gap:6px}
+  .game-stat{min-width:48px}
+  .game-stat .val{font-size:.9rem}
+}
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="logo">A.Z</div>
+    <div>
+      <strong>amat_al_zahraa</strong>
+      <small>InfoSec Studio</small>
+    </div>
+  </div>
+  <nav class="nav" id="nav"></nav>
+  <div class="sidebar-foot">
+    📚 10 محاضرات + 6 ألعاب
+    <span class="author">amat_al_zahraa</span>
+  </div>
+</aside>
+<div class="main">
+  <header class="topbar">
+    <button class="icon-btn hamburger" id="hamburger" title="القائمة">☰</button>
+    <div class="topbar-title" id="topTitle"></div>
+    <div class="topbar-spacer"></div>
+    <button class="icon-btn" id="langBtn" title="Language">🌐 <span class="lbl" id="langLbl">English</span></button>
+    <button class="icon-btn" id="focusBtn" title="Focus">🎯 <span class="lbl" id="focusLbl">وضع التركيز</span></button>
+  </header>
+  <main class="content" id="content"></main>
+</div>
+<script>
+const state = { lang:'ar', section:'lec1', focus:false, selectedLectures: JSON.parse(localStorage.getItem('selLectures')||'null') || [1,2,3,4,5,6,7,8,9,10] };
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = arr => { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const pickN = (a,n) => shuffle(a).slice(0,n);
+const t = k => T[state.lang][k];
+
+function saveSelectedLectures(){ localStorage.setItem('selLectures', JSON.stringify(state.selectedLectures)); }
+function renderLectureFilter(bank){
+  const counts = {}; for(let i=1;i<=10;i++) counts[i]=0;
+  bank.forEach(q => { if(q.lec>=1 && q.lec<=10) counts[q.lec]++; });
+  const total = state.selectedLectures.reduce((s,l)=>s+counts[l],0);
+  const isAr = state.lang==='ar';
+  const chips = [];
+  for(let i=1;i<=10;i++){
+    const active = state.selectedLectures.includes(i);
+    chips.push(`<button class="lec-chip ${active?'active':''}" data-lec="${i}">L${i} <span class="count">${counts[i]}</span></button>`);
+  }
+  return `<div class="lecture-filter">
+    <h4><span>${isAr?'📚 اختر المحاضرات':"📚 Select lectures"}</span><span>${state.selectedLectures.length}/10</span></h4>
+    <div class="lecture-chips">${chips.join('')}</div>
+    <div class="lec-actions">
+      <button data-action="all">${isAr?'الكل':'All'}</button>
+      <button data-action="none">${isAr?'مسح':'Clear'}</button>
+      <button data-action="common">${isAr?'أساسية 1-5':'Basics 1-5'}</button>
+      <button data-action="adv">${isAr?'متقدمة 6-10':'Advanced 6-10'}</button>
+    </div>
+    <div class="q-total ${total===0?'low':''}">${isAr?'📊 الأسئلة المتاحة:':'📊 Available:'} ${total}</div>
+  </div>`;
+}
+function attachLectureFilter(onChange){
+  document.querySelectorAll('.lec-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const lec = parseInt(chip.dataset.lec);
+      if(state.selectedLectures.includes(lec)) state.selectedLectures = state.selectedLectures.filter(l=>l!==lec);
+      else state.selectedLectures.push(lec);
+      state.selectedLectures.sort((a,b)=>a-b);
+      saveSelectedLectures();
+      onChange();
+    });
+  });
+  document.querySelectorAll('.lec-actions button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const a = btn.dataset.action;
+      if(a==='all') state.selectedLectures=[1,2,3,4,5,6,7,8,9,10];
+      else if(a==='none') state.selectedLectures=[];
+      else if(a==='common') state.selectedLectures=[1,2,3,4,5];
+      else if(a==='adv') state.selectedLectures=[6,7,8,9,10];
+      saveSelectedLectures();
+      onChange();
+    });
+  });
+}
+
+const T = {
+  ar:{langBtn:'English', focusOn:'وضع التركيز', focusOff:'إنهاء التركيز', examIntro:'أجب عن الأسئلة ثم اضغط «تصحيح».', submit:'تصحيح الإجابات', reset:'إعادة المحاولة', explanation:'التفسير', question:'سؤال', howToPlay:'كيف تلعب؟', howToPlayDesc:'اختر المحاضرات ثم اللعبة. الأسئلة تُسحب عشوائياً!', qCount:'سؤال', infiniteQ:'∞', score:'النقاط', time:'الوقت', lives:'الحيوات', streak:'التتابع', next:'التالي', correct:'إجابة صحيحة!', wrong:'إجابة خاطئة', gameOver:'انتهت اللعبة', newHigh:'رقم قياسي جديد!', playAgain:'العب مجدداً', otherGames:'اختر لعبة أخرى', points:'نقطة', correctLabel:'صحيحة', wrongLabel:'خاطئة', accuracy:'الدقة', bestStreak:'أفضل تتابع', quitConfirm:'هل تريد إنهاء اللعبة؟'},
+  en:{langBtn:'العربية', focusOn:'Focus Mode', focusOff:'Exit Focus', examIntro:'Answer the questions, then press "Check Answers".', submit:'Check Answers', reset:'Try Again', explanation:'Explanation', question:'Question', howToPlay:'How to play?', howToPlayDesc:'Select lectures then pick a game. Questions drawn randomly!', qCount:'questions', infiniteQ:'∞', score:'Score', time:'Time', lives:'Lives', streak:'Streak', next:'Next', correct:'Correct!', wrong:'Wrong', gameOver:'Game Over', newHigh:'New High Score!', playAgain:'Play Again', otherGames:'Other Games', points:'points', correctLabel:'Correct', wrongLabel:'Wrong', accuracy:'Accuracy', bestStreak:'Best streak', quitConfirm:'Quit the game?'}
+};
+
+const SECTIONS = [
+{id:'lec1', icon:'🛡️', num:'L1', title:{ar:'مقدمة في أمن المعلومات', en:'Introduction to Information Security'}, sub:{ar:'CIA + Threat + Vulnerability + Risk + Controls', en:'CIA + Threat + Vulnerability + Risk + Controls'}, body:{
+ar:`<span class="lec-badge">المحاضرة 1</span>
+<h3>ما هو أمن المعلومات؟</h3>
+<p><strong>أمن المعلومات</strong> (InfoSec) هو ممارسة حماية المعلومات من الوصول غير المصرح به، الاستخدام، التعديل، الإفصاح، التلف، أو الفقدان.</p>
+<h3>ماذا نحمي؟ (Assets)</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الأصل</th><th>مثال</th></tr></thead>
+<tbody>
+<tr><td>Data</td><td>سجلات الطلاب</td></tr>
+<tr><td>Computers</td><td>أجهزة PC والحواسيب المحمولة</td></tr>
+<tr><td>Networks</td><td>شبكة الجامعة</td></tr>
+<tr><td>Mobile Devices</td><td>الهواتف الذكية</td></tr>
+<tr><td>Documents</td><td>التقارير المطبوعة</td></tr>
+<tr><td>Accounts</td><td>حسابات البريد</td></tr>
+<tr><td>People</td><td>المستخدمون والموظفون</td></tr>
+</tbody></table></div>
+<h3>ثالوث CIA</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المبدأ</th><th>المعنى</th><th>مثال</th><th>الحماية</th></tr></thead>
+<tbody>
+<tr><td><strong>Confidentiality</strong></td><td>متاحة فقط للمصرح لهم</td><td>الطالب والموظف فقط يريان الدرجات</td><td>كلمات مرور، تشفير</td></tr>
+<tr><td><strong>Integrity</strong></td><td>صحيحة وغير معدلة</td><td>لا تغيير 85 إلى 95 بدون صلاحية</td><td>صلاحيات، hashing، نسخ</td></tr>
+<tr><td><strong>Availability</strong></td><td>متاحة عند الحاجة</td><td>نظام التسجيل شغال</td><td>نسخ احتياطي، صيانة</td></tr>
+</tbody></table></div>
+<h3>التهديد والثغرة والخطر والضابط</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المفهوم</th><th>تعريف</th><th>مثال</th></tr></thead>
+<tbody>
+<tr><td><strong>Threat</strong></td><td>شيء قد يسبب ضرراً</td><td>هاكر</td></tr>
+<tr><td><strong>Vulnerability</strong></td><td>ضعف قابل للاستغلال</td><td>كلمة مرور ضعيفة</td></tr>
+<tr><td><strong>Risk</strong></td><td>احتمالية الضرر</td><td>الحساب قد يُسرق</td></tr>
+<tr><td><strong>Control</strong></td><td>حماية تُقلل الخطر</td><td>كلمة مرور + MFA</td></tr>
+</tbody></table></div>
+<h3>أنواع الضوابط</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>النوع</th><th>الوصف</th><th>مثال</th></tr></thead>
+<tbody>
+<tr><td><strong>Administrative</strong></td><td>قواعد وإجراءات</td><td>سياسة أمنية، تدريب</td></tr>
+<tr><td><strong>Technical</strong></td><td>تقنيات</td><td>جدار ناري، تشفير</td></tr>
+<tr><td><strong>Physical</strong></td><td>فيزيائية</td><td>أقفال، كاميرات</td></tr>
+</tbody></table></div>
+<h3>InfoSec vs Cybersecurity</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>أمن المعلومات</th><th>الأمن السيبراني</th></tr></thead>
+<tbody>
+<tr><td>يحمي كل أشكال المعلومات</td><td>يركز على الرقمي</td></tr>
+<tr><td>مفهوم أوسع</td><td>جزء من أمن المعلومات</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 1</span>
+<h3>InfoSec & CIA Triad</h3>
+<p>InfoSec protects information from unauthorized access, use, modification, disclosure, damage, or loss.</p>
+<h3>CIA Triad</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Principle</th><th>Meaning</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><strong>Confidentiality</strong></td><td>Only authorized access</td><td>Only student + staff see grades</td></tr>
+<tr><td><strong>Integrity</strong></td><td>Correct & unmodified</td><td>Grade 85 can't become 95</td></tr>
+<tr><td><strong>Availability</strong></td><td>Available when needed</td><td>Portal online at registration</td></tr>
+</tbody></table></div>
+<h3>Threat, Vulnerability, Risk, Control</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Concept</th><th>Definition</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><strong>Threat</strong></td><td>Potential harm</td><td>Hacker</td></tr>
+<tr><td><strong>Vulnerability</strong></td><td>Weakness</td><td>Weak password</td></tr>
+<tr><td><strong>Risk</strong></td><td>Damage probability</td><td>Account theft</td></tr>
+<tr><td><strong>Control</strong></td><td>Reduces risk</td><td>Strong password + MFA</td></tr>
+</tbody></table></div>`}},
+
+{id:'lec2', icon:'🔐', num:'L2', title:{ar:'أساسيات التشفير', en:'Basics of Cryptography'}, sub:{ar:'Plaintext + Ciphertext + Keys', en:'Plaintext + Ciphertext + Keys'}, body:{
+ar:`<span class="lec-badge">المحاضرة 2</span>
+<h3>ما هو التشفير؟</h3>
+<p><strong>التشفير</strong> هو علم وممارسة حماية المعلومات بتحويلها إلى شكل لا يفهمه غير المصرح لهم.</p>
+<h3>حالتا البيانات</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الحالة</th><th>المعنى</th><th>مثال</th></tr></thead>
+<tbody>
+<tr><td><strong>Data at rest</strong></td><td>مخزنة</td><td>ملف على حاسوب</td></tr>
+<tr><td><strong>Data in transit</strong></td><td>تتحرك عبر شبكة</td><td>رسالة عبر الإنترنت</td></tr>
+</tbody></table></div>
+<h3>المفاهيم الأساسية</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المصطلح</th><th>التعريف</th><th>مثال</th></tr></thead>
+<tbody>
+<tr><td><strong>Plaintext</strong></td><td>المعلومات الأصلية</td><td>HELLO</td></tr>
+<tr><td><strong>Ciphertext</strong></td><td>الشكل المحمي</td><td>KHOOR</td></tr>
+<tr><td><strong>Encryption</strong></td><td>Plaintext → Ciphertext</td><td>HELLO → KHOOR</td></tr>
+<tr><td><strong>Decryption</strong></td><td>Ciphertext → Plaintext</td><td>KHOOR → HELLO</td></tr>
+<tr><td><strong>Algorithm</strong></td><td>قواعد</td><td>قاعدة الإزاحة</td></tr>
+<tr><td><strong>Key</strong></td><td>قيمة تحكم</td><td>قيمة الإزاحة 3</td></tr>
+</tbody></table></div>
+<h3>Caesar Cipher</h3>
+<pre class="code"><code>Plaintext:   HELLO
+Key:         Shift by 3
+Ciphertext:  KHOOR</code></pre>
+<h3>مثال تطبيقي — Hash</h3>
+<pre class="code"><code>import hashlib
+name = "amat al zahraa"
+hash_value = hashlib.sha256(name.encode()).hexdigest()
+print(hash_value)
+# Output: a3f5d2c8b9e7f...
+
+# Verification
+hashlib.sha256("amat al zahraa".encode()).hexdigest() == hash_value
+# True</code></pre>
+<h3>التطور التاريخي</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الحقبة</th><th>التطور</th></tr></thead>
+<tbody>
+<tr><td>Ancient</td><td>رموز ووصفات مشفرة</td></tr>
+<tr><td>Classical</td><td>Scytale + Caesar</td></tr>
+<tr><td>القرن 9</td><td>الخوارزمي + Frequency Analysis</td></tr>
+<tr><td>World Wars</td><td>Enigma</td></tr>
+<tr><td>1970s</td><td>DES + Public-Key</td></tr>
+<tr><td>اليوم</td><td>خوارزميات حديثة</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 2</span>
+<h3>Cryptography Basics</h3>
+<h3>Key Concepts</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Term</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td><strong>Plaintext</strong></td><td>Original readable</td></tr>
+<tr><td><strong>Ciphertext</strong></td><td>Protected unreadable</td></tr>
+<tr><td><strong>Encryption</strong></td><td>Plaintext → Ciphertext</td></tr>
+<tr><td><strong>Decryption</strong></td><td>Ciphertext → Plaintext</td></tr>
+<tr><td><strong>Algorithm</strong></td><td>Encryption rules</td></tr>
+<tr><td><strong>Key</strong></td><td>Controls algorithm</td></tr>
+</tbody></table></div>
+<h3>Caesar Cipher</h3>
+<pre class="code"><code>HELLO → KHOOR (shift 3)</code></pre>
+<h3>Hash Example</h3>
+<pre class="code"><code>import hashlib
+print(hashlib.sha256("amat al zahraa".encode()).hexdigest())
+# a3f5d2c8b9e7f...</code></pre>`}},
+
+{id:'lec3', icon:'🔑', num:'L3', title:{ar:'التشفير المتماثل', en:'Symmetric Encryption'}, sub:{ar:'مفتاح سري واحد + DES/3DES/AES', en:'One shared key + DES/3DES/AES'}, body:{
+ar:`<span class="lec-badge">المحاضرة 3</span>
+<h3>ما هو التشفير المتماثل؟</h3>
+<p>طريقة تشفير تستخدم <strong>مفتاحاً سرياً مشتركاً واحداً</strong> للتشفير وفك التشفير (Secret-Key Encryption).</p>
+<div class="callout deep"><span>🔍</span><div><strong>التشبيه:</strong> صندوق مقفل بمفتاح واحد. المرسل يقفل، المستقبل يفتح بنفس المفتاح. لو نسخ أحد المفتاح — انتهت الحماية!</div></div>
+<h3>الخطوات الخمس</h3>
+<div class="flow">
+<div class="flow-step"><span class="num">1</span><div><h4>Key generation</h4><p>توليد مفتاح عشوائي قوي</p></div></div>
+<div class="flow-step"><span class="num">2</span><div><h4>Secure key sharing</h4><p>الطرفان يحصلان على نفس المفتاح</p></div></div>
+<div class="flow-step"><span class="num">3</span><div><h4>Encryption</h4><p>المرسل يحول Plaintext إلى Ciphertext</p></div></div>
+<div class="flow-step"><span class="num">4</span><div><h4>Transmission</h4><p>Ciphertext يُرسل</p></div></div>
+<div class="flow-step"><span class="num">5</span><div><h4>Decryption</h4><p>المستقبل يستخدم نفس المفتاح</p></div></div>
+</div>
+<h3>Block vs Stream</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخاصية</th><th>Block</th><th>Stream</th></tr></thead>
+<tbody>
+<tr><td>المعالجة</td><td>كتل ثابتة</td><td>بت/بايت</td></tr>
+<tr><td>الاستخدام</td><td>ملفات، أقراص</td><td>بيانات مستمرة</td></tr>
+<tr><td>مثال</td><td>AES</td><td>ChaCha20</td></tr>
+</tbody></table></div>
+<h3>DES vs 3DES vs AES</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخوارزمية</th><th>Block</th><th>Key</th><th>الحالة</th></tr></thead>
+<tbody>
+<tr><td><strong>DES</strong></td><td>64 bits</td><td>56 bits</td><td>قديمة وغير آمنة</td></tr>
+<tr><td><strong>3DES</strong></td><td>64 bits</td><td>2-3 مفاتيح</td><td>تُسحب</td></tr>
+<tr><td><strong>AES</strong></td><td>128 bits</td><td>128/192/256</td><td>المعيار</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Key Size</th><th>Rounds</th></tr></thead>
+<tbody>
+<tr><td>128 bits</td><td>10</td></tr>
+<tr><td>192 bits</td><td>12</td></tr>
+<tr><td>256 bits</td><td>14</td></tr>
+</tbody></table></div>
+<h3>مثال XOR</h3>
+<pre class="code"><code>Plaintext:  10110110
+Secret Key: 11001010
+Ciphertext: 01111100   (XOR)
+
+Decrypt:
+Ciphertext: 01111100
+Secret Key: 11001010
+Plaintext:  10110110   (same key!)</code></pre>
+<h3>مثال تطبيقي — تشفير ملف</h3>
+<pre class="code"><code># Plaintext file
+grades_amat_al_zahraa.pdf
+
+# Encrypt with AES-256
+$ openssl enc -aes-256-cbc \
+    -in grades_amat_al_zahraa.pdf \
+    -out grades_amat_al_zahraa.enc \
+    -k "shared-secret-key-2026"
+
+# Decrypt
+$ openssl enc -d -aes-256-cbc \
+    -in grades_amat_al_zahraa.enc \
+    -out grades_amat_al_zahraa.pdf</code></pre>
+<h3>مشكلة توزيع المفتاح</h3>
+<p>قبل التواصل الآمن، يجب أن يحصل الطرفان على نفس المفتاح. إرسال المفتاح عبر قناة غير آمنة قد يسمح للمهاجم بنسخه. هذه هي <strong>مشكلة توزيع المفتاح</strong>.</p>
+<h3>عدد المفاتيح = n(n-1)/2</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المستخدمون</th><th>المفاتيح</th></tr></thead>
+<tbody>
+<tr><td>2</td><td>1</td></tr>
+<tr><td>10</td><td>45</td></tr>
+<tr><td>20</td><td>190</td></tr>
+</tbody></table></div>
+<h3>المزايا والعيوب</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المزايا</th><th>العيوب</th></tr></thead>
+<tbody>
+<tr><td>سريع للبيانات الكبيرة</td><td>مشاركة المفتاح صعبة</td></tr>
+<tr><td>حسابات أقل</td><td>المفتاح المسروق يكشف البيانات</td></tr>
+<tr><td>مدعوم في العتاد</td><td>إدارة المفاتيح معقدة</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 3</span>
+<h3>Symmetric Encryption</h3>
+<p>One shared secret key for encryption and decryption.</p>
+<h3>DES vs 3DES vs AES</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Algorithm</th><th>Block</th><th>Key</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>DES</td><td>64</td><td>56</td><td>Obsolete</td></tr>
+<tr><td>3DES</td><td>64</td><td>2-3 keys</td><td>Legacy</td></tr>
+<tr><td>AES</td><td>128</td><td>128/192/256</td><td>Recommended</td></tr>
+</tbody></table></div>
+<h3>AES Example</h3>
+<pre class="code"><code>$ openssl enc -aes-256-cbc \
+    -in grades_amat_al_zahraa.pdf \
+    -out grades_amat_al_zahraa.enc \
+    -k "shared-secret-key-2026"</code></pre>`}},
+
+{id:'lec4', icon:'🔐', num:'L4', title:{ar:'التشفير غير المتماثل', en:'Asymmetric Encryption'}, sub:{ar:'Public/Private + RSA + ECC', en:'Public/Private + RSA + ECC'}, body:{
+ar:`<span class="lec-badge">المحاضرة 4</span>
+<h3>ما هو التشفير غير المتماثل؟</h3>
+<p>يستخدم <strong>زوجاً من المفاتيح المترابطة رياضياً</strong>: مفتاح عام (Public) ومفتاح خاص (Private).</p>
+<h3>جدول المفتاحين</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المفتاح</th><th>من يعرفه</th><th>الدور</th></tr></thead>
+<tbody>
+<tr><td><strong>Public</strong></td><td>أي شخص</td><td>يشفر البيانات لمالكه</td></tr>
+<tr><td><strong>Private</strong></td><td>المالك فقط</td><td>يفك التشفير</td></tr>
+</tbody></table></div>
+<h3>RSA</h3>
+<p>خوارزمية 1977. أمنها يعتمد على صعوبة تحليل عدد كبير إلى عوامل أولية.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>المكوّن</th><th>المعنى</th></tr></thead>
+<tbody>
+<tr><td>p, q</td><td>عددان أوليان سريان</td></tr>
+<tr><td>n = p×q</td><td>Modulus في كلا المفتاحين</td></tr>
+<tr><td>e</td><td>Public exponent</td></tr>
+<tr><td>d</td><td>Private exponent</td></tr>
+<tr><td>Public Key</td><td>(n, e)</td></tr>
+<tr><td>Private Key</td><td>(n, d)</td></tr>
+</tbody></table></div>
+<h4>مثال RSA تعليمي</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>الخطوة</th><th>الحساب</th><th>النتيجة</th></tr></thead>
+<tbody>
+<tr><td>p, q</td><td>3, 11</td><td>عددان أوليان</td></tr>
+<tr><td>n</td><td>3×11</td><td>33</td></tr>
+<tr><td>phi</td><td>(3-1)(11-1) = 2×10</td><td>20</td></tr>
+<tr><td>e</td><td>3</td><td>Public (33, 3)</td></tr>
+<tr><td>d</td><td>3×7=21, 21 mod 20 = 1</td><td>Private (33, 7)</td></tr>
+<tr><td>تشفير M=4</td><td>4³ mod 33</td><td>C=31</td></tr>
+<tr><td>فك</td><td>31⁷ mod 33</td><td>M=4</td></tr>
+</tbody></table></div>
+<div class="callout warn"><span>⚠️</span><div>هذه أرقام تعليمية فقط. RSA الحقيقي يستخدم أعداداً ضخمة وحشواً آمناً.</div></div>
+<h3>ECC</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخاصية</th><th>الشرح</th></tr></thead>
+<tbody>
+<tr><td>مفاتيح أصغر</td><td>أمان قوي بمفاتيح صغيرة</td></tr>
+<tr><td>ECDH</td><td>اتفاق المفاتيح</td></tr>
+<tr><td>ECDSA</td><td>التوقيعات</td></tr>
+<tr><td>الاستخدام</td><td>الهواتف، IoT</td></tr>
+</tbody></table></div>
+<h3>RSA vs ECC</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخاصية</th><th>RSA</th><th>ECC</th></tr></thead>
+<tbody>
+<tr><td>الأساس</td><td>تحليل أعداد</td><td>منحنيات إهليلجية</td></tr>
+<tr><td>حجم المفتاح</td><td>أكبر</td><td>أصغر</td></tr>
+<tr><td>IoT</td><td>أقل ملاءمة</td><td>مثالي</td></tr>
+</tbody></table></div>
+<h3>التشفير الهجين</h3>
+<div class="flow">
+<div class="flow-step"><span class="num">1</span><div><h4>Public-Key</h4><p>RSA أو ECDH</p></div></div>
+<div class="flow-step"><span class="num">2</span><div><h4>Session Key</h4><p>مفتاح متماثل مؤقت</p></div></div>
+<div class="flow-step"><span class="num">3</span><div><h4>AES</h4><p>للبيانات الكبيرة</p></div></div>
+</div>
+<h3>مثال تطبيقي — شهادة رقمية</h3>
+<pre class="code"><code>Digital Certificate
+────────────────────────────
+Subject:   CN = amat al zahraa
+           O  = Technological Institute of Basra
+Public Key: RSA-2048
+Issuer:    University CA
+Valid:     2026 → 2027
+Signature: Valid</code></pre>
+<h3>خوارزميات أخرى</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخوارزمية</th><th>الغرض</th></tr></thead>
+<tbody>
+<tr><td>DSA</td><td>التوقيعات</td></tr>
+<tr><td>Diffie-Hellman</td><td>اتفاق المفاتيح</td></tr>
+<tr><td>ElGamal</td><td>تشفير وتوقيع</td></tr>
+<tr><td>ECDH / ECDSA</td><td>ECC</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 4</span>
+<h3>Asymmetric Encryption</h3>
+<p>Mathematically related key pair (public + private).</p>
+<h3>RSA vs ECC</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>RSA</th><th>ECC</th></tr></thead>
+<tbody>
+<tr><td>Math</td><td>Factorization</td><td>Elliptic curves</td></tr>
+<tr><td>Key size</td><td>Larger</td><td>Smaller</td></tr>
+<tr><td>IoT</td><td>Less fit</td><td>Ideal</td></tr>
+</tbody></table></div>
+<h3>Certificate Example</h3>
+<pre class="code"><code>Subject:   CN = amat al zahraa
+Public Key: RSA-2048
+Issuer:    University CA</code></pre>`}},
+
+{id:'lec5', icon:'🗝️', num:'L5', title:{ar:'إدارة المفاتيح', en:'Key Management'}, sub:{ar:'Lifecycle + KDC + PKI', en:'Lifecycle + KDC + PKI'}, body:{
+ar:`<span class="lec-badge">المحاضرة 5</span>
+<h3>ما هي إدارة المفاتيح؟</h3>
+<p>التعامل الآمن مع المفاتيح التشفيرية طوال دورة حياتها.</p>
+<h3>دورة حياة المفتاح (5 مراحل)</h3>
+<div class="steps">
+<div class="step"><div class="badge">1</div><h4>Generation</h4><p>توليد بقيم عشوائية</p></div>
+<div class="step"><div class="badge">2</div><h4>Distribution</h4><p>توصيل آمن</p></div>
+<div class="step"><div class="badge">3</div><h4>Storage</h4><p>حماية واستخدام مصرح</p></div>
+<div class="step"><div class="badge">4</div><h4>Rotation</h4><p>استبدال حسب السياسة</p></div>
+<div class="step"><div class="badge">5</div><h4>Recovery</h4><p>استرداد وإتلاف</p></div>
+</div>
+<h3>قواعد حماية المفاتيح</h3>
+<ul>
+<li>تقييد الوصول للمصرح لهم</li>
+<li>عدم المشاركة عبر البريد</li>
+<li>حماية نسخ الاسترداد</li>
+<li>استبدال المخترقة</li>
+</ul>
+<h3>طرق التوزيع</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الطريقة</th><th>الفكرة</th></tr></thead>
+<tbody>
+<tr><td>Manual</td><td>تسليم شخصي</td></tr>
+<tr><td>Pre-shared Key</td><td>حماية بمفتاح قديم</td></tr>
+<tr><td>Public-key Transport</td><td>تشفير بالمفتاح العام</td></tr>
+</tbody></table></div>
+<h3>KDC</h3>
+<p>خدمة موثوقة تزود الأطراف بمفاتيح جلسة (Session Keys).</p>
+<div class="flow">
+<div class="flow-step"><span class="num">1</span><div><h4>Request</h4><p>Alice تطلب من KDC مفتاح</p></div></div>
+<div class="flow-step"><span class="num">2</span><div><h4>Generate</h4><p>KDC يولّد مفتاح جلسة</p></div></div>
+<div class="flow-step"><span class="num">3</span><div><h4>Forward</h4><p>تمرير نسخة Bob</p></div></div>
+<div class="flow-step"><span class="num">4</span><div><h4>Session</h4><p>الطرفان يستخدمان نفس المفتاح</p></div></div>
+</div>
+<h3>Diffie-Hellman</h3>
+<p>بروتوكول يسمح لطرفين بإنشاء سر مشترك دون إرساله.</p>
+<div class="callout warn"><span>⚠️</span><div>بدون مصادقة، قابل لهجوم Man-in-the-Middle.</div></div>
+<h3>PKI</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المكوّن</th><th>الوظيفة</th></tr></thead>
+<tbody>
+<tr><td><strong>CA</strong></td><td>يُصدر ويوقّع الشهادات</td></tr>
+<tr><td><strong>RA</strong></td><td>يتحقق من الهوية</td></tr>
+<tr><td><strong>Certificate</strong></td><td>يربط المفتاح بالهوية</td></tr>
+<tr><td><strong>Repository</strong></td><td>يخزن الشهادات</td></tr>
+</tbody></table></div>
+<div class="callout info"><span>📌</span><div>الشهادة تحتوي على <strong>المفتاح العام</strong> فقط، وليس الخاص.</div></div>
+<h3>مثال تطبيقي — CSR</h3>
+<pre class="code"><code>Subject:
+  CN = amat_al_zahraa
+  O  = Technological Institute of Basra
+  OU = Computer Networks
+  C  = IQ
+
+Public Key: RSA-2048</code></pre>`,
+en:`<span class="lec-badge">Lecture 5</span>
+<h3>Key Lifecycle (5 stages)</h3>
+<ol><li>Generation</li><li>Distribution</li><li>Storage</li><li>Rotation</li><li>Recovery</li></ol>
+<h3>PKI Components</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Component</th><th>Function</th></tr></thead>
+<tbody>
+<tr><td>CA</td><td>Issues & signs certs</td></tr>
+<tr><td>RA</td><td>Verifies identity</td></tr>
+<tr><td>Certificate</td><td>Binds public key to identity</td></tr>
+</tbody></table></div>
+<h3>CSR Example</h3>
+<pre class="code"><code>Subject:
+  CN = amat_al_zahraa
+  O  = Technological Institute of Basra</code></pre>`}},
+
+{id:'lec6', icon:'✍️', num:'L6', title:{ar:'التوقيعات الرقمية والمصادقة', en:'Digital Signatures & Authentication'}, sub:{ar:'Hash + Signature + Certs + MFA', en:'Hash + Signature + Certs + MFA'}, body:{
+ar:`<span class="lec-badge">المحاضرة 6</span>
+<h3>التوقيع الرقمي</h3>
+<p>قيمة تشفيرية تُنشأ بمفتاح المُوقِّع الخاص، وتُتحقق بالمفتاح العام.</p>
+<h3>الخصائص الثلاث</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخاصية</th><th>المعنى</th></tr></thead>
+<tbody>
+<tr><td><strong>Authenticity</strong></td><td>التحقق من هوية الموقّع</td></tr>
+<tr><td><strong>Integrity</strong></td><td>كشف أي تغيير</td></tr>
+<tr><td><strong>Non-repudiation</strong></td><td>عدم الإنكار</td></tr>
+</tbody></table></div>
+<div class="callout warn"><span>⚠️</span><div>التوقيع <strong>لا يُشفّر</strong> المستند. السرية تحتاج تشفيراً.</div></div>
+<h3>Hash Functions</h3>
+<p>تحول رسالة بأي طول إلى قيمة ثابتة. تغيير الرسالة يغيّر الـ hash ويسبب فشل التحقق.</p>
+<h3>خطوات التوقيع والتحقق</h3>
+<div class="flow">
+<div class="flow-step"><span class="num">1</span><div><h4>Hash</h4><p>Bob يحسب hash للرسالة</p></div></div>
+<div class="flow-step"><span class="num">2</span><div><h4>Sign</h4><p>يوقّع الـ hash بمفتاحه الخاص</p></div></div>
+<div class="flow-step"><span class="num">3</span><div><h4>Send</h4><p>يرسل الرسالة + التوقيع</p></div></div>
+<div class="flow-step"><span class="num">4</span><div><h4>Verify</h4><p>Alice تتحقق بالمفتاح العام</p></div></div>
+</div>
+<h4>مثال RSA تعليمي</h4>
+<p>h=4، d=7، e=3، n=33</p>
+<div class="table-wrap"><table>
+<thead><tr><th>الخطوة</th><th>الحساب</th><th>النتيجة</th></tr></thead>
+<tbody>
+<tr><td>Sign</td><td>4⁷ mod 33</td><td>S=16</td></tr>
+<tr><td>Verify</td><td>16³ mod 33</td><td>V=4</td></tr>
+<tr><td>Result</td><td>V = h</td><td>صالح ✓</td></tr>
+</tbody></table></div>
+<h3>مثال تطبيقي — توقيع رقمي</h3>
+<pre class="code"><code>private_key = load("amat_al_zahraa_private.pem")
+
+report = open("grades.pdf", "rb").read()
+signature = private_key.sign(report, SHA256())
+
+print("Signed by: amat_al_zahraa")
+
+public_key.verify(signature, report, SHA256())
+# Valid</code></pre>
+<h3>الشهادات الرقمية</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الحقل</th><th>المحتوى</th></tr></thead>
+<tbody>
+<tr><td>Subject</td><td>اسم الموضوع</td></tr>
+<tr><td>Public key</td><td>المفتاح العام</td></tr>
+<tr><td>Issuer</td><td>CA</td></tr>
+<tr><td>Validity</td><td>التواريخ</td></tr>
+<tr><td>CA signature</td><td>توقيع CA</td></tr>
+</tbody></table></div>
+<h3>إصدار الشهادة (5 خطوات)</h3>
+<div class="steps">
+<div class="step"><div class="badge">1</div><h4>Key Pair</h4></div>
+<div class="step"><div class="badge">2</div><h4>CSR</h4></div>
+<div class="step"><div class="badge">3</div><h4>Identity Check</h4></div>
+<div class="step"><div class="badge">4</div><h4>CA Sign</h4></div>
+<div class="step"><div class="badge">5</div><h4>Install</h4></div>
+</div>
+<h3>MFA</h3>
+<div class="grid-3">
+<div class="mini-card"><h4>🧠 KNOW</h4><p>كلمة مرور، PIN</p></div>
+<div class="mini-card"><h4>📱 HAVE</h4><p>هاتف، token</p></div>
+<div class="mini-card"><h4>👁️ ARE</h4><p>بصمة، وجه</p></div>
+</div>
+<div class="callout info"><span>📌</span><div>MFA يحتاج فئات مختلفة. كلمتا مرور <strong>لا</strong> تُعدّان MFA.</div></div>
+<h3>Auth vs Authz</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Authentication</th><th>Authorization</th></tr></thead>
+<tbody>
+<tr><td>من أنت؟</td><td>ماذا تفعل؟</td></tr>
+</tbody></table></div>
+<h3>IAM</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الوظيفة</th><th>الوصف</th></tr></thead>
+<tbody>
+<tr><td>Account Management</td><td>إنشاء/تعطيل</td></tr>
+<tr><td>Authentication</td><td>التحقق</td></tr>
+<tr><td>Authorization</td><td>الصلاحيات</td></tr>
+<tr><td>Review</td><td>المراجعة</td></tr>
+<tr><td>Audit</td><td>التسجيل</td></tr>
+</tbody></table></div>
+<h3>تحسينات حديثة</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>التحسين</th><th>الفكرة</th></tr></thead>
+<tbody>
+<tr><td>Passkeys</td><td>بيانات اعتماد تشفيرية</td></tr>
+<tr><td>Risk-based Auth</td><td>فحوصات إضافية</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 6</span>
+<h3>Digital Signatures</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Property</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Authenticity</td><td>Verify signer</td></tr>
+<tr><td>Integrity</td><td>Detect changes</td></tr>
+<tr><td>Non-repudiation</td><td>Cannot deny</td></tr>
+</tbody></table></div>
+<h3>Signature Example</h3>
+<pre class="code"><code>private_key = load("amat_al_zahraa_private.pem")
+signature = private_key.sign(report, SHA256())
+print("Signed by: amat_al_zahraa")</code></pre>
+<h3>MFA Categories</h3>
+<div class="grid-3">
+<div class="mini-card"><h4>KNOW</h4><p>Password</p></div>
+<div class="mini-card"><h4>HAVE</h4><p>Phone</p></div>
+<div class="mini-card"><h4>ARE</h4><p>Fingerprint</p></div>
+</div>`}},
+
+{id:'lec7', icon:'🌐', num:'L7', title:{ar:'أمن الشبكات', en:'Network Security'}, sub:{ar:'Malware + Phishing + DoS + Firewall', en:'Malware + Phishing + DoS + Firewall'}, body:{
+ar:`<span class="lec-badge">المحاضرة 7</span>
+<h3>أمن الشبكات</h3>
+<p>حماية أجهزة الشبكة والخدمات والبيانات من الوصول غير المصرح به.</p>
+<h3>Malware</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>النوع</th><th>الخاصية</th></tr></thead>
+<tbody>
+<tr><td><strong>Virus</strong></td><td>يحتاج ملف مضيف</td></tr>
+<tr><td><strong>Worm</strong></td><td>ينتشر ذاتياً</td></tr>
+<tr><td><strong>Trojan</strong></td><td>متنكر</td></tr>
+</tbody></table></div>
+<h3>Social Engineering & Phishing</h3>
+<p>Social Engineering = التلاعب بالأشخاص. Phishing = هجوم تصيد برسائل/مواقع مزيفة.</p>
+<h3>DoS vs DDoS</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>DoS</th><th>DDoS</th></tr></thead>
+<tbody>
+<tr><td>مصدر واحد</td><td>مصادر متعددة (botnet)</td></tr>
+</tbody></table></div>
+<h3>Firewall</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Rule</th><th>Action</th><th>Reason</th></tr></thead>
+<tbody>
+<tr><td>HTTPS (443)</td><td>ALLOW</td><td>خدمة ويب</td></tr>
+<tr><td>Telnet (23)</td><td>BLOCK</td><td>غير آمن</td></tr>
+</tbody></table></div>
+<h3>IDS vs IPS</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>IDS</th><th>IPS</th></tr></thead>
+<tbody>
+<tr><td>يكتشف ويُنبّه</td><td>يكتشف ويحجب</td></tr>
+</tbody></table></div>
+<h3>تأمين الشبكات</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>السلكية</th><th>اللاسلكية</th></tr></thead>
+<tbody>
+<tr><td>تقييد الوصول الفيزيائي</td><td>WPA3</td></tr>
+<tr><td>تعطيل المنافذ</td><td>مصادقة مؤسسية</td></tr>
+<tr><td>تقسيم الشبكة</td><td>عزل الزوار</td></tr>
+</tbody></table></div>
+<h3>مثال تطبيقي — IDS Alert</h3>
+<pre class="code"><code>[2026-01-15 10:23:45] ALERT
+  Source: amat_al_zahraa-PC (192.168.1.42)
+  URL: http://malicious-site.example/invoice.pdf.exe
+  File type: PE32 executable (Trojan)
+  Action: BLOCKED by IPS
+  Status: file quarantined</code></pre>`,
+en:`<span class="lec-badge">Lecture 7</span>
+<h3>Malware Types</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Type</th><th>Characteristic</th></tr></thead>
+<tbody>
+<tr><td>Virus</td><td>Needs host file</td></tr>
+<tr><td>Worm</td><td>Self-replicates</td></tr>
+<tr><td>Trojan</td><td>Disguised</td></tr>
+</tbody></table></div>
+<h3>IDS Alert Example</h3>
+<pre class="code"><code>[2026-01-15 10:23:45] ALERT
+  Source: amat_al_zahraa-PC
+  URL: malicious/invoice.pdf.exe
+  Action: BLOCKED by IPS</code></pre>`}},
+
+{id:'lec8', icon:'💻', num:'L8', title:{ar:'أمن التطبيقات والبيانات', en:'Application & Data Security'}, sub:{ar:'SQLi + XSS + FDE + DB Security', en:'SQLi + XSS + FDE + DB Security'}, body:{
+ar:`<span class="lec-badge">المحاضرة 8</span>
+<h3>مبادئ أمن التطبيقات</h3>
+<ul>
+<li>Input Validation</li>
+<li>Least Privilege</li>
+<li>Secure Authentication</li>
+<li>Safe Error Handling</li>
+</ul>
+<h3>SQL Injection</h3>
+<pre class="code"><code>Malicious input:
+administrator' --
+
+Unsafe query:
+SELECT * FROM users WHERE username = 'administrator' --' AND password = 'secret';
+
+Result: Login bypass!</code></pre>
+<p><b>الحماية:</b> Parameterized Queries (Prepared Statements).</p>
+<h3>مثال تطبيقي — استعلام آمن</h3>
+<pre class="code"><code>-- Unsafe (vulnerable):
+SELECT * FROM students WHERE username = 'amat_al_zahraa';
+
+-- Safe (parameterized):
+PREPARE stmt FROM 'SELECT * FROM students WHERE username = ?';
+SET @user = 'amat_al_zahraa';
+EXECUTE stmt USING @user;
+
+-- Result: ID 2024-0421, Grade 85</code></pre>
+<h3>XSS</h3>
+<p>ثغرة ويب حيث محتوى غير موثوق يجعل المتصفح ينفذ سكريبت.</p>
+<p><b>الحماية:</b> Context-aware Output Encoding + CSP.</p>
+<h3>Data in Transit vs At Rest</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الحالة</th><th>الحماية</th></tr></thead>
+<tbody>
+<tr><td>In Transit</td><td>TLS/HTTPS</td></tr>
+<tr><td>At Rest</td><td>Storage encryption</td></tr>
+</tbody></table></div>
+<h3>FDE</h3>
+<ul>
+<li>حماية البيانات إذا فُقد الجهاز</li>
+<li>تشفير الملفات والنظام</li>
+<li><b>قيد:</b> لا يحمي جهازاً مفتوحاً</li>
+</ul>
+<h3>ممارسات أمن DB</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الممارسة</th><th>الفكرة</th></tr></thead>
+<tbody>
+<tr><td>Access Control</td><td>صلاحيات محدودة</td></tr>
+<tr><td>Least Privilege</td><td>فقط ما تحتاجه</td></tr>
+<tr><td>Parameterized Queries</td><td>منع SQLi</td></tr>
+<tr><td>Encryption</td><td>تشفير السجلات</td></tr>
+<tr><td>Backups</td><td>نسخ مختبرة</td></tr>
+<tr><td>Monitoring</td><td>سجلات</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 8</span>
+<h3>SQL Injection</h3>
+<pre class="code"><code>Malicious: administrator' --
+Result: Login bypass!</code></pre>
+<h3>Safe Query</h3>
+<pre class="code"><code>PREPARE stmt FROM 'SELECT * FROM students WHERE username = ?';
+SET @user = 'amat_al_zahraa';
+EXECUTE stmt USING @user;</code></pre>
+<h3>Data States</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>State</th><th>Protection</th></tr></thead>
+<tbody>
+<tr><td>In Transit</td><td>TLS</td></tr>
+<tr><td>At Rest</td><td>Encryption</td></tr>
+</tbody></table></div>`}},
+
+{id:'lec9', icon:'📋', num:'L9', title:{ar:'إدارة الأمن السيبراني', en:'Cybersecurity Management'}, sub:{ar:'Policies + IR + ISO 27001 + NIST', en:'Policies + IR + ISO 27001 + NIST'}, body:{
+ar:`<span class="lec-badge">المحاضرة 9</span>
+<h3>Policy vs Procedure</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>المفهوم</th><th>المعنى</th></tr></thead>
+<tbody>
+<tr><td><strong>Policy</strong></td><td>قاعدة = ماذا</td></tr>
+<tr><td><strong>Procedure</strong></td><td>خطوات = كيف</td></tr>
+</tbody></table></div>
+<div class="callout info"><span>📌</span><div><b>Policy:</b> فقط موظفو التسجيل يغيرون الدرجات.<br><b>Procedure:</b> تحقق الهوية → موافقة → سجّل.</div></div>
+<h3>عناصر السياسة</h3>
+<div class="steps">
+<div class="step"><div class="badge">1</div><h4>Access Control</h4></div>
+<div class="step"><div class="badge">2</div><h4>Data Protection</h4></div>
+<div class="step"><div class="badge">3</div><h4>Incident Reporting</h4></div>
+<div class="step"><div class="badge">4</div><h4>Monitoring</h4></div>
+<div class="step"><div class="badge">5</div><h4>Awareness</h4></div>
+</div>
+<h3>دورة تطوير السياسة (5 خطوات)</h3>
+<div class="flow">
+<div class="flow-step"><span class="num">1</span><div><h4>Set Goals</h4></div></div>
+<div class="flow-step"><span class="num">2</span><div><h4>Assess Risk</h4></div></div>
+<div class="flow-step"><span class="num">3</span><div><h4>Write Rules</h4></div></div>
+<div class="flow-step"><span class="num">4</span><div><h4>Apply & Train</h4></div></div>
+<div class="flow-step"><span class="num">5</span><div><h4>Review</h4></div></div>
+</div>
+<h3>Incident Response (6 خطوات)</h3>
+<div class="steps">
+<div class="step"><div class="badge">1</div><h4>Preparation</h4></div>
+<div class="step"><div class="badge">2</div><h4>Identification</h4></div>
+<div class="step"><div class="badge">3</div><h4>Containment</h4></div>
+<div class="step"><div class="badge">4</div><h4>Eradication</h4></div>
+<div class="step"><div class="badge">5</div><h4>Recovery</h4></div>
+<div class="step"><div class="badge">6</div><h4>Lessons</h4></div>
+</div>
+<h3>مثال تطبيقي — Audit Log</h3>
+<pre class="code"><code>[2026-01-15 10:23:45] user=amat_al_zahraa | action=LOGIN | result=OK
+[2026-01-15 10:23:52] user=amat_al_zahraa | action=MFA_VERIFY | result=OK
+[2026-01-15 10:24:11] user=amat_al_zahraa | action=VIEW_GRADES | result=OK
+[2026-01-15 10:25:03] user=amat_al_zahraa | action=LOGOUT | result=OK</code></pre>
+<h3>ISO 27001</h3>
+<p>معيار دولي لمتطلبات ISMS. الشهادة اختيارية.</p>
+<h3>NIST CSF 2.0</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Function</th><th>الفكرة</th></tr></thead>
+<tbody>
+<tr><td><strong>GOVERN</strong></td><td>المحور</td></tr>
+<tr><td><strong>IDENTIFY</strong></td><td>اعرف الأنظمة</td></tr>
+<tr><td><strong>PROTECT</strong></td><td>الضوابط</td></tr>
+<tr><td><strong>DETECT</strong></td><td>الكشف</td></tr>
+<tr><td><strong>RESPOND</strong></td><td>الاستجابة</td></tr>
+<tr><td><strong>RECOVER</strong></td><td>الاستعادة</td></tr>
+</tbody></table></div>
+<h3>ISO vs NIST</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخاصية</th><th>ISO</th><th>NIST</th></tr></thead>
+<tbody>
+<tr><td>النوع</td><td>معيار ISMS</td><td>إطار مرن</td></tr>
+<tr><td>الشهادة</td><td>اختيارية</td><td>لا شهادة</td></tr>
+</tbody></table></div>`,
+en:`<span class="lec-badge">Lecture 9</span>
+<h3>Policy vs Procedure</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Policy</td><td>Rule = WHAT</td></tr>
+<tr><td>Procedure</td><td>Steps = HOW</td></tr>
+</tbody></table></div>
+<h3>Audit Log</h3>
+<pre class="code"><code>[2026-01-15 10:23:45] user=amat_al_zahraa | action=LOGIN | result=OK
+[2026-01-15 10:24:11] user=amat_al_zahraa | action=VIEW_GRADES | result=OK</code></pre>
+<h3>NIST CSF 2.0</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Function</th><th>Idea</th></tr></thead>
+<tbody>
+<tr><td>GOVERN</td><td>Central</td></tr>
+<tr><td>IDENTIFY</td><td>Know systems</td></tr>
+<tr><td>PROTECT</td><td>Safeguards</td></tr>
+<tr><td>DETECT</td><td>Incidents</td></tr>
+<tr><td>RESPOND</td><td>Manage</td></tr>
+<tr><td>RECOVER</td><td>Restore</td></tr>
+</tbody></table></div>`}},
+
+{id:'lec10', icon:'☁️', num:'L10', title:{ar:'أمن السحابة وإنترنت الأشياء', en:'Cloud, IoT & Future'}, sub:{ar:'Cloud Security + IoT + Future', en:'Cloud Security + IoT + Future'}, body:{
+ar:`<span class="lec-badge">المحاضرة 10</span>
+<h3>أمن السحابة</h3>
+<p>حماية البيانات والتطبيقات والخدمات المستضافة في السحابة من الوصول غير المصرح به.</p>
+<h3>التحديات الشائعة</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>التحدي</th><th>الوصف</th></tr></thead>
+<tbody>
+<tr><td>Misconfiguration</td><td>إعدادات خاطئة</td></tr>
+<tr><td>Weak Access Control</td><td>حسابات مسروقة</td></tr>
+<tr><td>Data Exposure</td><td>ملفات مكشوفة</td></tr>
+<tr><td>Limited Visibility</td><td>سجلات ناقصة</td></tr>
+</tbody></table></div>
+<h3>المسؤولية المشتركة</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Provider</th><th>Customer</th></tr></thead>
+<tbody>
+<tr><td>مرافق DC</td><td>صلاحيات وMFA</td></tr>
+<tr><td>العتاد</td><td>إعدادات البيانات</td></tr>
+<tr><td>البنية التحتية</td><td>المراقبة</td></tr>
+</tbody></table></div>
+<h3>ممارسات الأمن السحابي</h3>
+<ul>
+<li>MFA</li>
+<li>Least Privilege</li>
+<li>Secure Configuration</li>
+<li>Data Protection</li>
+<li>Monitoring</li>
+</ul>
+<h3>مثال تطبيقي — S3 Bucket</h3>
+<pre class="code"><code>Bucket: student-records-amat_al_zahraa-2024
+
+Config (SAFE):
+  Block Public Access:  Enabled
+  Encryption:           AES-256
+  Versioning:           Enabled
+  MFA Delete:           Required
+  Access:
+    - Allow: amat_al_zahraa → read/write own
+    - Allow: staff/registrar → read all
+    - Deny:  everyone else</code></pre>
+<h3>إنترنت الأشياء (IoT)</h3>
+<p>أجهزة فيزيائية تجمع أو تتبادل البيانات عبر الشبكات.</p>
+<h3>مخاطر IoT</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>الخطر</th><th>الوصف</th></tr></thead>
+<tbody>
+<tr><td>Default Passwords</td><td>admin/admin</td></tr>
+<tr><td>Outdated Firmware</td><td>ثغرات</td></tr>
+<tr><td>Privacy Exposure</td><td>كاميرات</td></tr>
+<tr><td>Botnet Misuse</td><td>DDoS</td></tr>
+</tbody></table></div>
+<h3>ممارسات IoT</h3>
+<ul>
+<li>كلمات مرور فريدة</li>
+<li>تحديث firmware</li>
+<li>عزل الشبكة</li>
+<li>تقييد الوصول</li>
+</ul>
+<h3>التحديات المستقبلية</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>التحدي</th><th>الاستعداد</th></tr></thead>
+<tbody>
+<tr><td>AI Threats</td><td>تدريب</td></tr>
+<tr><td>Device Growth</td><td>جرد</td></tr>
+<tr><td>Quantum</td><td>تخطيط</td></tr>
+<tr><td>Supply Chain</td><td>مراجعة</td></tr>
+</tbody></table></div>
+<div class="callout good"><span>🎓</span><div>نهاية هذه الدورة ليست نهاية التعلم. استمروا في الاستكشاف وبناء عالم رقمي أكثر أماناً.</div></div>`,
+en:`<span class="lec-badge">Lecture 10</span>
+<h3>Cloud Security Challenges</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Challenge</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Misconfiguration</td><td>Wrong settings</td></tr>
+<tr><td>Weak Access Control</td><td>Stolen accounts</td></tr>
+<tr><td>Data Exposure</td><td>Exposed files</td></tr>
+<tr><td>Limited Visibility</td><td>Missing logs</td></tr>
+</tbody></table></div>
+<h3>S3 Bucket</h3>
+<pre class="code"><code>Bucket: student-records-amat_al_zahraa-2024
+Config: Private, AES-256, MFA Delete</code></pre>
+<h3>IoT Risks</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Risk</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Default Passwords</td><td>Attacker access</td></tr>
+<tr><td>Outdated Firmware</td><td>Unpatched bugs</td></tr>
+<tr><td>Privacy Exposure</td><td>Camera leaks</td></tr>
+<tr><td>Botnet Misuse</td><td>DDoS attacks</td></tr>
+</tbody></table></div>
+<h3>Future Challenges</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Challenge</th><th>Preparation</th></tr></thead>
+<tbody>
+<tr><td>AI Threats</td><td>User training</td></tr>
+<tr><td>Device Growth</td><td>Inventory</td></tr>
+<tr><td>Quantum</td><td>Post-quantum</td></tr>
+<tr><td>Supply Chain</td><td>Vendor review</td></tr>
+</tbody></table></div>`}},
+
+{id:'exam', icon:'📝', type:'exam', title:{ar:'الاختبار الشامل', en:'Full Exam'}, sub:{ar:'اختر المحاضرات ثم ابدأ', en:'Select lectures then start'}, body:{ar:'',en:''}},
+{id:'games', icon:'🎮', type:'games', title:{ar:'محاكي الألعاب', en:'Games Arcade'}, sub:{ar:'اختر المحاضرات ثم اللعبة', en:'Select lectures then game'}, body:{ar:'',en:''}}
+];
+
+const q = (lec, type, arQ, enQ, opts, ans, arE, enE) => ({lec, type, q:{ar:arQ, en:enQ}, opts: opts.map(o => ({ar:o[0], en:o[1]})), answer: ans, exp:{ar:arE, en:enE}});
+
+const QUESTIONS = [
+q(1,'mcq','ما الهدف الرئيسي لأمن المعلومات؟','Main goal of InfoSec?',
+  [['حماية المعلومات من الوصول غير المصرح','Protect from unauthorized access'],['زيادة السرعة','Speed up'],['توفير الطاقة','Save energy'],['تقليل التكلفة','Reduce cost']],0,
+  'أمن المعلومات يحمي المعلومات من الوصول غير المصرح.','InfoSec protects from unauthorized access.'),
+q(1,'mcq','ثالوث CIA = ؟','CIA Triad = ?',
+  [['Confidentiality, Integrity, Availability','Confidentiality, Integrity, Availability'],['Central, Internet, Access','Central, Internet, Access'],['Cyber, Info, Attack','Cyber, Info, Attack'],['Control, Inspect, Audit','Control, Inspect, Audit']],0,
+  'CIA = السرية + النزاهة + التوافرية.','CIA = Confidentiality + Integrity + Availability.'),
+q(1,'mcq','ماذا يعني Integrity؟','What does Integrity mean?',
+  [['البيانات صحيحة وغير معدلة','Data correct & unmodified'],['السماح للجميع','Allow everyone'],['إغلاق الخادم','Shut down server'],['حذف النسخ','Delete backups']],0,
+  'النزاهة = البيانات صحيحة وغير معدلة.','Integrity = data correct, not modified.'),
+q(1,'mcq','ما الفرق بين Threat و Vulnerability؟','Difference between Threat and Vulnerability?',
+  [['Threat يسبب ضرراً، Vulnerability ضعف','Threat causes harm, Vulnerability weakness'],['لا فرق','No diff'],['Threat أضعف','Threat weaker'],['Vulnerability يسبب ضرراً','Vulnerability direct harm']],0,
+  'Threat = شيء قد يسبب ضرر. Vulnerability = ضعف.','Threat = potential harm. Vulnerability = weakness.'),
+q(1,'mcq','ما هو Risk؟','What is Risk?',
+  [['احتمالية الضرر عند استغلال الثغرة','Probability of damage when vulnerability is exploited'],['برنامج حماية','Security software'],['مفتاح','Key'],['كلمة مرور','Password']],0,
+  'Risk = احتمال أن يستغل التهديد الثغرة.','Risk = probability threat exploits vulnerability.'),
+q(1,'mcq','أي مما يلي ضابط تقني؟','Which is Technical Control?',
+  [['جدار ناري','Firewall'],['سياسة','Policy'],['حارس','Guard'],['باب مقفل','Locked door']],0,
+  'الجدار الناري تقني.','Firewall is technical.'),
+q(1,'tf','ثالوث CIA = Confidentiality + Integrity + Availability','CIA = Confidentiality + Integrity + Availability',
+  [['صواب','True'],['خطأ','False']],0,'هذا تعريف ثالوث CIA.','This is the CIA Triad definition.'),
+q(1,'tf','كلمة المرور الضعيفة = Vulnerability','Weak password = Vulnerability',
+  [['صواب','True'],['خطأ','False']],0,'كلمة المرور الضعيفة = ثغرة.','Weak password = vulnerability.'),
+q(1,'tf','السياسة الأمنية = Physical Control','Security policy = Physical Control',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. السياسة إدارية.','False. Administrative.'),
+q(2,'mcq','ما هو Plaintext؟','What is Plaintext?',
+  [['المعلومات الأصلية المقروءة','Original readable info'],['النص المشفر','Ciphertext'],['المفتاح','Key'],['الخوارزمية','Algorithm']],0,
+  'Plaintext = المقروء قبل التشفير.','Plaintext = readable before encryption.'),
+q(2,'mcq','Encryption هو؟','Encryption is?',
+  [['Plaintext → Ciphertext','Plaintext → Ciphertext'],['Ciphertext → Plaintext','Ciphertext → Plaintext'],['حذف','Delete'],['نسخ','Copy']],0,
+  'التشفير يحول المقروء إلى محمي.','Encryption converts readable to protected.'),
+q(2,'mcq','في Caesar بمفتاح 3، HELLO تصبح؟','Caesar key 3, HELLO becomes?',
+  [['KHOOR','KHOOR'],['HELLO','HELLO'],['ABCDE','ABCDE'],['XYZ','XYZ']],0,
+  'H→K, E→H, L→O, O→R = KHOOR.','H→K, E→H, L→O, O→R = KHOOR.'),
+q(2,'tf','التشفير يضمن Availability تلقائياً','Encryption guarantees Availability automatically',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. يحمي السرية.','False. Protects confidentiality.'),
+q(2,'tf','Caesar cipher = تشفير متماثل','Caesar cipher = symmetric',
+  [['صواب','True'],['خطأ','False']],0,'مفتاح واحد.','One key.'),
+q(3,'mcq','مبدأ التشفير المتماثل؟','Symmetric principle?',
+  [['مفتاح سري واحد','One shared key'],['مفتاحان','Two keys'],['لا مفاتيح','No keys'],['مفتاح عام','Public only']],0,
+  'نفس المفتاح السري.','Same secret key.'),
+q(3,'mcq','AES-256 كم جولة؟','AES-256 rounds?',
+  [['14','14'],['10','10'],['12','12'],['20','20']],0,
+  'AES-128=10, AES-192=12, AES-256=14.','AES-128=10, 192=12, 256=14.'),
+q(3,'mcq','DES key size?','DES key size?',
+  [['56 bits','56 bits'],['128','128'],['256','256'],['64','64']],0,
+  'DES = 56 بت (قديم).','DES = 56 bits (obsolete).'),
+q(3,'mcq','أفضل خوارزمية حديثة؟','Best modern algorithm?',
+  [['AES','AES'],['DES','DES'],['3DES','3DES'],['RC4','RC4']],0,
+  'AES هو المعيار.','AES is standard.'),
+q(3,'tf','DES آمن للأنظمة الحديثة','DES secure for modern',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. قديم.','False. Obsolete.'),
+q(3,'tf','AES block size = 128 bit','AES block = 128 bit',
+  [['صواب','True'],['خطأ','False']],0,'دائماً 128 بت.','Always 128.'),
+q(4,'mcq','لإرسال سري لـ Bob:','Secret to Bob:',
+  [['مفتاح Bob العام','Bob public key'],['مفتاح Bob الخاص','Bob private key'],['مفتاح Alice','Alice key'],['مفتاح مشترك','Shared key']],0,
+  'بالمفتاح العام للمستقبل.','Recipient public key.'),
+q(4,'mcq','RSA يعتمد على؟','RSA depends on?',
+  [['تحليل الأعداد الكبيرة','Integer factorization'],['السرعة','Speed'],['الطول','Length'],['الحجم','Size']],0,
+  'صعوبة factoring.','Difficulty factoring.'),
+q(4,'mcq','لماذا ECC مناسب للـ IoT؟','Why ECC good for IoT?',
+  [['مفاتيح أصغر','Smaller keys'],['لا مفاتيح','No keys'],['أبطأ','Slower'],['حجم كبير','Big']],0,
+  'فعال للطاقة.','Energy-efficient.'),
+q(4,'tf','المفتاح الخاص يمكن حسابه من العام','Private from public',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. مستحيل.','False. Infeasible.'),
+q(4,'tf','Hybrid = غير متماثل + متماثل','Hybrid = asymmetric + symmetric',
+  [['صواب','True'],['خطأ','False']],0,'غير متماثل للمفتاح، متماثل للبيانات.','Asymmetric for key, symmetric for data.'),
+q(5,'mcq','KDC = ؟','KDC = ?',
+  [['توزيع مفاتيح جلسات','Distribute session keys'],['تشفير ملفات','Encrypt files'],['فحص فيروسات','Scan viruses'],['إصدار شهادات','Issue certs']],0,
+  'خدمة موثوقة للمفاتيح.','Trusted key service.'),
+q(5,'mcq','CA = ؟','CA = ?',
+  [['Certificate Authority','Certificate Authority'],['Client','Client'],['Cloud','Cloud'],['Central','Central']],0,
+  'CA = Certificate Authority.','CA = Certificate Authority.'),
+q(5,'mcq','مراحل دورة حياة المفتاح؟','Key lifecycle?',
+  [['5','5'],['3','3'],['4','4'],['7','7']],0,
+  'Generation, Distribution, Storage, Rotation, Recovery.','5 stages.'),
+q(5,'tf','Diffie-Hellman ينشئ سراً مشتركاً دون إرساله','DH establishes shared secret without sending',
+  [['صواب','True'],['خطأ','False']],0,'كلا الطرفان يحسبان.','Both compute.'),
+q(5,'tf','DH آمن ضد MITM بدون مصادقة','DH secure vs MITM without auth',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. يحتاج مصادقة.','False. Needs auth.'),
+q(6,'mcq','التوقيع يستخدم أي مفتاح؟','Signature uses which key?',
+  [['المفتاح الخاص','Private key'],['المفتاح العام','Public key'],['لا مفتاح','No key'],['كلاهما','Both']],0,
+  'نوقّع بالخاص.','Sign with private.'),
+q(6,'mcq','لماذا Hash قبل التوقيع؟','Why Hash?',
+  [['لتقليل الحجم','Reduce size'],['لإخفاء','Hide'],['للإسراع','Speed'],['لا داعي','Unneeded']],0,
+  'Hash يحول لـ digest ثابت.','Fixed digest.'),
+q(6,'mcq','MFA حقيقي = ؟','True MFA?',
+  [['كلمة مرور + رمز هاتف','Password + phone code'],['كلمتان','Two passwords'],['PIN+PIN','PIN+PIN'],['كلمة مرور فقط','Password only']],0,
+  'فئتان مختلفتان.','Two categories.'),
+q(6,'tf','التوقيع يشفّر المستند','Signature encrypts document',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. لا يشفّر.','False. No encryption.'),
+q(6,'tf','Authentication = من أنت؟','Auth = who are you?',
+  [['صواب','True'],['خطأ','False']],0,'نعم.','Yes.'),
+q(7,'mcq','Worm vs Virus؟','Worm vs Virus?',
+  [['Worm ينتشر ذاتياً','Worm self-replicates'],['Virus يحتاج ملف','Virus needs file'],['لا فرق','No diff'],['Worm غير ضار','Worm harmless']],0,
+  'Worm ذاتي.','Worm self-replicates.'),
+q(7,'mcq','Trojan = ؟','Trojan?',
+  [['متنكر','Disguised'],['فيروس','Virus'],['ديدان','Worm'],['جدار','Firewall']],0,
+  'Trojan يتنكر.','Trojan disguises.'),
+q(7,'mcq','DoS vs DDoS؟','DoS vs DDoS?',
+  [['واحد vs مصادر','One vs many'],['لا فرق','No diff'],['DDoS أضعف','DDoS weaker'],['DoS يستخدم botnet','DoS botnet']],0,
+  'واحد vs متعدد.','One vs many.'),
+q(7,'mcq','Firewall = ؟','Firewall?',
+  [['يرشح الترافيك','Filter traffic'],['يشفر','Encrypts'],['يفحص فيروسات','Scans viruses'],['يصدر شهادات','Issues certs']],0,
+  'يرشح حسب قواعد.','Filters by rules.'),
+q(7,'tf','WPA3 أفضل من WEP','WPA3 better than WEP',
+  [['صواب','True'],['خطأ','False']],0,'WEP مكسور.','WEP broken.'),
+q(7,'tf','DDoS من مصدر واحد','DDoS single source',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. distributed.','False. distributed.'),
+q(8,'mcq','حماية SQLi؟','SQLi defense?',
+  [['Parameterized Queries','Parameterized Queries'],['حذف DB','Drop DB'],['كلمة مرور','Password'],['تعطيل','Disable']],0,
+  'Prepared statements.','Prepared statements.'),
+q(8,'mcq','XSS = ؟','XSS?',
+  [['سكريبت في سياق موثوق','Script in trusted context'],['هجوم DNS','DNS attack'],['هجوم شبكة','Network attack'],['فيروس','Virus']],0,
+  'XSS = سكريبت.','XSS = script.'),
+q(8,'mcq','FDE = ؟','FDE?',
+  [['تشفير كامل القرص','Encrypts entire drive'],['ملف','One file'],['حذف','Delete'],['ضغط','Compress']],0,
+  'تشفير كامل.','Full disk.'),
+q(8,'tf','FDE يحمي جهازاً مفتوحاً','FDE protects open device',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. لا يحميه.','False. Does not.'),
+q(8,'tf','Parameterized Queries تمنع SQLi','Parameterized Queries prevent SQLi',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(9,'mcq','Policy vs Procedure؟','Policy vs Procedure?',
+  [['Policy=WHAT, Procedure=HOW','Policy=WHAT, Procedure=HOW'],['لا فرق','No diff'],['Policy أسرع','Policy faster'],['Procedure أعلى','Procedure higher']],0,
+  'Policy = ماذا. Procedure = كيف.','Policy = what. Procedure = how.'),
+q(9,'mcq','Containment في IR = خطوة؟','Containment step?',
+  [['3','3'],['1','1'],['5','5'],['6','6']],0,
+  'Prep, Ident, Contain...','3rd.'),
+q(9,'mcq','NIST CSF محور؟','NIST CSF center?',
+  [['GOVERN','GOVERN'],['IDENTIFY','IDENTIFY'],['PROTECT','PROTECT'],['RECOVER','RECOVER']],0,
+  'GOVERN محور.','GOVERN central.'),
+q(9,'tf','NIST CSF له شهادة رسمية','NIST has official cert',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. لا شهادة.','False. No cert.'),
+q(9,'tf','ISO 27001 شهادة اختيارية','ISO 27001 optional',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(10,'mcq','تحدي سحابي شائع؟','Cloud challenge?',
+  [['Misconfiguration','Misconfiguration'],['السرعة','Speed'],['الطاقة','Energy'],['التخزين','Storage']],0,
+  'إعدادات خاطئة.','Wrong settings.'),
+q(10,'mcq','Shared: من يحمي DC؟','Shared: who protects DC?',
+  [['المزود','Provider'],['العميل','Customer'],['لا أحد','Nobody'],['الإنترنت','Internet']],0,
+  'المزود يحمي البنية.','Provider protects infra.'),
+q(10,'mcq','IoT botnet في؟','IoT botnet in?',
+  [['DDoS','DDoS'],['تشفير','Encryption'],['تخزين','Storage'],['سرعة','Speed']],0,
+  'IoT = botnet.','IoT = botnet.'),
+q(10,'tf','MFA ضروري في السحابة','MFA in cloud',
+  [['صواب','True'],['خطأ','False']],0,'MFA ممارسة أساسية.','MFA basic.'),
+q(10,'tf','IoT خطر DDoS','IoT risks DDoS',
+  [['صواب','True'],['خطأ','False']],0,'IoT مصاب = botnet.','Infected IoT = botnet.')
+];
+
+const TERMS_DICT = [
+  {ar:'Confidentiality', dAr:'المعلومات متاحة فقط للمصرح لهم', dEn:'Only authorized access'},
+  {ar:'Integrity', dAr:'البيانات صحيحة وغير معدلة', dEn:'Correct & unmodified'},
+  {ar:'Availability', dAr:'متاحة عند الحاجة', dEn:'Accessible when needed'},
+  {ar:'Threat', dAr:'شيء قد يسبب ضرراً', dEn:'Something that may cause harm'},
+  {ar:'Vulnerability', dAr:'ضعف قابل للاستغلال', dEn:'Exploitable weakness'},
+  {ar:'Risk', dAr:'احتمالية الضرر', dEn:'Probability of damage'},
+  {ar:'Plaintext', dAr:'النص الأصلي المقروء', dEn:'Original readable'},
+  {ar:'Ciphertext', dAr:'النص المشفر', dEn:'Protected form'},
+  {ar:'Encryption', dAr:'Plaintext → Ciphertext', dEn:'Plaintext → Ciphertext'},
+  {ar:'Decryption', dAr:'Ciphertext → Plaintext', dEn:'Ciphertext → Plaintext'},
+  {ar:'Symmetric', dAr:'مفتاح سري واحد', dEn:'One shared key'},
+  {ar:'Asymmetric', dAr:'زوج مفاتيح', dEn:'Key pair'},
+  {ar:'AES', dAr:'معيار حديث، block 128', dEn:'Modern, 128 block'},
+  {ar:'DES', dAr:'قديم، key 56', dEn:'Obsolete, 56-bit'},
+  {ar:'RSA', dAr:'تحليل الأعداد الكبيرة', dEn:'Integer factorization'},
+  {ar:'ECC', dAr:'مفاتيح صغيرة، أمان مماثل', dEn:'Small keys, same security'},
+  {ar:'Digital Signature', dAr:'خاص للتوقيع، عام للتحقق', dEn:'Private signs, public verifies'},
+  {ar:'Hash', dAr:'رسالة → digest ثابت', dEn:'Message → fixed digest'},
+  {ar:'Digital Certificate', dAr:'يربط العام بهوية', dEn:'Binds public to identity'},
+  {ar:'CA', dAr:'Certificate Authority', dEn:'Certificate Authority'},
+  {ar:'MFA', dAr:'فئتان مختلفتان', dEn:'Two different categories'},
+  {ar:'Authentication', dAr:'من أنت؟', dEn:'Who are you?'},
+  {ar:'Authorization', dAr:'ماذا تفعل؟', dEn:'What can you do?'},
+  {ar:'IAM', dAr:'إدارة الهوية والوصول', dEn:'Identity & Access'},
+  {ar:'Malware', dAr:'برامج خبيثة', dEn:'Malicious software'},
+  {ar:'Virus', dAr:'يحتاج ملف مضيف', dEn:'Needs host file'},
+  {ar:'Worm', dAr:'ينتشر ذاتياً', dEn:'Self-replicates'},
+  {ar:'Trojan', dAr:'متنكر', dEn:'Disguised'},
+  {ar:'Phishing', dAr:'هندسة اجتماعية', dEn:'Social engineering'},
+  {ar:'DoS', dAr:'مصدر واحد', dEn:'One source'},
+  {ar:'DDoS', dAr:'مصادر متعددة', dEn:'Many sources'},
+  {ar:'Firewall', dAr:'يرشح الترافيك', dEn:'Filters traffic'},
+  {ar:'IDS', dAr:'يكتشف ويُنبّه', dEn:'Detects & alerts'},
+  {ar:'IPS', dAr:'يكتشف ويحجب', dEn:'Detects & blocks'},
+  {ar:'SQL Injection', dAr:'تلاعب بـ DB', dEn:'DB query manipulation'},
+  {ar:'XSS', dAr:'سكريبت في سياق موثوق', dEn:'Script in trusted context'},
+  {ar:'FDE', dAr:'تشفير كامل القرص', dEn:'Full Disk Encryption'},
+  {ar:'ISMS', dAr:'نظام إدارة أمن المعلومات', dEn:'InfoSec Mgmt System'},
+  {ar:'KDC', dAr:'توزيع مفاتيح جلسات', dEn:'Session key distribution'},
+  {ar:'PKI', dAr:'إطار الشهادات', dEn:'Cert framework'},
+  {ar:'Session Key', dAr:'مفتاح مؤقت', dEn:'Temporary key'},
+  {ar:'Non-repudiation', dAr:'عدم إنكار التوقيع', dEn:'No signature denial'}
+];
+
+const GENERATORS = [
+  () => {
+    const term = pick(TERMS_DICT);
+    const wrongs = pickN(TERMS_DICT.filter(x => x.ar !== term.ar), 3);
+    const opts = shuffle([{ar:term.dAr, en:term.dEn}, ...wrongs.map(w => ({ar:w.dAr, en:w.dEn}))]);
+    return {lec:0, type:'mcq', stem:'gen-t-'+term.ar,
+      q:{ar:`ما تعريف <strong>${term.ar}</strong>؟`, en:`What is <strong>${term.ar}</strong>?`},
+      opts, answer: opts.findIndex(o => o.ar === term.dAr),
+      exp:{ar:`${term.ar} = ${term.dAr}.`, en:`${term.ar} = ${term.dEn}.`}};
+  },
+  () => {
+    const term = pick(TERMS_DICT);
+    const wrongs = pickN(TERMS_DICT.filter(x => x.ar !== term.ar), 3);
+    const opts = shuffle([{ar:term.ar, en:term.ar}, ...wrongs.map(w => ({ar:w.ar, en:w.ar}))]);
+    return {lec:0, type:'mcq', stem:'gen-d-'+term.ar,
+      q:{ar:`أي مصطلح = <em>${term.dAr}</em>؟`, en:`Which = <em>${term.dEn}</em>?`},
+      opts, answer: opts.findIndex(o => o.ar === term.ar),
+      exp:{ar:`${term.ar} = ${term.dAr}.`, en:`${term.ar} = ${term.dEn}.`}};
+  }
+];
+
+const GAMES = [
+  {id:'speed', icon:'🔥', color:'#ef4444', title:{ar:'سباق السرعة', en:'Speed Quiz'}, desc:{ar:'20 سؤال × 15 ثانية', en:'20 q × 15s'}, qCount:20, perTime:15, totalTime:null, pointsPerQ:1000, timePenalty:true, lives:null, typeFilter:['mcq','tf']},
+  {id:'survival', icon:'❤️', color:'#f43f5e', title:{ar:'وضع البقاء', en:'Survival'}, desc:{ar:'3 حيوات × 30 سؤال', en:'3 lives × 30 q'}, qCount:30, perTime:20, totalTime:null, pointsPerQ:500, timePenalty:false, lives:3, typeFilter:['mcq','tf']},
+  {id:'timeattack', icon:'⏱️', color:'#f59e0b', title:{ar:'تحدي الزمن', en:'Time Attack'}, desc:{ar:'60 ثانية لا نهائي', en:'60s infinite'}, qCount:999, perTime:null, totalTime:60, pointsPerQ:500, timePenalty:false, lives:null, typeFilter:['mcq','tf']},
+  {id:'truefalse', icon:'✅', color:'#10b981', title:{ar:'صواب أم خطأ', en:'True/False'}, desc:{ar:'15 سؤال TF', en:'15 TF'}, qCount:15, perTime:10, totalTime:null, pointsPerQ:400, timePenalty:false, lives:null, typeFilter:['tf']},
+  {id:'marathon', icon:'🏆', color:'#a855f7', title:{ar:'الماراثون', en:'Marathon'}, desc:{ar:'30 سؤال بدون مؤقت', en:'30 q no timer'}, qCount:30, perTime:null, totalTime:null, pointsPerQ:300, timePenalty:false, lives:null, typeFilter:['mcq','tf']},
+  {id:'code', icon:'💻', color:'#06b6d4', title:{ar:'تحدي الكود', en:'Code Challenge'}, desc:{ar:'15 سؤال تقني', en:'15 technical q'}, qCount:15, perTime:25, totalTime:null, pointsPerQ:700, timePenalty:false, lives:null, typeFilter:['mcq','tf']}
+];
+
+const EXAM_QUESTIONS = [
+  {lec:1, q:{ar:'ما مبدأ CIA الذي يضمن صحة البيانات؟', en:'Which CIA ensures data correctness?'}, opts:['Confidentiality','Integrity','Availability','Authentication'], answer:1, why:{ar:'Integrity = النزاهة.', en:'Integrity = data correctness.'}},
+  {lec:1, q:{ar:'أي مما يلي ضابط إداري؟', en:'Which is Administrative Control?'}, opts:['Firewall','Security Policy','CCTV','Encryption'], answer:1, why:{ar:'السياسة إدارية.', en:'Policy is administrative.'}},
+  {lec:2, q:{ar:'Caesar key 3: HELLO → ?', en:'Caesar key 3: HELLO → ?'}, opts:['KHOOR','HELLO','ABCDE','XYZ'], answer:0, why:{ar:'H→K, E→H, L→O, O→R.', en:'H→K, E→H, L→O, O→R.'}},
+  {lec:3, q:{ar:'أي خوارزمية متماثلة؟', en:'Which is symmetric?'}, opts:['RSA','ECC','AES','DSA'], answer:2, why:{ar:'AES متماثل.', en:'AES is symmetric.'}},
+  {lec:3, q:{ar:'لماذا DES غير آمن؟', en:'Why is DES insecure?'}, opts:['key 56 بت','block كبير','بطيء','مفتاح طويل'], answer:0, why:{ar:'DES = 56 بت.', en:'DES = 56 bits.'}},
+  {lec:4, q:{ar:'لإرسال سري لـ Bob:', en:'Secret to Bob:'}, opts:['مفتاح Bob العام','مفتاح Bob الخاص','مفتاح Alice','مفتاح مشترك'], answer:0, why:{ar:'بالمفتاح العام للمستقبل.', en:'Recipient public key.'}},
+  {lec:5, q:{ar:'CA = ؟', en:'CA = ?'}, opts:['Certificate Authority','Client','Cloud','Central'], answer:0, why:{ar:'CA = Certificate Authority.', en:'CA = Certificate Authority.'}},
+  {lec:6, q:{ar:'التوقيع يستخدم:', en:'Signature uses:'}, opts:['العام','الخاص','كلمة مرور','لا مفتاح'], answer:1, why:{ar:'خاص للتوقيع.', en:'Private signs.'}},
+  {lec:6, q:{ar:'MFA حقيقي = ؟', en:'True MFA = ?'}, opts:['كلمة مرور + رمز','كلمتان','PIN+PIN','رقم'], answer:0, why:{ar:'فئتان مختلفتان.', en:'Two categories.'}},
+  {lec:7, q:{ar:'Worm vs Virus؟', en:'Worm vs Virus?'}, opts:['Worm ينتشر ذاتياً','Virus يحتاج ملف','لا فرق','Worm غير ضار'], answer:0, why:{ar:'Worm ذاتي.', en:'Worm self-replicates.'}},
+  {lec:7, q:{ar:'DoS vs DDoS؟', en:'DoS vs DDoS?'}, opts:['واحد vs مصادر','DoS أسرع','لا فرق','DDoS أضعف'], answer:0, why:{ar:'واحد vs متعدد.', en:'One vs many.'}},
+  {lec:8, q:{ar:'حماية SQLi؟', en:'SQLi defense?'}, opts:['Parameterized Queries','حذف DB','كلمة مرور','تعطيل'], answer:0, why:{ar:'Prepared statements.', en:'Prepared statements.'}},
+  {lec:8, q:{ar:'XSS = ؟', en:'XSS = ?'}, opts:['سكريبت في سياق موثوق','تعطيل','إغراق','نسخ'], answer:0, why:{ar:'XSS = سكريبت.', en:'XSS = script.'}},
+  {lec:8, q:{ar:'FDE يحمي؟', en:'FDE protects?'}, opts:['القرص كاملاً','ملف','صور','سرعة'], answer:0, why:{ar:'FDE = full disk.', en:'FDE = full disk.'}},
+  {lec:9, q:{ar:'خطوة IR الأولى؟', en:'First IR step?'}, opts:['Preparation','Containment','Recovery','Lessons'], answer:0, why:{ar:'Preparation أولاً.', en:'Preparation first.'}},
+  {lec:9, q:{ar:'NIST CSF محور؟', en:'NIST CSF center?'}, opts:['GOVERN','IDENTIFY','PROTECT','RECOVER'], answer:0, why:{ar:'GOVERN محور.', en:'GOVERN central.'}},
+  {lec:10, q:{ar:'السحابة: من يحمي DC؟', en:'Cloud: DC?'}, opts:['المزود','العميل','لا أحد','الإنترنت'], answer:0, why:{ar:'المزود يحمي البنية.', en:'Provider protects infra.'}},
+  {lec:10, q:{ar:'IoT botnet في؟', en:'IoT botnet in?'}, opts:['DDoS','تشفير','تخزين','سرعة'], answer:0, why:{ar:'IoT مصاب = botnet.', en:'Infected IoT = botnet.'}},
+  {lec:9, q:{ar:'ISO 27001 = ؟', en:'ISO 27001 = ?'}, opts:['معيار ISMS','إطار مرن','لغة','شهادة إلزامية'], answer:0, why:{ar:'معيار دولي.', en:'International standard.'}},
+  {lec:9, q:{ar:'في audit log ما الغرض؟', en:'Audit log purpose?'}, opts:['مساءلة','حذف','تشفير','عرض'], answer:0, why:{ar:'Audit = مساءلة.', en:'Audit = accountability.'}}
+];
+
+let activeGame = null;
+let currentExamQuestions = [];
+const HighScores = {
+  get(id){ return parseInt(localStorage.getItem('hs_'+id)) || 0; },
+  set(id,s){ const c=this.get(id); if(s>c){ localStorage.setItem('hs_'+id,s); return true; } return false; }
+};
+function generateQuestion(f){
+  const filtered = QUESTIONS.filter(q => state.selectedLectures.includes(q.lec) && f.includes(q.type));
+  const includeGen = state.selectedLectures.length === 10;
+  if(includeGen && Math.random() < 0.5) return pick(GENERATORS)();
+  if(filtered.length === 0) return null;
+  return pick(filtered);
+}
+function buildQuestions(def){
+  const pool = []; const seen = new Set();
+  const target = def.qCount === 999 ? 200 : def.qCount * 4;
+  let tries = 0, stale = 0;
+  while(pool.length < target && tries < 1000){
+    const q = generateQuestion(def.typeFilter);
+    if(q && !seen.has(q.stem || q.q.ar)){ seen.add(q.stem || q.q.ar); pool.push(q); stale = 0; }
+    else { stale++; if(stale > 100) break; }
+    tries++;
+  }
+  return shuffle(pool).slice(0, def.qCount);
+}
+function startGame(id){
+  const def = GAMES.find(g => g.id === id); if(!def) return;
+  if(state.selectedLectures.length === 0){
+    alert(state.lang==='ar'?'اختر محاضرة واحدة على الأقل':'Select at least one lecture');
+    return;
+  }
+  const available = QUESTIONS.filter(q => state.selectedLectures.includes(q.lec) && def.typeFilter.includes(q.type)).length;
+  if(available === 0){
+    alert(state.lang==='ar'?'لا توجد أسئلة متاحة':'No questions available');
+    return;
+  }
+  activeGame = {def, questions:buildQuestions(def), idx:0, score:0, correct:0, wrong:0,
+    streak:0, bestStreak:0, lives:def.lives, questionStart:null, totalStart:Date.now(),
+    timerId:null, finished:false, answered:null, lastPoints:0};
+  renderGamePlay(); nextQuestion();
+}
+function nextQuestion(){
+  const g = activeGame; if(!g || g.finished) return;
+  if(g.def.qCount !== 999 && g.idx >= g.questions.length) return endGame();
+  if(g.lives !== null && g.lives <= 0) return endGame();
+  if(g.def.qCount === 999 && g.idx >= g.questions.length){
+    const q = generateQuestion(g.def.typeFilter);
+    if(q) g.questions.push(q); else return endGame();
+  }
+  const q = g.questions[g.idx]; g.questionStart = Date.now(); g.answered = null;
+  renderQuestion(q); startTimer();
+}
+function startTimer(){
+  stopTimer(); const g = activeGame; if(!g || g.finished) return;
+  if(g.def.totalTime){
+    const u = () => { const e=(Date.now()-g.totalStart)/1000, r=g.def.totalTime-e;
+      if(r<=0){ stopTimer(); endGame(); } else updateTimer(r); };
+    u(); g.timerId = setInterval(u, 100);
+  } else if(g.def.perTime && g.questionStart){
+    const u = () => { const e=(Date.now()-g.questionStart)/1000, r=g.def.perTime-e;
+      if(r<=0){ stopTimer(); answerQuestion(-1); } else updateTimer(r); };
+    u(); g.timerId = setInterval(u, 100);
+  }
+}
+function stopTimer(){ if(activeGame?.timerId){ clearInterval(activeGame.timerId); activeGame.timerId=null; } }
+function updateTimer(sec){
+  const el = document.getElementById('gameTimer'); if(!el) return;
+  el.textContent = Math.ceil(sec) + 's';
+  el.classList.toggle('danger', sec <= 5);
+}
+function answerQuestion(idx){
+  const g = activeGame; if(!g || g.answered !== null) return;
+  stopTimer();
+  const q = g.questions[g.idx];
+  const correct = idx === q.answer;
+  const tSpent = (Date.now()-g.questionStart)/1000;
+  g.answered = idx; g.lastPoints = 0;
+  if(correct){
+    g.correct++; g.streak++; g.bestStreak = Math.max(g.bestStreak, g.streak);
+    let pts = g.def.pointsPerQ;
+    if(g.def.timePenalty && g.def.perTime) pts = Math.round(pts * (1 - (tSpent/g.def.perTime)*0.5));
+    if(g.def.id === 'survival') pts += g.streak*50;
+    g.lastPoints = pts; g.score += pts;
+  } else { g.wrong++; g.streak = 0; if(g.lives !== null) g.lives--; }
+  showFeedback(q, idx, correct); updateStats();
+  if(g.def.id === 'timeattack' && !g.finished){
+    setTimeout(() => { if(activeGame && !activeGame.finished && activeGame.answered !== null){ activeGame.idx++; nextQuestion(); } }, 900);
+  }
+}
+function showFeedback(q, chosen, correct){
+  document.querySelectorAll('.game-opt').forEach((el,i) => {
+    el.classList.add('locked'); el.disabled = true;
+    if(i === q.answer) el.classList.add('correct');
+    else if(i === chosen) el.classList.add('wrong');
+  });
+  const fb = document.createElement('div');
+  fb.className = 'game-feedback ' + (correct?'good':'bad');
+  fb.innerHTML = `<strong>${correct?'✓ '+t('correct')+(activeGame.lastPoints?' +'+activeGame.lastPoints:''):'✕ '+t('wrong')}</strong>${q.exp[state.lang]}`;
+  document.getElementById('gameFeedback').appendChild(fb);
+  const nb = document.getElementById('gameNextBtn'); if(nb){ nb.hidden = false; nb.focus(); }
+}
+function endGame(){
+  stopTimer(); const g = activeGame; if(!g) return;
+  g.finished = true;
+  const isNewHigh = HighScores.set(g.def.id, g.score);
+  showResult(g, isNewHigh);
+}
+function updateStats(){
+  const g = activeGame; if(!g) return;
+  const s=document.getElementById('gameScore'); const l=document.getElementById('gameLives'); const st=document.getElementById('gameStreak');
+  if(s) s.textContent = g.score;
+  if(l) l.textContent = '❤️'.repeat(Math.max(0, g.lives||0));
+  if(st) st.textContent = '🔥 ' + g.streak;
+}
+
+const contentEl = document.getElementById('content');
+const navEl = document.getElementById('nav');
+const topTitle = document.getElementById('topTitle');
+
+function renderSidebar(){
+  navEl.innerHTML = SECTIONS.map(s => `
+    <button class="nav-item ${s.id===state.section?'active':''}" data-id="${s.id}">
+      <span class="nav-icon">${s.icon}</span>
+      <span>${s.title[state.lang]}</span>
+      ${s.num ? `<span class="nav-badge">${s.num}</span>` : ''}
+    </button>`).join('');
+}
+function renderHero(sec){ return `<div class="hero"><div class="hero-icon">${sec.icon}</div><div><h1>${sec.title[state.lang]}</h1><p>${sec.sub[state.lang]}</p></div></div>`; }
+function renderSection(sec){ contentEl.innerHTML = renderHero(sec) + sec.body[state.lang]; }
+
+function renderExam(sec){
+  const filterHTML = renderLectureFilter(EXAM_QUESTIONS);
+  currentExamQuestions = EXAM_QUESTIONS.filter(q => state.selectedLectures.includes(q.lec));
+  let qHTML;
+  if(currentExamQuestions.length === 0){
+    qHTML = '<div class="callout warn"><span>⚠️</span><div>'+(state.lang==='ar'?'اختر محاضرة واحدة على الأقل':'Select at least one lecture')+'</div></div>';
+  } else {
+    qHTML = currentExamQuestions.map((q,i) => {
+      const opts = q.opts.map((o,j) => `<label class="opt" data-q="${i}" data-o="${j}"><input type="radio" name="q${i}" value="${j}"><span>${esc(o)}</span></label>`).join('');
+      return `<div class="question" id="q-${i}"><div class="q-head"><span class="q-num">${i+1}</span><h4>${q.q[state.lang]}</h4></div>${opts}<div class="why" hidden></div></div>`;
+    }).join('');
+  }
+  contentEl.innerHTML = `${renderHero(sec)}${filterHTML}
+    <div class="callout info"><span>🧠</span><div>${t('examIntro')}</div></div>
+    <div class="exam-top"><span>📝 ${currentExamQuestions.length} ${t('question')}</span><span id="progress">0 / ${currentExamQuestions.length}</span></div>
+    <div id="exam-body">${qHTML}</div>
+    <div class="exam-actions"><button class="btn primary" id="submitExam" ${currentExamQuestions.length===0?'disabled':''}>✅ ${t('submit')}</button><button class="btn" id="resetExam">🔄 ${t('reset')}</button></div>
+    <div id="exam-result" class="result" hidden></div>`;
+  attachLectureFilter(() => renderExam(sec));
+  if(currentExamQuestions.length === 0) return;
+  const prog = document.getElementById('progress');
+  contentEl.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const n = new Set([...contentEl.querySelectorAll('input[type="radio"]:checked')].map(x=>x.name)).size;
+      prog.textContent = n + ' / ' + currentExamQuestions.length;
+      r.closest('.question').classList.add('answered');
+    });
+  });
+  document.getElementById('submitExam').addEventListener('click', () => checkExam());
+  document.getElementById('resetExam').addEventListener('click', () => renderExam(sec));
+}
+function checkExam(){
+  let score = 0;
+  currentExamQuestions.forEach((q,i) => {
+    const qEl = document.getElementById('q-'+i);
+    const chosen = qEl.querySelector('input[type="radio"]:checked');
+    const optsEls = qEl.querySelectorAll('.opt');
+    optsEls.forEach(o => o.classList.remove('correct','wrong'));
+    optsEls[q.answer].classList.add('correct');
+    if(chosen && Number(chosen.value) === q.answer) score++;
+    else if(chosen) optsEls[Number(chosen.value)].classList.add('wrong');
+    const why = qEl.querySelector('.why');
+    why.hidden = false;
+    why.innerHTML = '<strong>' + t('explanation') + ':</strong> ' + q.why[state.lang];
+  });
+  const pct = Math.round(score/currentExamQuestions.length*100);
+  let msg = '📚';
+  if(pct >= 90) msg = '🎉 ' + (state.lang==='ar'?'ممتاز!':'Excellent!');
+  else if(pct >= 70) msg = '💪 ' + (state.lang==='ar'?'جيد جداً!':'Very good!');
+  else if(pct >= 50) msg = '📖 ' + (state.lang==='ar'?'مقبول':'Fair');
+  else msg = '📚 ' + (state.lang==='ar'?'تحتاج مراجعة':'Needs review');
+  const res = document.getElementById('exam-result');
+  res.hidden = false;
+  res.innerHTML = `<div class="score">${score}<small> / ${currentExamQuestions.length}</small></div><div class="score" style="font-size:1.1rem;margin-top:4px;color:#9cc4ff">${pct}%</div><p>${msg}</p>`;
+  res.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function renderGames(sec){ if(activeGame) renderGamePlay(); else renderLobby(sec); }
+function renderLobby(sec){
+  const filterHTML = renderLectureFilter(QUESTIONS);
+  const gamesHTML = GAMES.map(g => {
+    const high = HighScores.get(g.id);
+    const qLabel = g.qCount === 999 ? t('infiniteQ') : `${g.qCount} ${t('qCount')}`;
+    return `<div class="game-card" data-id="${g.id}" style="--game-color:${g.color}">
+      <div class="icon" style="color:${g.color}">${g.icon}</div>
+      <div class="title">${g.title[state.lang]}</div>
+      <div class="desc">${g.desc[state.lang]}</div>
+      <div class="meta"><span>${qLabel}</span><span>🏆 ${high}</span></div>
+    </div>`;
+  }).join('');
+  contentEl.innerHTML = `${renderHero(sec)}${filterHTML}
+    <div class="callout deep"><span>🎮</span><div><strong>${t('howToPlay')}</strong><br>${t('howToPlayDesc')}</div></div>
+    <div class="games-grid">${gamesHTML}</div>`;
+  attachLectureFilter(() => renderLobby(sec));
+  contentEl.querySelectorAll('.game-card').forEach(c => c.addEventListener('click', () => startGame(c.dataset.id)));
+}
+function renderGamePlay(){
+  const g = activeGame;
+  if(!g) return renderGames(SECTIONS.find(s => s.id === 'games'));
+  const timerHTML = (g.def.perTime || g.def.totalTime) ? `<div class="game-stat"><span class="lbl">${t('time')}</span><span class="val timer" id="gameTimer">${g.def.totalTime || g.def.perTime}s</span></div>` : '';
+  const livesHTML = (g.lives !== null) ? `<div class="game-stat"><span class="lbl">${t('lives')}</span><span class="val lives" id="gameLives">${'❤️'.repeat(Math.max(0,g.lives))}</span></div>` : '';
+  contentEl.innerHTML = `<div class="game-top">
+      <button class="icon-btn" id="gameQuit">✕</button>
+      <div class="game-stat"><span class="lbl">${t('question')}</span><span class="val">${g.idx+1}</span></div>
+      ${timerHTML}
+      <div class="game-stat"><span class="lbl">${t('score')}</span><span class="val score" id="gameScore">${g.score}</span></div>
+      ${livesHTML}
+      <div class="game-stat"><span class="lbl">${t('streak')}</span><span class="val streak" id="gameStreak">🔥 ${g.streak}</span></div>
+    </div>
+    <div class="game-progress-bar"><div class="fill" id="gameProgressFill"></div></div>
+    <div id="gameQuestionWrapper"></div>
+    <div id="gameFeedback"></div>
+    <div class="game-actions"><button class="btn primary" id="gameNextBtn" hidden>${t('next')} →</button></div>`;
+  document.getElementById('gameQuit').addEventListener('click', () => { if(confirm(t('quitConfirm'))) endGame(); });
+  document.getElementById('gameNextBtn').addEventListener('click', () => { if(activeGame && !activeGame.finished){ activeGame.idx++; nextQuestion(); } });
+}
+function renderQuestion(q){
+  const g = activeGame; const w = document.getElementById('gameQuestionWrapper'); if(!w) return;
+  const isTF = q.type === 'tf' && q.opts.length === 2;
+  const letters = isTF ? ['✓','✗'] : ['A','B','C','D'];
+  const pct = g.def.qCount === 999 ? 100 : ((g.idx)/g.def.qCount)*100;
+  const fill = document.getElementById('gameProgressFill'); if(fill) fill.style.width = pct + '%';
+  w.innerHTML = `<div class="game-question">${q.q[state.lang]}</div>
+    <div class="game-options">${q.opts.map((o,i) => `
+      <button class="game-opt" data-idx="${i}">
+        <span class="letter">${letters[i] || (i+1)}</span>
+        <span>${o[state.lang]}</span>
+      </button>`).join('')}
+    </div>`;
+  w.querySelectorAll('.game-opt').forEach(btn => btn.addEventListener('click', () => answerQuestion(parseInt(btn.dataset.idx))));
+  const fb = document.getElementById('gameFeedback'); if(fb) fb.innerHTML = '';
+  const nb = document.getElementById('gameNextBtn'); if(nb) nb.hidden = true;
+}
+function showResult(g, isNewHigh){
+  const total = g.correct + g.wrong;
+  const acc = total > 0 ? Math.round(g.correct/total*100) : 0;
+  const emoji = isNewHigh ? '🏆' : (acc >= 70 ? '🎉' : (acc >= 40 ? '💪' : '📚'));
+  contentEl.innerHTML = `<div class="result-screen">
+    <div class="emoji">${emoji}</div>
+    <h2>${isNewHigh ? t('newHigh') : t('gameOver')}</h2>
+    <div class="big-score">${g.score}</div>
+    <div class="sub">${t('points')}</div>
+    ${isNewHigh ? `<div class="new-high">🏆 ${t('newHigh')}</div>` : ''}
+    <div class="result-stats">
+      <div class="result-stat"><div class="lbl">${t('correctLabel')}</div><div class="val" style="color:var(--green)">${g.correct}</div></div>
+      <div class="result-stat"><div class="lbl">${t('wrongLabel')}</div><div class="val" style="color:var(--red)">${g.wrong}</div></div>
+      <div class="result-stat"><div class="lbl">${t('accuracy')}</div><div class="val" style="color:var(--accent)">${acc}%</div></div>
+    </div>
+    ${g.bestStreak > 1 ? `<p style="color:var(--amber);margin:12px 0">🔥 ${t('bestStreak')}: ${g.bestStreak}</p>` : ''}
+    <div class="exam-actions" style="justify-content:center;margin-top:20px">
+      <button class="btn primary" id="resultPlayAgain">🔄 ${t('playAgain')}</button>
+      <button class="btn" id="resultLobby">🎮 ${t('otherGames')}</button>
+    </div>
+  </div>`;
+  const gameId = g.def.id; activeGame = null;
+  document.getElementById('resultPlayAgain').addEventListener('click', () => startGame(gameId));
+  document.getElementById('resultLobby').addEventListener('click', () => render());
+}
+function render(){
+  const sec = SECTIONS.find(s => s.id === state.section) || SECTIONS[0];
+  document.documentElement.lang = state.lang;
+  document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('langLbl').textContent = t('langBtn');
+  document.getElementById('focusLbl').textContent = state.focus ? t('focusOff') : t('focusOn');
+  topTitle.textContent = sec.title[state.lang];
+  renderSidebar();
+  if(sec.type === 'games') renderGames(sec);
+  else if(sec.type === 'exam') renderExam(sec);
+  else renderSection(sec);
+  window.scrollTo({top:0, behavior:'auto'});
+}
+
+navEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.nav-item'); if(!btn) return;
+  if(activeGame && !activeGame.finished){ if(!confirm(t('quitConfirm'))) return; stopTimer(); activeGame = null; }
+  state.section = btn.dataset.id; document.body.classList.remove('nav-open'); render();
+});
+document.getElementById('langBtn').addEventListener('click', () => {
+  state.lang = state.lang === 'ar' ? 'en' : 'ar';
+  if(activeGame && !activeGame.finished){
+    stopTimer(); renderGamePlay(); renderQuestion(activeGame.questions[activeGame.idx]);
+    if(activeGame.answered !== null){ const q = activeGame.questions[activeGame.idx]; showFeedback(q, activeGame.answered, activeGame.answered === q.answer); updateStats(); }
+    else startTimer();
+    document.getElementById('langLbl').textContent = t('langBtn'); topTitle.textContent = activeGame.def.title[state.lang];
+  } else render();
+});
+document.getElementById('focusBtn').addEventListener('click', () => {
+  state.focus = !state.focus;
+  document.body.classList.toggle('focus', state.focus);
+  document.getElementById('focusBtn').classList.toggle('on', state.focus);
+  document.getElementById('focusLbl').textContent = state.focus ? t('focusOff') : t('focusOn');
+});
+document.getElementById('hamburger').addEventListener('click', () => document.body.classList.toggle('nav-open'));
+document.getElementById('overlay').addEventListener('click', () => document.body.classList.remove('nav-open'));
+document.addEventListener('keydown', (e) => {
+  if(e.target.matches('input, textarea, select')) return;
+  if(e.key === 'f' || e.key === 'F') document.getElementById('focusBtn').click();
+  if(activeGame && activeGame.answered === null){
+    const k = e.key.toLowerCase();
+    if(['1','2','3','4'].includes(k)){ const i = parseInt(k)-1; const b = document.querySelector(`.game-opt[data-idx="${i}"]`); if(b) b.click(); }
+  }
+});
+
+render();
+</script>
+</body>
+</html>
