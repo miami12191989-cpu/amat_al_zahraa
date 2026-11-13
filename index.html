@@ -314,21 +314,6 @@ ar:`<span class="lec-badge">المحاضرة 1</span>
 <tr><td><strong>Vulnerability</strong></td><td>ضعف قابل للاستغلال</td><td>كلمة مرور ضعيفة</td></tr>
 <tr><td><strong>Risk</strong></td><td>احتمالية الضرر</td><td>الحساب قد يُسرق</td></tr>
 <tr><td><strong>Control</strong></td><td>حماية تُقلل الخطر</td><td>كلمة مرور + MFA</td></tr>
-</tbody></table></div>
-<h3>أنواع الضوابط</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>النوع</th><th>الوصف</th><th>مثال</th></tr></thead>
-<tbody>
-<tr><td><strong>Administrative</strong></td><td>قواعد وإجراءات</td><td>سياسة أمنية، تدريب</td></tr>
-<tr><td><strong>Technical</strong></td><td>تقنيات</td><td>جدار ناري، تشفير</td></tr>
-<tr><td><strong>Physical</strong></td><td>فيزيائية</td><td>أقفال، كاميرات</td></tr>
-</tbody></table></div>
-<h3>InfoSec vs Cybersecurity</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>أمن المعلومات</th><th>الأمن السيبراني</th></tr></thead>
-<tbody>
-<tr><td>يحمي كل أشكال المعلومات</td><td>يركز على الرقمي</td></tr>
-<tr><td>مفهوم أوسع</td><td>جزء من أمن المعلومات</td></tr>
 </tbody></table></div>`,
 en:`<span class="lec-badge">Lecture 1</span>
 <h3>InfoSec & CIA Triad</h3>
@@ -340,15 +325,6 @@ en:`<span class="lec-badge">Lecture 1</span>
 <tr><td><strong>Confidentiality</strong></td><td>Only authorized access</td><td>Only student + staff see grades</td></tr>
 <tr><td><strong>Integrity</strong></td><td>Correct & unmodified</td><td>Grade 85 can't become 95</td></tr>
 <tr><td><strong>Availability</strong></td><td>Available when needed</td><td>Portal online at registration</td></tr>
-</tbody></table></div>
-<h3>Threat, Vulnerability, Risk, Control</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Concept</th><th>Definition</th><th>Example</th></tr></thead>
-<tbody>
-<tr><td><strong>Threat</strong></td><td>Potential harm</td><td>Hacker</td></tr>
-<tr><td><strong>Vulnerability</strong></td><td>Weakness</td><td>Weak password</td></tr>
-<tr><td><strong>Risk</strong></td><td>Damage probability</td><td>Account theft</td></tr>
-<tr><td><strong>Control</strong></td><td>Reduces risk</td><td>Strong password + MFA</td></tr>
 </tbody></table></div>`}},
 
 {id:'lec2', icon:'🔐', num:'L2', title:{ar:'أساسيات التشفير', en:'Basics of Cryptography'}, sub:{ar:'Plaintext + Ciphertext + Keys', en:'Plaintext + Ciphertext + Keys'}, body:{
@@ -386,18 +362,7 @@ print(hash_value)
 
 # Verification
 hashlib.sha256("amat al zahraa".encode()).hexdigest() == hash_value
-# True</code></pre>
-<h3>التطور التاريخي</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الحقبة</th><th>التطور</th></tr></thead>
-<tbody>
-<tr><td>Ancient</td><td>رموز ووصفات مشفرة</td></tr>
-<tr><td>Classical</td><td>Scytale + Caesar</td></tr>
-<tr><td>القرن 9</td><td>الخوارزمي + Frequency Analysis</td></tr>
-<tr><td>World Wars</td><td>Enigma</td></tr>
-<tr><td>1970s</td><td>DES + Public-Key</td></tr>
-<tr><td>اليوم</td><td>خوارزميات حديثة</td></tr>
-</tbody></table></div>`,
+# True</code></pre>`,
 en:`<span class="lec-badge">Lecture 2</span>
 <h3>Cryptography Basics</h3>
 <h3>Key Concepts</h3>
@@ -412,33 +377,13 @@ en:`<span class="lec-badge">Lecture 2</span>
 <tr><td><strong>Key</strong></td><td>Controls algorithm</td></tr>
 </tbody></table></div>
 <h3>Caesar Cipher</h3>
-<pre class="code"><code>HELLO → KHOOR (shift 3)</code></pre>
-<h3>Hash Example</h3>
-<pre class="code"><code>import hashlib
-print(hashlib.sha256("amat al zahraa".encode()).hexdigest())
-# a3f5d2c8b9e7f...</code></pre>`}},
+<pre class="code"><code>HELLO → KHOOR (shift 3)</code></pre>`}},
 
 {id:'lec3', icon:'🔑', num:'L3', title:{ar:'التشفير المتماثل', en:'Symmetric Encryption'}, sub:{ar:'مفتاح سري واحد + DES/3DES/AES', en:'One shared key + DES/3DES/AES'}, body:{
 ar:`<span class="lec-badge">المحاضرة 3</span>
 <h3>ما هو التشفير المتماثل؟</h3>
 <p>طريقة تشفير تستخدم <strong>مفتاحاً سرياً مشتركاً واحداً</strong> للتشفير وفك التشفير (Secret-Key Encryption).</p>
 <div class="callout deep"><span>🔍</span><div><strong>التشبيه:</strong> صندوق مقفل بمفتاح واحد. المرسل يقفل، المستقبل يفتح بنفس المفتاح. لو نسخ أحد المفتاح — انتهت الحماية!</div></div>
-<h3>الخطوات الخمس</h3>
-<div class="flow">
-<div class="flow-step"><span class="num">1</span><div><h4>Key generation</h4><p>توليد مفتاح عشوائي قوي</p></div></div>
-<div class="flow-step"><span class="num">2</span><div><h4>Secure key sharing</h4><p>الطرفان يحصلان على نفس المفتاح</p></div></div>
-<div class="flow-step"><span class="num">3</span><div><h4>Encryption</h4><p>المرسل يحول Plaintext إلى Ciphertext</p></div></div>
-<div class="flow-step"><span class="num">4</span><div><h4>Transmission</h4><p>Ciphertext يُرسل</p></div></div>
-<div class="flow-step"><span class="num">5</span><div><h4>Decryption</h4><p>المستقبل يستخدم نفس المفتاح</p></div></div>
-</div>
-<h3>Block vs Stream</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الخاصية</th><th>Block</th><th>Stream</th></tr></thead>
-<tbody>
-<tr><td>المعالجة</td><td>كتل ثابتة</td><td>بت/بايت</td></tr>
-<tr><td>الاستخدام</td><td>ملفات، أقراص</td><td>بيانات مستمرة</td></tr>
-<tr><td>مثال</td><td>AES</td><td>ChaCha20</td></tr>
-</tbody></table></div>
 <h3>DES vs 3DES vs AES</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>الخوارزمية</th><th>Block</th><th>Key</th><th>الحالة</th></tr></thead>
@@ -454,15 +399,6 @@ ar:`<span class="lec-badge">المحاضرة 3</span>
 <tr><td>192 bits</td><td>12</td></tr>
 <tr><td>256 bits</td><td>14</td></tr>
 </tbody></table></div>
-<h3>مثال XOR</h3>
-<pre class="code"><code>Plaintext:  10110110
-Secret Key: 11001010
-Ciphertext: 01111100   (XOR)
-
-Decrypt:
-Ciphertext: 01111100
-Secret Key: 11001010
-Plaintext:  10110110   (same key!)</code></pre>
 <h3>مثال تطبيقي — تشفير ملف</h3>
 <pre class="code"><code># Plaintext file
 grades_amat_al_zahraa.pdf
@@ -476,25 +412,7 @@ $ openssl enc -aes-256-cbc \
 # Decrypt
 $ openssl enc -d -aes-256-cbc \
     -in grades_amat_al_zahraa.enc \
-    -out grades_amat_al_zahraa.pdf</code></pre>
-<h3>مشكلة توزيع المفتاح</h3>
-<p>قبل التواصل الآمن، يجب أن يحصل الطرفان على نفس المفتاح. إرسال المفتاح عبر قناة غير آمنة قد يسمح للمهاجم بنسخه. هذه هي <strong>مشكلة توزيع المفتاح</strong>.</p>
-<h3>عدد المفاتيح = n(n-1)/2</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>المستخدمون</th><th>المفاتيح</th></tr></thead>
-<tbody>
-<tr><td>2</td><td>1</td></tr>
-<tr><td>10</td><td>45</td></tr>
-<tr><td>20</td><td>190</td></tr>
-</tbody></table></div>
-<h3>المزايا والعيوب</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>المزايا</th><th>العيوب</th></tr></thead>
-<tbody>
-<tr><td>سريع للبيانات الكبيرة</td><td>مشاركة المفتاح صعبة</td></tr>
-<tr><td>حسابات أقل</td><td>المفتاح المسروق يكشف البيانات</td></tr>
-<tr><td>مدعوم في العتاد</td><td>إدارة المفاتيح معقدة</td></tr>
-</tbody></table></div>`,
+    -out grades_amat_al_zahraa.pdf</code></pre>`,
 en:`<span class="lec-badge">Lecture 3</span>
 <h3>Symmetric Encryption</h3>
 <p>One shared secret key for encryption and decryption.</p>
@@ -505,12 +423,7 @@ en:`<span class="lec-badge">Lecture 3</span>
 <tr><td>DES</td><td>64</td><td>56</td><td>Obsolete</td></tr>
 <tr><td>3DES</td><td>64</td><td>2-3 keys</td><td>Legacy</td></tr>
 <tr><td>AES</td><td>128</td><td>128/192/256</td><td>Recommended</td></tr>
-</tbody></table></div>
-<h3>AES Example</h3>
-<pre class="code"><code>$ openssl enc -aes-256-cbc \
-    -in grades_amat_al_zahraa.pdf \
-    -out grades_amat_al_zahraa.enc \
-    -k "shared-secret-key-2026"</code></pre>`}},
+</tbody></table></div>`}},
 
 {id:'lec4', icon:'🔐', num:'L4', title:{ar:'التشفير غير المتماثل', en:'Asymmetric Encryption'}, sub:{ar:'Public/Private + RSA + ECC', en:'Public/Private + RSA + ECC'}, body:{
 ar:`<span class="lec-badge">المحاضرة 4</span>
@@ -523,40 +436,6 @@ ar:`<span class="lec-badge">المحاضرة 4</span>
 <tr><td><strong>Public</strong></td><td>أي شخص</td><td>يشفر البيانات لمالكه</td></tr>
 <tr><td><strong>Private</strong></td><td>المالك فقط</td><td>يفك التشفير</td></tr>
 </tbody></table></div>
-<h3>RSA</h3>
-<p>خوارزمية 1977. أمنها يعتمد على صعوبة تحليل عدد كبير إلى عوامل أولية.</p>
-<div class="table-wrap"><table>
-<thead><tr><th>المكوّن</th><th>المعنى</th></tr></thead>
-<tbody>
-<tr><td>p, q</td><td>عددان أوليان سريان</td></tr>
-<tr><td>n = p×q</td><td>Modulus في كلا المفتاحين</td></tr>
-<tr><td>e</td><td>Public exponent</td></tr>
-<tr><td>d</td><td>Private exponent</td></tr>
-<tr><td>Public Key</td><td>(n, e)</td></tr>
-<tr><td>Private Key</td><td>(n, d)</td></tr>
-</tbody></table></div>
-<h4>مثال RSA تعليمي</h4>
-<div class="table-wrap"><table>
-<thead><tr><th>الخطوة</th><th>الحساب</th><th>النتيجة</th></tr></thead>
-<tbody>
-<tr><td>p, q</td><td>3, 11</td><td>عددان أوليان</td></tr>
-<tr><td>n</td><td>3×11</td><td>33</td></tr>
-<tr><td>phi</td><td>(3-1)(11-1) = 2×10</td><td>20</td></tr>
-<tr><td>e</td><td>3</td><td>Public (33, 3)</td></tr>
-<tr><td>d</td><td>3×7=21, 21 mod 20 = 1</td><td>Private (33, 7)</td></tr>
-<tr><td>تشفير M=4</td><td>4³ mod 33</td><td>C=31</td></tr>
-<tr><td>فك</td><td>31⁷ mod 33</td><td>M=4</td></tr>
-</tbody></table></div>
-<div class="callout warn"><span>⚠️</span><div>هذه أرقام تعليمية فقط. RSA الحقيقي يستخدم أعداداً ضخمة وحشواً آمناً.</div></div>
-<h3>ECC</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الخاصية</th><th>الشرح</th></tr></thead>
-<tbody>
-<tr><td>مفاتيح أصغر</td><td>أمان قوي بمفاتيح صغيرة</td></tr>
-<tr><td>ECDH</td><td>اتفاق المفاتيح</td></tr>
-<tr><td>ECDSA</td><td>التوقيعات</td></tr>
-<tr><td>الاستخدام</td><td>الهواتف، IoT</td></tr>
-</tbody></table></div>
 <h3>RSA vs ECC</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>الخاصية</th><th>RSA</th><th>ECC</th></tr></thead>
@@ -565,12 +444,6 @@ ar:`<span class="lec-badge">المحاضرة 4</span>
 <tr><td>حجم المفتاح</td><td>أكبر</td><td>أصغر</td></tr>
 <tr><td>IoT</td><td>أقل ملاءمة</td><td>مثالي</td></tr>
 </tbody></table></div>
-<h3>التشفير الهجين</h3>
-<div class="flow">
-<div class="flow-step"><span class="num">1</span><div><h4>Public-Key</h4><p>RSA أو ECDH</p></div></div>
-<div class="flow-step"><span class="num">2</span><div><h4>Session Key</h4><p>مفتاح متماثل مؤقت</p></div></div>
-<div class="flow-step"><span class="num">3</span><div><h4>AES</h4><p>للبيانات الكبيرة</p></div></div>
-</div>
 <h3>مثال تطبيقي — شهادة رقمية</h3>
 <pre class="code"><code>Digital Certificate
 ────────────────────────────
@@ -579,16 +452,7 @@ Subject:   CN = amat al zahraa
 Public Key: RSA-2048
 Issuer:    University CA
 Valid:     2026 → 2027
-Signature: Valid</code></pre>
-<h3>خوارزميات أخرى</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الخوارزمية</th><th>الغرض</th></tr></thead>
-<tbody>
-<tr><td>DSA</td><td>التوقيعات</td></tr>
-<tr><td>Diffie-Hellman</td><td>اتفاق المفاتيح</td></tr>
-<tr><td>ElGamal</td><td>تشفير وتوقيع</td></tr>
-<tr><td>ECDH / ECDSA</td><td>ECC</td></tr>
-</tbody></table></div>`,
+Signature: Valid</code></pre>`,
 en:`<span class="lec-badge">Lecture 4</span>
 <h3>Asymmetric Encryption</h3>
 <p>Mathematically related key pair (public + private).</p>
@@ -599,11 +463,7 @@ en:`<span class="lec-badge">Lecture 4</span>
 <tr><td>Math</td><td>Factorization</td><td>Elliptic curves</td></tr>
 <tr><td>Key size</td><td>Larger</td><td>Smaller</td></tr>
 <tr><td>IoT</td><td>Less fit</td><td>Ideal</td></tr>
-</tbody></table></div>
-<h3>Certificate Example</h3>
-<pre class="code"><code>Subject:   CN = amat al zahraa
-Public Key: RSA-2048
-Issuer:    University CA</code></pre>`}},
+</tbody></table></div>`}},
 
 {id:'lec5', icon:'🗝️', num:'L5', title:{ar:'إدارة المفاتيح', en:'Key Management'}, sub:{ar:'Lifecycle + KDC + PKI', en:'Lifecycle + KDC + PKI'}, body:{
 ar:`<span class="lec-badge">المحاضرة 5</span>
@@ -617,33 +477,7 @@ ar:`<span class="lec-badge">المحاضرة 5</span>
 <div class="step"><div class="badge">4</div><h4>Rotation</h4><p>استبدال حسب السياسة</p></div>
 <div class="step"><div class="badge">5</div><h4>Recovery</h4><p>استرداد وإتلاف</p></div>
 </div>
-<h3>قواعد حماية المفاتيح</h3>
-<ul>
-<li>تقييد الوصول للمصرح لهم</li>
-<li>عدم المشاركة عبر البريد</li>
-<li>حماية نسخ الاسترداد</li>
-<li>استبدال المخترقة</li>
-</ul>
-<h3>طرق التوزيع</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الطريقة</th><th>الفكرة</th></tr></thead>
-<tbody>
-<tr><td>Manual</td><td>تسليم شخصي</td></tr>
-<tr><td>Pre-shared Key</td><td>حماية بمفتاح قديم</td></tr>
-<tr><td>Public-key Transport</td><td>تشفير بالمفتاح العام</td></tr>
-</tbody></table></div>
-<h3>KDC</h3>
-<p>خدمة موثوقة تزود الأطراف بمفاتيح جلسة (Session Keys).</p>
-<div class="flow">
-<div class="flow-step"><span class="num">1</span><div><h4>Request</h4><p>Alice تطلب من KDC مفتاح</p></div></div>
-<div class="flow-step"><span class="num">2</span><div><h4>Generate</h4><p>KDC يولّد مفتاح جلسة</p></div></div>
-<div class="flow-step"><span class="num">3</span><div><h4>Forward</h4><p>تمرير نسخة Bob</p></div></div>
-<div class="flow-step"><span class="num">4</span><div><h4>Session</h4><p>الطرفان يستخدمان نفس المفتاح</p></div></div>
-</div>
-<h3>Diffie-Hellman</h3>
-<p>بروتوكول يسمح لطرفين بإنشاء سر مشترك دون إرساله.</p>
-<div class="callout warn"><span>⚠️</span><div>بدون مصادقة، قابل لهجوم Man-in-the-Middle.</div></div>
-<h3>PKI</h3>
+<h3>PKI Components</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>المكوّن</th><th>الوظيفة</th></tr></thead>
 <tbody>
@@ -652,7 +486,6 @@ ar:`<span class="lec-badge">المحاضرة 5</span>
 <tr><td><strong>Certificate</strong></td><td>يربط المفتاح بالهوية</td></tr>
 <tr><td><strong>Repository</strong></td><td>يخزن الشهادات</td></tr>
 </tbody></table></div>
-<div class="callout info"><span>📌</span><div>الشهادة تحتوي على <strong>المفتاح العام</strong> فقط، وليس الخاص.</div></div>
 <h3>مثال تطبيقي — CSR</h3>
 <pre class="code"><code>Subject:
   CN = amat_al_zahraa
@@ -671,11 +504,7 @@ en:`<span class="lec-badge">Lecture 5</span>
 <tr><td>CA</td><td>Issues & signs certs</td></tr>
 <tr><td>RA</td><td>Verifies identity</td></tr>
 <tr><td>Certificate</td><td>Binds public key to identity</td></tr>
-</tbody></table></div>
-<h3>CSR Example</h3>
-<pre class="code"><code>Subject:
-  CN = amat_al_zahraa
-  O  = Technological Institute of Basra</code></pre>`}},
+</tbody></table></div>`}},
 
 {id:'lec6', icon:'✍️', num:'L6', title:{ar:'التوقيعات الرقمية والمصادقة', en:'Digital Signatures & Authentication'}, sub:{ar:'Hash + Signature + Certs + MFA', en:'Hash + Signature + Certs + MFA'}, body:{
 ar:`<span class="lec-badge">المحاضرة 6</span>
@@ -690,24 +519,6 @@ ar:`<span class="lec-badge">المحاضرة 6</span>
 <tr><td><strong>Non-repudiation</strong></td><td>عدم الإنكار</td></tr>
 </tbody></table></div>
 <div class="callout warn"><span>⚠️</span><div>التوقيع <strong>لا يُشفّر</strong> المستند. السرية تحتاج تشفيراً.</div></div>
-<h3>Hash Functions</h3>
-<p>تحول رسالة بأي طول إلى قيمة ثابتة. تغيير الرسالة يغيّر الـ hash ويسبب فشل التحقق.</p>
-<h3>خطوات التوقيع والتحقق</h3>
-<div class="flow">
-<div class="flow-step"><span class="num">1</span><div><h4>Hash</h4><p>Bob يحسب hash للرسالة</p></div></div>
-<div class="flow-step"><span class="num">2</span><div><h4>Sign</h4><p>يوقّع الـ hash بمفتاحه الخاص</p></div></div>
-<div class="flow-step"><span class="num">3</span><div><h4>Send</h4><p>يرسل الرسالة + التوقيع</p></div></div>
-<div class="flow-step"><span class="num">4</span><div><h4>Verify</h4><p>Alice تتحقق بالمفتاح العام</p></div></div>
-</div>
-<h4>مثال RSA تعليمي</h4>
-<p>h=4، d=7، e=3، n=33</p>
-<div class="table-wrap"><table>
-<thead><tr><th>الخطوة</th><th>الحساب</th><th>النتيجة</th></tr></thead>
-<tbody>
-<tr><td>Sign</td><td>4⁷ mod 33</td><td>S=16</td></tr>
-<tr><td>Verify</td><td>16³ mod 33</td><td>V=4</td></tr>
-<tr><td>Result</td><td>V = h</td><td>صالح ✓</td></tr>
-</tbody></table></div>
 <h3>مثال تطبيقي — توقيع رقمي</h3>
 <pre class="code"><code>private_key = load("amat_al_zahraa_private.pem")
 
@@ -718,54 +529,12 @@ print("Signed by: amat_al_zahraa")
 
 public_key.verify(signature, report, SHA256())
 # Valid</code></pre>
-<h3>الشهادات الرقمية</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الحقل</th><th>المحتوى</th></tr></thead>
-<tbody>
-<tr><td>Subject</td><td>اسم الموضوع</td></tr>
-<tr><td>Public key</td><td>المفتاح العام</td></tr>
-<tr><td>Issuer</td><td>CA</td></tr>
-<tr><td>Validity</td><td>التواريخ</td></tr>
-<tr><td>CA signature</td><td>توقيع CA</td></tr>
-</tbody></table></div>
-<h3>إصدار الشهادة (5 خطوات)</h3>
-<div class="steps">
-<div class="step"><div class="badge">1</div><h4>Key Pair</h4></div>
-<div class="step"><div class="badge">2</div><h4>CSR</h4></div>
-<div class="step"><div class="badge">3</div><h4>Identity Check</h4></div>
-<div class="step"><div class="badge">4</div><h4>CA Sign</h4></div>
-<div class="step"><div class="badge">5</div><h4>Install</h4></div>
-</div>
 <h3>MFA</h3>
 <div class="grid-3">
 <div class="mini-card"><h4>🧠 KNOW</h4><p>كلمة مرور، PIN</p></div>
 <div class="mini-card"><h4>📱 HAVE</h4><p>هاتف، token</p></div>
 <div class="mini-card"><h4>👁️ ARE</h4><p>بصمة، وجه</p></div>
-</div>
-<div class="callout info"><span>📌</span><div>MFA يحتاج فئات مختلفة. كلمتا مرور <strong>لا</strong> تُعدّان MFA.</div></div>
-<h3>Auth vs Authz</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Authentication</th><th>Authorization</th></tr></thead>
-<tbody>
-<tr><td>من أنت؟</td><td>ماذا تفعل؟</td></tr>
-</tbody></table></div>
-<h3>IAM</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الوظيفة</th><th>الوصف</th></tr></thead>
-<tbody>
-<tr><td>Account Management</td><td>إنشاء/تعطيل</td></tr>
-<tr><td>Authentication</td><td>التحقق</td></tr>
-<tr><td>Authorization</td><td>الصلاحيات</td></tr>
-<tr><td>Review</td><td>المراجعة</td></tr>
-<tr><td>Audit</td><td>التسجيل</td></tr>
-</tbody></table></div>
-<h3>تحسينات حديثة</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>التحسين</th><th>الفكرة</th></tr></thead>
-<tbody>
-<tr><td>Passkeys</td><td>بيانات اعتماد تشفيرية</td></tr>
-<tr><td>Risk-based Auth</td><td>فحوصات إضافية</td></tr>
-</tbody></table></div>`,
+</div>`,
 en:`<span class="lec-badge">Lecture 6</span>
 <h3>Digital Signatures</h3>
 <div class="table-wrap"><table>
@@ -775,10 +544,6 @@ en:`<span class="lec-badge">Lecture 6</span>
 <tr><td>Integrity</td><td>Detect changes</td></tr>
 <tr><td>Non-repudiation</td><td>Cannot deny</td></tr>
 </tbody></table></div>
-<h3>Signature Example</h3>
-<pre class="code"><code>private_key = load("amat_al_zahraa_private.pem")
-signature = private_key.sign(report, SHA256())
-print("Signed by: amat_al_zahraa")</code></pre>
 <h3>MFA Categories</h3>
 <div class="grid-3">
 <div class="mini-card"><h4>KNOW</h4><p>Password</p></div>
@@ -798,34 +563,11 @@ ar:`<span class="lec-badge">المحاضرة 7</span>
 <tr><td><strong>Worm</strong></td><td>ينتشر ذاتياً</td></tr>
 <tr><td><strong>Trojan</strong></td><td>متنكر</td></tr>
 </tbody></table></div>
-<h3>Social Engineering & Phishing</h3>
-<p>Social Engineering = التلاعب بالأشخاص. Phishing = هجوم تصيد برسائل/مواقع مزيفة.</p>
 <h3>DoS vs DDoS</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>DoS</th><th>DDoS</th></tr></thead>
 <tbody>
 <tr><td>مصدر واحد</td><td>مصادر متعددة (botnet)</td></tr>
-</tbody></table></div>
-<h3>Firewall</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Rule</th><th>Action</th><th>Reason</th></tr></thead>
-<tbody>
-<tr><td>HTTPS (443)</td><td>ALLOW</td><td>خدمة ويب</td></tr>
-<tr><td>Telnet (23)</td><td>BLOCK</td><td>غير آمن</td></tr>
-</tbody></table></div>
-<h3>IDS vs IPS</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>IDS</th><th>IPS</th></tr></thead>
-<tbody>
-<tr><td>يكتشف ويُنبّه</td><td>يكتشف ويحجب</td></tr>
-</tbody></table></div>
-<h3>تأمين الشبكات</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>السلكية</th><th>اللاسلكية</th></tr></thead>
-<tbody>
-<tr><td>تقييد الوصول الفيزيائي</td><td>WPA3</td></tr>
-<tr><td>تعطيل المنافذ</td><td>مصادقة مؤسسية</td></tr>
-<tr><td>تقسيم الشبكة</td><td>عزل الزوار</td></tr>
 </tbody></table></div>
 <h3>مثال تطبيقي — IDS Alert</h3>
 <pre class="code"><code>[2026-01-15 10:23:45] ALERT
@@ -842,22 +584,10 @@ en:`<span class="lec-badge">Lecture 7</span>
 <tr><td>Virus</td><td>Needs host file</td></tr>
 <tr><td>Worm</td><td>Self-replicates</td></tr>
 <tr><td>Trojan</td><td>Disguised</td></tr>
-</tbody></table></div>
-<h3>IDS Alert Example</h3>
-<pre class="code"><code>[2026-01-15 10:23:45] ALERT
-  Source: amat_al_zahraa-PC
-  URL: malicious/invoice.pdf.exe
-  Action: BLOCKED by IPS</code></pre>`}},
+</tbody></table></div>`}},
 
 {id:'lec8', icon:'💻', num:'L8', title:{ar:'أمن التطبيقات والبيانات', en:'Application & Data Security'}, sub:{ar:'SQLi + XSS + FDE + DB Security', en:'SQLi + XSS + FDE + DB Security'}, body:{
 ar:`<span class="lec-badge">المحاضرة 8</span>
-<h3>مبادئ أمن التطبيقات</h3>
-<ul>
-<li>Input Validation</li>
-<li>Least Privilege</li>
-<li>Secure Authentication</li>
-<li>Safe Error Handling</li>
-</ul>
 <h3>SQL Injection</h3>
 <pre class="code"><code>Malicious input:
 administrator' --
@@ -879,31 +609,12 @@ EXECUTE stmt USING @user;
 -- Result: ID 2024-0421, Grade 85</code></pre>
 <h3>XSS</h3>
 <p>ثغرة ويب حيث محتوى غير موثوق يجعل المتصفح ينفذ سكريبت.</p>
-<p><b>الحماية:</b> Context-aware Output Encoding + CSP.</p>
-<h3>Data in Transit vs At Rest</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الحالة</th><th>الحماية</th></tr></thead>
-<tbody>
-<tr><td>In Transit</td><td>TLS/HTTPS</td></tr>
-<tr><td>At Rest</td><td>Storage encryption</td></tr>
-</tbody></table></div>
 <h3>FDE</h3>
 <ul>
 <li>حماية البيانات إذا فُقد الجهاز</li>
 <li>تشفير الملفات والنظام</li>
 <li><b>قيد:</b> لا يحمي جهازاً مفتوحاً</li>
-</ul>
-<h3>ممارسات أمن DB</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الممارسة</th><th>الفكرة</th></tr></thead>
-<tbody>
-<tr><td>Access Control</td><td>صلاحيات محدودة</td></tr>
-<tr><td>Least Privilege</td><td>فقط ما تحتاجه</td></tr>
-<tr><td>Parameterized Queries</td><td>منع SQLi</td></tr>
-<tr><td>Encryption</td><td>تشفير السجلات</td></tr>
-<tr><td>Backups</td><td>نسخ مختبرة</td></tr>
-<tr><td>Monitoring</td><td>سجلات</td></tr>
-</tbody></table></div>`,
+</ul>`,
 en:`<span class="lec-badge">Lecture 8</span>
 <h3>SQL Injection</h3>
 <pre class="code"><code>Malicious: administrator' --
@@ -911,14 +622,7 @@ Result: Login bypass!</code></pre>
 <h3>Safe Query</h3>
 <pre class="code"><code>PREPARE stmt FROM 'SELECT * FROM students WHERE username = ?';
 SET @user = 'amat_al_zahraa';
-EXECUTE stmt USING @user;</code></pre>
-<h3>Data States</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>State</th><th>Protection</th></tr></thead>
-<tbody>
-<tr><td>In Transit</td><td>TLS</td></tr>
-<tr><td>At Rest</td><td>Encryption</td></tr>
-</tbody></table></div>`}},
+EXECUTE stmt USING @user;</code></pre>`}},
 
 {id:'lec9', icon:'📋', num:'L9', title:{ar:'إدارة الأمن السيبراني', en:'Cybersecurity Management'}, sub:{ar:'Policies + IR + ISO 27001 + NIST', en:'Policies + IR + ISO 27001 + NIST'}, body:{
 ar:`<span class="lec-badge">المحاضرة 9</span>
@@ -929,23 +633,6 @@ ar:`<span class="lec-badge">المحاضرة 9</span>
 <tr><td><strong>Policy</strong></td><td>قاعدة = ماذا</td></tr>
 <tr><td><strong>Procedure</strong></td><td>خطوات = كيف</td></tr>
 </tbody></table></div>
-<div class="callout info"><span>📌</span><div><b>Policy:</b> فقط موظفو التسجيل يغيرون الدرجات.<br><b>Procedure:</b> تحقق الهوية → موافقة → سجّل.</div></div>
-<h3>عناصر السياسة</h3>
-<div class="steps">
-<div class="step"><div class="badge">1</div><h4>Access Control</h4></div>
-<div class="step"><div class="badge">2</div><h4>Data Protection</h4></div>
-<div class="step"><div class="badge">3</div><h4>Incident Reporting</h4></div>
-<div class="step"><div class="badge">4</div><h4>Monitoring</h4></div>
-<div class="step"><div class="badge">5</div><h4>Awareness</h4></div>
-</div>
-<h3>دورة تطوير السياسة (5 خطوات)</h3>
-<div class="flow">
-<div class="flow-step"><span class="num">1</span><div><h4>Set Goals</h4></div></div>
-<div class="flow-step"><span class="num">2</span><div><h4>Assess Risk</h4></div></div>
-<div class="flow-step"><span class="num">3</span><div><h4>Write Rules</h4></div></div>
-<div class="flow-step"><span class="num">4</span><div><h4>Apply & Train</h4></div></div>
-<div class="flow-step"><span class="num">5</span><div><h4>Review</h4></div></div>
-</div>
 <h3>Incident Response (6 خطوات)</h3>
 <div class="steps">
 <div class="step"><div class="badge">1</div><h4>Preparation</h4></div>
@@ -960,8 +647,6 @@ ar:`<span class="lec-badge">المحاضرة 9</span>
 [2026-01-15 10:23:52] user=amat_al_zahraa | action=MFA_VERIFY | result=OK
 [2026-01-15 10:24:11] user=amat_al_zahraa | action=VIEW_GRADES | result=OK
 [2026-01-15 10:25:03] user=amat_al_zahraa | action=LOGOUT | result=OK</code></pre>
-<h3>ISO 27001</h3>
-<p>معيار دولي لمتطلبات ISMS. الشهادة اختيارية.</p>
 <h3>NIST CSF 2.0</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Function</th><th>الفكرة</th></tr></thead>
@@ -972,13 +657,6 @@ ar:`<span class="lec-badge">المحاضرة 9</span>
 <tr><td><strong>DETECT</strong></td><td>الكشف</td></tr>
 <tr><td><strong>RESPOND</strong></td><td>الاستجابة</td></tr>
 <tr><td><strong>RECOVER</strong></td><td>الاستعادة</td></tr>
-</tbody></table></div>
-<h3>ISO vs NIST</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>الخاصية</th><th>ISO</th><th>NIST</th></tr></thead>
-<tbody>
-<tr><td>النوع</td><td>معيار ISMS</td><td>إطار مرن</td></tr>
-<tr><td>الشهادة</td><td>اختيارية</td><td>لا شهادة</td></tr>
 </tbody></table></div>`,
 en:`<span class="lec-badge">Lecture 9</span>
 <h3>Policy vs Procedure</h3>
@@ -988,9 +666,6 @@ en:`<span class="lec-badge">Lecture 9</span>
 <tr><td>Policy</td><td>Rule = WHAT</td></tr>
 <tr><td>Procedure</td><td>Steps = HOW</td></tr>
 </tbody></table></div>
-<h3>Audit Log</h3>
-<pre class="code"><code>[2026-01-15 10:23:45] user=amat_al_zahraa | action=LOGIN | result=OK
-[2026-01-15 10:24:11] user=amat_al_zahraa | action=VIEW_GRADES | result=OK</code></pre>
 <h3>NIST CSF 2.0</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Function</th><th>Idea</th></tr></thead>
@@ -1016,22 +691,6 @@ ar:`<span class="lec-badge">المحاضرة 10</span>
 <tr><td>Data Exposure</td><td>ملفات مكشوفة</td></tr>
 <tr><td>Limited Visibility</td><td>سجلات ناقصة</td></tr>
 </tbody></table></div>
-<h3>المسؤولية المشتركة</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Provider</th><th>Customer</th></tr></thead>
-<tbody>
-<tr><td>مرافق DC</td><td>صلاحيات وMFA</td></tr>
-<tr><td>العتاد</td><td>إعدادات البيانات</td></tr>
-<tr><td>البنية التحتية</td><td>المراقبة</td></tr>
-</tbody></table></div>
-<h3>ممارسات الأمن السحابي</h3>
-<ul>
-<li>MFA</li>
-<li>Least Privilege</li>
-<li>Secure Configuration</li>
-<li>Data Protection</li>
-<li>Monitoring</li>
-</ul>
 <h3>مثال تطبيقي — S3 Bucket</h3>
 <pre class="code"><code>Bucket: student-records-amat_al_zahraa-2024
 
@@ -1044,8 +703,6 @@ Config (SAFE):
     - Allow: amat_al_zahraa → read/write own
     - Allow: staff/registrar → read all
     - Deny:  everyone else</code></pre>
-<h3>إنترنت الأشياء (IoT)</h3>
-<p>أجهزة فيزيائية تجمع أو تتبادل البيانات عبر الشبكات.</p>
 <h3>مخاطر IoT</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>الخطر</th><th>الوصف</th></tr></thead>
@@ -1054,24 +711,7 @@ Config (SAFE):
 <tr><td>Outdated Firmware</td><td>ثغرات</td></tr>
 <tr><td>Privacy Exposure</td><td>كاميرات</td></tr>
 <tr><td>Botnet Misuse</td><td>DDoS</td></tr>
-</tbody></table></div>
-<h3>ممارسات IoT</h3>
-<ul>
-<li>كلمات مرور فريدة</li>
-<li>تحديث firmware</li>
-<li>عزل الشبكة</li>
-<li>تقييد الوصول</li>
-</ul>
-<h3>التحديات المستقبلية</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>التحدي</th><th>الاستعداد</th></tr></thead>
-<tbody>
-<tr><td>AI Threats</td><td>تدريب</td></tr>
-<tr><td>Device Growth</td><td>جرد</td></tr>
-<tr><td>Quantum</td><td>تخطيط</td></tr>
-<tr><td>Supply Chain</td><td>مراجعة</td></tr>
-</tbody></table></div>
-<div class="callout good"><span>🎓</span><div>نهاية هذه الدورة ليست نهاية التعلم. استمروا في الاستكشاف وبناء عالم رقمي أكثر أماناً.</div></div>`,
+</tbody></table></div>`,
 en:`<span class="lec-badge">Lecture 10</span>
 <h3>Cloud Security Challenges</h3>
 <div class="table-wrap"><table>
@@ -1084,25 +724,7 @@ en:`<span class="lec-badge">Lecture 10</span>
 </tbody></table></div>
 <h3>S3 Bucket</h3>
 <pre class="code"><code>Bucket: student-records-amat_al_zahraa-2024
-Config: Private, AES-256, MFA Delete</code></pre>
-<h3>IoT Risks</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Risk</th><th>Description</th></tr></thead>
-<tbody>
-<tr><td>Default Passwords</td><td>Attacker access</td></tr>
-<tr><td>Outdated Firmware</td><td>Unpatched bugs</td></tr>
-<tr><td>Privacy Exposure</td><td>Camera leaks</td></tr>
-<tr><td>Botnet Misuse</td><td>DDoS attacks</td></tr>
-</tbody></table></div>
-<h3>Future Challenges</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Challenge</th><th>Preparation</th></tr></thead>
-<tbody>
-<tr><td>AI Threats</td><td>User training</td></tr>
-<tr><td>Device Growth</td><td>Inventory</td></tr>
-<tr><td>Quantum</td><td>Post-quantum</td></tr>
-<tr><td>Supply Chain</td><td>Vendor review</td></tr>
-</tbody></table></div>`}},
+Config: Private, AES-256, MFA Delete</code></pre>`}},
 
 {id:'exam', icon:'📝', type:'exam', title:{ar:'الاختبار الشامل', en:'Full Exam'}, sub:{ar:'اختر المحاضرات ثم ابدأ', en:'Select lectures then start'}, body:{ar:'',en:''}},
 {id:'games', icon:'🎮', type:'games', title:{ar:'محاكي الألعاب', en:'Games Arcade'}, sub:{ar:'اختر المحاضرات ثم اللعبة', en:'Select lectures then game'}, body:{ar:'',en:''}}
@@ -1111,6 +733,7 @@ Config: Private, AES-256, MFA Delete</code></pre>
 const q = (lec, type, arQ, enQ, opts, ans, arE, enE) => ({lec, type, q:{ar:arQ, en:enQ}, opts: opts.map(o => ({ar:o[0], en:o[1]})), answer: ans, exp:{ar:arE, en:enE}});
 
 const QUESTIONS = [
+// L1
 q(1,'mcq','ما الهدف الرئيسي لأمن المعلومات؟','Main goal of InfoSec?',
   [['حماية المعلومات من الوصول غير المصرح','Protect from unauthorized access'],['زيادة السرعة','Speed up'],['توفير الطاقة','Save energy'],['تقليل التكلفة','Reduce cost']],0,
   'أمن المعلومات يحمي المعلومات من الوصول غير المصرح.','InfoSec protects from unauthorized access.'),
@@ -1129,12 +752,46 @@ q(1,'mcq','ما هو Risk؟','What is Risk?',
 q(1,'mcq','أي مما يلي ضابط تقني؟','Which is Technical Control?',
   [['جدار ناري','Firewall'],['سياسة','Policy'],['حارس','Guard'],['باب مقفل','Locked door']],0,
   'الجدار الناري تقني.','Firewall is technical.'),
+q(1,'mcq','ما هو الضابط الإداري (Administrative Control)؟','What is an Administrative Control?',
+  [['سياسة أمنية وتدريب','Security policy and training'],['جدار ناري','Firewall'],['كاميرا','Camera'],['تشفير','Encryption']],0,
+  'الضوابط الإدارية هي القواعد والسياسات.','Administrative controls are rules and policies.'),
+q(1,'mcq','ما هو الأصل (Asset) في أمن المعلومات؟','What is an Asset in InfoSec?',
+  [['أي شيء له قيمة ويحتاج حماية','Anything valuable that needs protection'],['الهاكر فقط','Hacker only'],['الفيروسات','Viruses'],['الشبكات فقط','Networks only']],0,
+  'الأصل هو أي شيء ذو قيمة للمؤسسة.','An asset is anything of value to the organization.'),
+q(1,'mcq','ماذا يعني Availability؟','What does Availability mean?',
+  [['المعلومات متاحة للمصرح لهم عند الحاجة','Info is available to authorized users when needed'],['المعلومات سرية','Info is secret'],['المعلومات صحيحة','Info is correct'],['المعلومات مشفرة','Info is encrypted']],0,
+  'التوافرية تعني ضمان الوصول للمعلومات عند الحاجة.','Availability ensures access to info when needed.'),
+q(1,'mcq','أمن المعلومات يحمي:', 'InfoSec protects:',
+  [['المعلومات الرقمية والمادية','Digital and physical information'],['الأجهزة فقط','Devices only'],['البرامج فقط','Software only'],['الشبكات فقط','Networks only']],0,
+  'أمن المعلومات يحمي جميع أشكال المعلومات.','InfoSec protects all forms of information.'),
+q(1,'mcq','ما هو الفرق بين InfoSec و Cybersecurity؟','Difference between InfoSec and Cybersecurity?',
+  [['InfoSec أوسع ويشمل المادي','InfoSec is broader and includes physical'],['Cybersecurity أوسع','Cybersecurity is broader'],['لا فرق','No difference'],['InfoSec للشبكات فقط','InfoSec for networks only']],0,
+  'أمن المعلومات أوسع ويشمل حماية الوثائق المطبوعة.','InfoSec is broader and includes printed documents.'),
+q(1,'mcq','من المسؤول عن أمن المعلومات في المؤسسة؟','Who is responsible for InfoSec in an organization?',
+  [['كل الموظفين والمستخدمين','All employees and users'],['قسم IT فقط','IT department only'],['المدير فقط','Manager only'],['لا أحد','No one']],0,
+  'الأمن مسؤولية الجميع.',"Security is everyone's responsibility."),
+q(1,'mcq','مثال على أصل مادي (Physical Asset):','Example of a Physical Asset:',
+  [['حاسوب المكتب','Office computer'],['قاعدة بيانات','Database'],['كلمة مرور','Password'],['ملف سحابي','Cloud file']],0,
+  'الحاسوب أصل مادي.','A computer is a physical asset.'),
+q(1,'mcq','ماذا تعني كلمة Threat (تهديد)؟','What does Threat mean?',
+  [['شيء قد يسبب ضرراً','Something that may cause harm'],['شيء آمن','Something safe'],['برنامج حماية','Security software'],['إجراء وقائي','Preventive measure']],0,
+  'التهديد هو أي شيء قد يسبب ضرراً.','A threat is anything that may cause harm.'),
+q(1,'mcq','ماذا تعني كلمة Vulnerability (ثغرة)؟','What does Vulnerability mean?',
+  [['ضعف يمكن استغلاله','A weakness that can be exploited'],['برنامج مضاد للفيروسات','Antivirus'],['جدار ناري','Firewall'],['تشفير قوي','Strong encryption']],0,
+  'الثغرة هي ضعف في النظام.','A vulnerability is a system weakness.'),
+q(1,'mcq','مثال على مبدأ السرية (Confidentiality):','Example of Confidentiality:',
+  [['استخدام التشفير وكلمات المرور','Using encryption and passwords'],['عمل نسخ احتياطي','Making backups'],['فحص الفيروسات','Scanning viruses'],['صيانة الخوادم','Server maintenance']],0,
+  'السرية تتحقق بالتشفير والتحكم بالوصول.','Confidentiality is achieved via encryption and access control.'),
 q(1,'tf','ثالوث CIA = Confidentiality + Integrity + Availability','CIA = Confidentiality + Integrity + Availability',
   [['صواب','True'],['خطأ','False']],0,'هذا تعريف ثالوث CIA.','This is the CIA Triad definition.'),
 q(1,'tf','كلمة المرور الضعيفة = Vulnerability','Weak password = Vulnerability',
   [['صواب','True'],['خطأ','False']],0,'كلمة المرور الضعيفة = ثغرة.','Weak password = vulnerability.'),
 q(1,'tf','السياسة الأمنية = Physical Control','Security policy = Physical Control',
   [['صواب','True'],['خطأ','False']],1,'خطأ. السياسة إدارية.','False. Administrative.'),
+q(1,'tf','Risk هو احتمال الضرر.','Risk is the probability of damage.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+
+// L2
 q(2,'mcq','ما هو Plaintext؟','What is Plaintext?',
   [['المعلومات الأصلية المقروءة','Original readable info'],['النص المشفر','Ciphertext'],['المفتاح','Key'],['الخوارزمية','Algorithm']],0,
   'Plaintext = المقروء قبل التشفير.','Plaintext = readable before encryption.'),
@@ -1144,10 +801,55 @@ q(2,'mcq','Encryption هو؟','Encryption is?',
 q(2,'mcq','في Caesar بمفتاح 3، HELLO تصبح؟','Caesar key 3, HELLO becomes?',
   [['KHOOR','KHOOR'],['HELLO','HELLO'],['ABCDE','ABCDE'],['XYZ','XYZ']],0,
   'H→K, E→H, L→O, O→R = KHOOR.','H→K, E→H, L→O, O→R = KHOOR.'),
+q(2,'mcq','ما هو Ciphertext؟','What is Ciphertext?',
+  [['النص المشفر','Encrypted text'],['النص الأصلي','Original text'],['المفتاح','Key'],['الخوارزمية','Algorithm']],0,
+  'Ciphertext هو النص المشفر.','Ciphertext is the encrypted text.'),
+q(2,'mcq','ما هو Decryption؟','What is Decryption?',
+  [['تحويل Ciphertext إلى Plaintext','Ciphertext to Plaintext'],['تحويل Plaintext إلى Ciphertext','Plaintext to Ciphertext'],['توليد المفتاح','Key generation'],['حذف البيانات','Delete data']],0,
+  'Decryption يستعيد النص الأصلي.','Decryption recovers original text.'),
+q(2,'mcq','ماذا يعني Data at rest؟','What does Data at rest mean?',
+  [['بيانات مخزنة','Stored data'],['بيانات تتحرك','Moving data'],['بيانات محذوفة','Deleted data'],['بيانات مشفرة فقط','Encrypted data only']],0,
+  'At rest تعني البيانات المخزنة.','At rest means stored data.'),
+q(2,'mcq','ماذا يعني Data in transit؟','What does Data in transit mean?',
+  [['بيانات تتحرك عبر شبكة','Data moving over network'],['بيانات مخزنة','Stored data'],['بيانات مطبوعة','Printed data'],['بيانات محذوفة','Deleted data']],0,
+  'In transit تعني البيانات أثناء النقل.','In transit means data during transmission.'),
+q(2,'mcq','ما هو Algorithm في التشفير؟','What is an Algorithm in cryptography?',
+  [['مجموعة قواعد التشفير','Rules for encryption'],['المفتاح','Key'],['النص المشفر','Ciphertext'],['المرسل','Sender']],0,
+  'الخوارزمية هي قواعد التشفير.','Algorithm is the encryption rules.'),
+q(2,'mcq','ما هو Cryptographic Key؟','What is a Cryptographic Key?',
+  [['قيمة تتحكم بالخوارزمية','Value that controls algorithm'],['الخوارزمية','Algorithm'],['النص','Text'],['البرنامج','Software']],0,
+  'المفتاح يتحكم بكيفية التشفير.','Key controls how encryption works.'),
+q(2,'mcq','ما هو الهدف من Hash Function؟','Purpose of Hash Function?',
+  [['تحويل رسالة إلى قيمة ثابتة الطول','Convert message to fixed length value'],['تشفير الملفات','Encrypt files'],['فك التشفير','Decrypt'],['ضغط الملفات','Compress files']],0,
+  'Hash يحول رسالة لأي حجم إلى digest ثابت.','Hash converts any message to fixed digest.'),
+q(2,'mcq','أي مما يلي مثال على Data at rest؟','Example of Data at rest?',
+  [['ملف على القرص الصلب','File on hard disk'],['رسالة واتساب أثناء الإرسال','WhatsApp msg in transit'],['مكالمة هاتفية','Phone call'],['بث فيديو','Video stream']],0,
+  'الملف المخزن هو At rest.','Stored file is at rest.'),
+q(2,'mcq','أي مما يلي مثال على Data in transit؟','Example of Data in transit?',
+  [['بريد إلكتروني أثناء الإرسال','Email during transmission'],['ملف في مجلد','File in folder'],['قاعدة بيانات','Database'],['قرص صلب','Hard disk']],0,
+  'البريد أثناء الإرسال هو In transit.','Email during transmission is in transit.'),
+q(2,'mcq','ما الذي يميز التشفير المتماثل في هذا الفصل؟','What distinguishes symmetric encryption?',
+  [['مفتاح واحد','One key'],['مفتاحان','Two keys'],['لا مفاتيح','No keys'],['مفتاح عام','Public key']],0,
+  'المتماثل يستخدم مفتاحاً واحداً.','Symmetric uses one key.'),
+q(2,'mcq','في Caesar cipher، ماذا يمثل الرقم 3؟','In Caesar cipher, what is 3?',
+  [['المفتاح','The key'],['الخوارزمية','The algorithm'],['النص','The text'],['المرسل','The sender']],0,
+  'الرقم 3 هو المفتاح (قيمة الإزاحة).','3 is the key (shift value).'),
+q(2,'mcq','لماذا التشفير مهم للتواصل؟','Why is encryption important for communication?',
+  [['يحمي السرية','Protects confidentiality'],['يزيد السرعة','Increases speed'],['يقلل الحجم','Reduces size'],['يوفر الطاقة','Saves energy']],0,
+  'التشفير يحمي السرية.','Encryption protects confidentiality.'),
+q(2,'mcq','ما هو التشفير (Cryptography)؟','What is Cryptography?',
+  [['علم حماية المعلومات بتحويلها','Science of protecting info via transformation'],['برمجة','Programming'],['تصميم','Design'],['شبكات','Networks']],0,
+  'التشفير هو علم حماية المعلومات.','Cryptography is the science of protecting info.'),
 q(2,'tf','التشفير يضمن Availability تلقائياً','Encryption guarantees Availability automatically',
   [['صواب','True'],['خطأ','False']],1,'خطأ. يحمي السرية.','False. Protects confidentiality.'),
 q(2,'tf','Caesar cipher = تشفير متماثل','Caesar cipher = symmetric',
   [['صواب','True'],['خطأ','False']],0,'مفتاح واحد.','One key.'),
+q(2,'tf','Hash Function يمكن عكسها لاستعادة النص الأصلي.','Hash Function is reversible.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. Hash لا يمكن عكسه.','False. Hash is irreversible.'),
+q(2,'tf','Plaintext هو النص المشفر.','Plaintext is the encrypted text.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. Plaintext هو النص الأصلي.','False. Plaintext is original.'),
+
+// L3
 q(3,'mcq','مبدأ التشفير المتماثل؟','Symmetric principle?',
   [['مفتاح سري واحد','One shared key'],['مفتاحان','Two keys'],['لا مفاتيح','No keys'],['مفتاح عام','Public only']],0,
   'نفس المفتاح السري.','Same secret key.'),
@@ -1160,10 +862,52 @@ q(3,'mcq','DES key size?','DES key size?',
 q(3,'mcq','أفضل خوارزمية حديثة؟','Best modern algorithm?',
   [['AES','AES'],['DES','DES'],['3DES','3DES'],['RC4','RC4']],0,
   'AES هو المعيار.','AES is standard.'),
+q(3,'mcq','ما هو حجم Block في AES؟','AES Block size?',
+  [['128 bits','128 bits'],['64 bits','64 bits'],['256 bits','256 bits'],['192 bits','192 bits']],0,
+  'AES دائماً block 128 بت.','AES is always 128 bits.'),
+q(3,'mcq','ما هو حجم Block في DES؟','DES Block size?',
+  [['64 bits','64 bits'],['128 bits','128 bits'],['56 bits','56 bits'],['256 bits','256 bits']],0,
+  'DES block = 64 بت.','DES block = 64 bits.'),
+q(3,'mcq','ما هو مفتاح DES؟','DES Key size?',
+  [['56 bits','56 bits'],['64 bits','64 bits'],['128 bits','128 bits'],['256 bits','256 bits']],0,
+  'DES key = 56 بت.','DES key = 56 bits.'),
+q(3,'mcq','أي مما يلي Stream Cipher؟','Which is Stream Cipher?',
+  [['ChaCha20','ChaCha20'],['AES','AES'],['DES','DES'],['3DES','3DES']],0,
+  'ChaCha20 هو stream cipher.','ChaCha20 is stream cipher.'),
+q(3,'mcq','أي مما يلي Block Cipher؟','Which is Block Cipher?',
+  [['AES','AES'],['ChaCha20','ChaCha20'],['RC4','RC4'],['A5/1','A5/1']],0,
+  'AES هو block cipher.','AES is block cipher.'),
+q(3,'mcq','Block Cipher يعالج البيانات:','Block Cipher processes data:',
+  [['كتل بحجم ثابت','Fixed blocks'],['بت واحد','One bit'],['بايت واحد','One byte'],['مستمر','Continuously']],0,
+  'Block يعالج كتل ثابتة.','Block processes fixed blocks.'),
+q(3,'mcq','Stream Cipher يعالج البيانات:','Stream Cipher processes data:',
+  [['بت/بايت واحد','Bit/byte at a time'],['كتل ثابتة','Fixed blocks'],['ملفات كبيرة','Large files'],['صور','Images']],0,
+  'Stream يعالج بت أو بايت.','Stream processes bit/byte.'),
+q(3,'mcq','ما هي مشكلة توزيع المفتاح؟','What is the key distribution problem?',
+  [['صعوبة إيصال المفتاح السري بأمان','Difficulty delivering secret key securely'],['نسيان المفتاح','Forgetting the key'],['طول المفتاح','Key length'],['قصر المفتاح','Short key']],0,
+  'توزيع المفتاح السري بأمان هو التحدي.','Securely distributing the secret key is the challenge.'),
+q(3,'mcq','ما هو عدد المفاتيح المطلوبة لـ 4 مستخدمين؟','Key count for 4 users?',
+  [['6','6'],['4','4'],['8','8'],['12','12']],0,
+  'n(n-1)/2 = 4×3/2 = 6.','n(n-1)/2 = 4×3/2 = 6.'),
+q(3,'mcq','كم عدد المفاتيح لـ 10 مستخدمين؟','Key count for 10 users?',
+  [['45','45'],['10','10'],['90','90'],['100','100']],0,
+  '10×9/2 = 45.','10×9/2 = 45.'),
+q(3,'mcq','3DES يطبق DES كم مرة؟','3DES applies DES how many times?',
+  [['3','3'],['2','2'],['1','1'],['4','4']],0,
+  '3DES يطبق DES ثلاث مرات.','3DES applies DES three times.'),
+q(3,'mcq','لماذا DES لم يعد آمناً؟','Why is DES insecure?',
+  [['مفتاحه 56 بت قابل للتخمين','56-bit key brute-forceable'],['بطيء جداً','Too slow'],["لا يعمل على الإنترنت","Doesn't work on internet"],['يستهلك طاقة','Uses too much power']],0,
+  'قصر المفتاح يجعله غير آمن.','Short key makes it insecure.'),
 q(3,'tf','DES آمن للأنظمة الحديثة','DES secure for modern',
   [['صواب','True'],['خطأ','False']],1,'خطأ. قديم.','False. Obsolete.'),
 q(3,'tf','AES block size = 128 bit','AES block = 128 bit',
   [['صواب','True'],['خطأ','False']],0,'دائماً 128 بت.','Always 128.'),
+q(3,'tf','التشفير المتماثل سريع للبيانات الكبيرة.','Symmetric encryption is fast for bulk data.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(3,'tf','3DES أسرع من AES.','3DES is faster than AES.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. 3DES أبطأ.','False. 3DES is slower.'),
+
+// L4
 q(4,'mcq','لإرسال سري لـ Bob:','Secret to Bob:',
   [['مفتاح Bob العام','Bob public key'],['مفتاح Bob الخاص','Bob private key'],['مفتاح Alice','Alice key'],['مفتاح مشترك','Shared key']],0,
   'بالمفتاح العام للمستقبل.','Recipient public key.'),
@@ -1173,10 +917,52 @@ q(4,'mcq','RSA يعتمد على؟','RSA depends on?',
 q(4,'mcq','لماذا ECC مناسب للـ IoT؟','Why ECC good for IoT?',
   [['مفاتيح أصغر','Smaller keys'],['لا مفاتيح','No keys'],['أبطأ','Slower'],['حجم كبير','Big']],0,
   'فعال للطاقة.','Energy-efficient.'),
+q(4,'mcq','ما هو المفتاح العام (Public Key)؟','What is a Public Key?',
+  [['مفتاح يمكن مشاركته','Key that can be shared'],['مفتاح سري','Secret key'],['كلمة مرور','Password'],['مفتاح AES','AES key']],0,
+  'المفتاح العام يمكن مشاركته.','Public key can be shared.'),
+q(4,'mcq','ما هو المفتاح الخاص (Private Key)؟','What is a Private Key?',
+  [['مفتاح سري يحتفظ به المالك','Secret key kept by owner'],['مفتاح عام','Public key'],['مفتاح مشترك','Shared key'],['كلمة مرور','Password']],0,
+  'المفتاح الخاص يجب أن يبقى سرياً.','Private key must stay secret.'),
+q(4,'mcq','ما هي وظيفة ECDH؟','Function of ECDH?',
+  [['اتفاق المفاتيح','Key agreement'],['التوقيع','Signing'],['التشفير','Encryption'],['الضغط','Compression']],0,
+  'ECDH لاتفاق المفاتيح.','ECDH is for key agreement.'),
+q(4,'mcq','ما هي وظيفة ECDSA؟','Function of ECDSA?',
+  [['التوقيعات الرقمية','Digital signatures'],['اتفاق المفاتيح','Key agreement'],['التشفير','Encryption'],['الضغط','Compression']],0,
+  'ECDSA للتوقيعات.','ECDSA is for signatures.'),
+q(4,'mcq','ما هو التشفير الهجين (Hybrid)؟','What is Hybrid encryption?',
+  [['يجمع المتماثل وغير المتماثل','Combines symmetric and asymmetric'],['يستخدم متماثل فقط','Symmetric only'],['يستخدم غير متماثل فقط','Asymmetric only'],['لا يستخدم مفاتيح','No keys']],0,
+  'الهجين يجمع بين الاثنين.','Hybrid combines both.'),
+q(4,'mcq','في RSA تعليمي p=3,q=11,e=3، ما هو n؟','RSA n with p=3,q=11?',
+  [['33','33'],['20','20'],['14','14'],['11','11']],0,
+  'n = p × q = 3 × 11 = 33.','n = p × q = 3 × 11 = 33.'),
+q(4,'mcq','في RSA، ما هو Public Key؟','RSA Public Key?',
+  [['(n, e)','(n, e)'],['(n, d)','(n, d)'],['(p, q)','(p, q)'],['(e, d)','(e, d)']],0,
+  'العام هو (n, e).','Public is (n, e).'),
+q(4,'mcq','في RSA، ما هو Private Key؟','RSA Private Key?',
+  [['(n, d)','(n, d)'],['(n, e)','(n, e)'],['(p, q)','(p, q)'],['(e, d)','(e, d)']],0,
+  'الخاص هو (n, d).','Private is (n, d).'),
+q(4,'mcq','لماذا RSA أبطأ من AES؟','Why is RSA slower than AES?',
+  [['يحتاج حسابات رياضية معقدة','Complex math operations'],["لأنه أقدم","Because it's older"],['لأنه غير آمن','Because it is insecure'],['لأنه سحابي','Because it is cloud']],0,
+  'حسابات RSA معقدة.','RSA math is complex.'),
+q(4,'mcq','لماذا نستخدم التشفير الهجين؟','Why use Hybrid encryption?',
+  [['لأخذ ميزة السرعة والأمان','To get speed and security'],['لتوفير المال','To save money'],['لتقليل الحجم','To reduce size'],["لأنه أسهل","Because it's easier"]],0,
+  'الهجين يجمع سرعة المتماثل وأمان غير المتماثل.','Combines symmetric speed and asymmetric security.'),
+q(4,'mcq','ما هو DSA؟','What is DSA?',
+  [['خوارزمية توقيع رقمي','Digital signature algorithm'],['خوارزمية تشفير','Encryption algorithm'],['خوارزمية ضغط','Compression algorithm'],['بروتوكول شبكة','Network protocol']],0,
+  'DSA مخصص للتوقيعات.','DSA is for signatures.'),
+q(4,'mcq','ما هي الميزة الرئيسية لـ ECC؟','Main advantage of ECC?',
+  [['مفاتيح أصغر لنفس الأمان','Smaller keys for same security'],['أسرع من AES','Faster than AES'],['لا يحتاج مفاتيح','No keys needed'],['يعمل بدون إنترنت','Works offline']],0,
+  'ECC يوفر أماناً عالياً بمفاتيح صغيرة.','ECC provides high security with small keys.'),
 q(4,'tf','المفتاح الخاص يمكن حسابه من العام','Private from public',
   [['صواب','True'],['خطأ','False']],1,'خطأ. مستحيل.','False. Infeasible.'),
 q(4,'tf','Hybrid = غير متماثل + متماثل','Hybrid = asymmetric + symmetric',
   [['صواب','True'],['خطأ','False']],0,'غير متماثل للمفتاح، متماثل للبيانات.','Asymmetric for key, symmetric for data.'),
+q(4,'tf','RSA يستخدم لتحليل الأعداد الكبيرة.','RSA uses integer factorization.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(4,'tf','ECDH تستخدم للتوقيع الرقمي.','ECDH is used for digital signatures.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. ECDH لاتفاق المفاتيح.','False. ECDH is for key agreement.'),
+
+// L5
 q(5,'mcq','KDC = ؟','KDC = ?',
   [['توزيع مفاتيح جلسات','Distribute session keys'],['تشفير ملفات','Encrypt files'],['فحص فيروسات','Scan viruses'],['إصدار شهادات','Issue certs']],0,
   'خدمة موثوقة للمفاتيح.','Trusted key service.'),
@@ -1186,10 +972,52 @@ q(5,'mcq','CA = ؟','CA = ?',
 q(5,'mcq','مراحل دورة حياة المفتاح؟','Key lifecycle?',
   [['5','5'],['3','3'],['4','4'],['7','7']],0,
   'Generation, Distribution, Storage, Rotation, Recovery.','5 stages.'),
+q(5,'mcq','ما هي وظيفة RA في PKI؟','RA function in PKI?',
+  [['التحقق من هوية المتقدم','Verify applicant identity'],['إصدار الشهادات','Issue certs'],['تشفير البيانات','Encrypt data'],['توزيع المفاتيح','Distribute keys']],0,
+  'RA يتحقق من الهوية.','RA verifies identity.'),
+q(5,'mcq','ما الذي تحتويه الشهادة الرقمية؟','What does a digital certificate contain?',
+  [['المفتاح العام فقط','Public key only'],['المفتاح الخاص','Private key'],['كلمة المرور','Password'],['الملفات','Files']],0,
+  'الشهادة تحتوي المفتاح العام.','Certificate contains public key.'),
+q(5,'mcq','ما هو Diffie-Hellman؟','What is Diffie-Hellman?',
+  [['بروتوكول اتفاق مفاتيح','Key agreement protocol'],['خوارزمية تشفير ملفات','File encryption algorithm'],['بروتوكول بريد','Email protocol'],['جدار ناري','Firewall']],0,
+  'DH لاتفاق المفاتيح.','DH is for key agreement.'),
+q(5,'mcq','ما هو الهجوم على Diffie-Hellman بدون مصادقة؟','Attack on DH without auth?',
+  [['Man-in-the-Middle','Man-in-the-Middle'],['DoS','DoS'],['SQL Injection','SQL Injection'],['XSS','XSS']],0,
+  'DH بدون مصادقة قابل لـ MITM.','DH without auth is MITM-vulnerable.'),
+q(5,'mcq','ما هي المرحلة الأولى في دورة حياة المفتاح؟','First key lifecycle stage?',
+  [['Generation','Generation'],['Distribution','Distribution'],['Storage','Storage'],['Recovery','Recovery']],0,
+  'المرحلة الأولى هي التوليد.','First stage is generation.'),
+q(5,'mcq','ما هي المرحلة الأخيرة في دورة حياة المفتاح؟','Last key lifecycle stage?',
+  [['Recovery & Destruction','Recovery & Destruction'],['Rotation','Rotation'],['Storage','Storage'],['Generation','Generation']],0,
+  'المرحلة الأخيرة هي الاسترداد والإتلاف.','Last stage is recovery & destruction.'),
+q(5,'mcq','ما هو Manual key distribution؟','What is Manual key distribution?',
+  [['تسليم شخصي','In-person delivery'],['إرسال بريد','Email'],['رفع سحابي','Cloud upload'],['رسالة نصية','Text message']],0,
+  'التسليم الشخصي هو توزيع يدوي.','In-person delivery is manual.'),
+q(5,'mcq','ما هو Public-key Transport؟','What is Public-key Transport?',
+  [['تشفير مفتاح جلسة بالمفتاح العام','Encrypt session key with public key'],['تشفير الملفات','Encrypt files'],['توقيع المستندات','Sign documents'],['توزيع الشهادات','Distribute certs']],0,
+  'نقل مفتاح الجلسة عبر المفتاح العام.','Transport session key via public key.'),
+q(5,'mcq','ما هو PKI؟','What is PKI?',
+  [['إطار إدارة الشهادات','Certificate management framework'],['بروتوكول تشفير','Encryption protocol'],['لغة برمجة','Programming language'],['نظام تشغيل','Operating system']],0,
+  'PKI هو إطار الشهادات.','PKI is the cert framework.'),
+q(5,'mcq','ما هو CA؟','What is CA?',
+  [['Certificate Authority','Certificate Authority'],['Client Access','Client Access'],['Cloud Auth','Cloud Auth'],['Central Admin','Central Admin']],0,
+  'CA = Certificate Authority.','CA = Certificate Authority.'),
+q(5,'mcq','من يصدر الشهادات الرقمية؟','Who issues digital certificates?',
+  [['CA','CA'],['RA','RA'],['KDC','KDC'],['DH','DH']],0,
+  'CA يصدر الشهادات.','CA issues certificates.'),
+q(5,'mcq','من يتحقق من هوية المتقدم للشهادة؟','Who verifies cert applicant identity?',
+  [['RA','RA'],['CA','CA'],['KDC','KDC'],['DH','DH']],0,
+  'RA يتحقق من الهوية.','RA verifies identity.'),
 q(5,'tf','Diffie-Hellman ينشئ سراً مشتركاً دون إرساله','DH establishes shared secret without sending',
   [['صواب','True'],['خطأ','False']],0,'كلا الطرفان يحسبان.','Both compute.'),
 q(5,'tf','DH آمن ضد MITM بدون مصادقة','DH secure vs MITM without auth',
   [['صواب','True'],['خطأ','False']],1,'خطأ. يحتاج مصادقة.','False. Needs auth.'),
+q(5,'tf','الشهادة الرقمية تحتوي المفتاح الخاص.','Digital certificate contains private key.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. تحتوي العام فقط.','False. Public only.'),
+q(5,'tf','KDC يوزع مفاتيح الجلسات.','KDC distributes session keys.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+
+// L6
 q(6,'mcq','التوقيع يستخدم أي مفتاح؟','Signature uses which key?',
   [['المفتاح الخاص','Private key'],['المفتاح العام','Public key'],['لا مفتاح','No key'],['كلاهما','Both']],0,
   'نوقّع بالخاص.','Sign with private.'),
@@ -1199,10 +1027,52 @@ q(6,'mcq','لماذا Hash قبل التوقيع؟','Why Hash?',
 q(6,'mcq','MFA حقيقي = ؟','True MFA?',
   [['كلمة مرور + رمز هاتف','Password + phone code'],['كلمتان','Two passwords'],['PIN+PIN','PIN+PIN'],['كلمة مرور فقط','Password only']],0,
   'فئتان مختلفتان.','Two categories.'),
+q(6,'mcq','ما هي خصائص التوقيع الرقمي؟','Digital signature properties?',
+  [['Authenticity, Integrity, Non-repudiation','Authenticity, Integrity, Non-repudiation'],['Speed, Size, Cost','Speed, Size, Cost'],['Color, Shape, Size','Color, Shape, Size'],['Speed, Accuracy','Speed, Accuracy']],0,
+  'الخصائص الثلاث هي الأصالة والنزاهة وعدم الإنكار.','The three properties.'),
+q(6,'mcq','ما هي وظيفة Hash Function؟','Hash function purpose?',
+  [['تحويل رسالة إلى قيمة ثابتة','Convert message to fixed value'],['تشفير الملفات','Encrypt files'],['إصدار الشهادات','Issue certs'],['توزيع المفاتيح','Distribute keys']],0,
+  'Hash يحول لـ digest.','Hash converts to digest.'),
+q(6,'mcq','من يصدر الشهادات؟','Who issues certs?',
+  [['CA','CA'],['RA','RA'],['KDC','KDC'],['DH','DH']],0,
+  'CA يصدر الشهادات.','CA issues certs.'),
+q(6,'mcq','ما هو Authentication؟','What is Authentication?',
+  [['التحقق من الهوية','Verify identity'],['تحديد الصلاحيات','Determine permissions'],['تشفير البيانات','Encrypt data'],['ضغط الملفات','Compress files']],0,
+  'Authentication = من أنت.','Authentication = who are you.'),
+q(6,'mcq','ما هو Authorization؟','What is Authorization?',
+  [['تحديد الصلاحيات','Determine permissions'],['التحقق من الهوية','Verify identity'],['تشفير البيانات','Encrypt data'],['ضغط الملفات','Compress files']],0,
+  'Authorization = ماذا تفعل.','Authorization = what can you do.'),
+q(6,'mcq','أي مما يلي فئة MFA؟','Which is an MFA category?',
+  [['Know, Have, Are','Know, Have, Are'],['Red, Green, Blue','Red, Green, Blue'],['Up, Down, Left','Up, Down, Left'],['Fast, Slow, Medium','Fast, Slow, Medium']],0,
+  'Know, Have, Are هي فئات MFA.','Know, Have, Are are the categories.'),
+q(6,'mcq','ما هو IAM؟','What is IAM?',
+  [['إدارة الهوية والوصول','Identity and Access Management'],['بروتوكول تشفير','Encryption protocol'],['جدار ناري','Firewall'],['نظام تشغيل','Operating system']],0,
+  'IAM = Identity and Access Management.','IAM = Identity and Access Management.'),
+q(6,'mcq','ما هي وظيفة IAM؟','IAM function?',
+  [['إدارة الحسابات والصلاحيات','Manage accounts and permissions'],['تشفير الملفات','Encrypt files'],['فحص الفيروسات','Scan viruses'],['ضغط البيانات','Compress data']],0,
+  'IAM تدير الهويات والصلاحيات.','IAM manages identities and permissions.'),
+q(6,'mcq','ما هو Passkey؟','What is a Passkey?',
+  [['بيانات اعتماد تشفيرية بدون كلمة مرور','Passwordless crypto credentials'],['كلمة مرور عادية','Normal password'],['مفتاح تشفير','Encryption key'],['شهادة رقمية','Digital cert']],0,
+  'Passkey = بدون كلمة مرور.','Passkey = passwordless.'),
+q(6,'mcq','ما هو Risk-based Authentication؟','What is Risk-based Auth?',
+  [['فحوصات إضافية عند دخول غير عادي','Extra checks for unusual login'],['كلمة مرور فقط','Password only'],['بدون مصادقة','No auth'],['تشفير فقط','Encryption only']],0,
+  'Risk-based يطلب فحوصات إضافية عند الحاجة.','Risk-based adds checks when needed.'),
+q(6,'mcq','من يتحقق من التوقيع الرقمي؟','Who verifies digital signature?',
+  [['أي شخص لديه المفتاح العام','Anyone with public key'],['فقط الموقّع','Only the signer'],['فقط CA','Only CA'],['لا أحد','No one']],0,
+  'أي شخص لديه المفتاح العام يمكنه التحقق.','Anyone with public key can verify.'),
+q(6,'mcq','ما هي خطوة إصدار الشهادة الأولى؟','First cert issuance step?',
+  [['توليد زوج مفاتيح','Generate key pair'],['إنشاء CSR','Create CSR'],['توقيع CA','CA sign'],['التثبيت','Install']],0,
+  'الخطوة الأولى هي توليد الزوج.','First step is generate key pair.'),
 q(6,'tf','التوقيع يشفّر المستند','Signature encrypts document',
   [['صواب','True'],['خطأ','False']],1,'خطأ. لا يشفّر.','False. No encryption.'),
 q(6,'tf','Authentication = من أنت؟','Auth = who are you?',
   [['صواب','True'],['خطأ','False']],0,'نعم.','Yes.'),
+q(6,'tf','التوقيع الرقمي يوفر Non-repudiation.','Digital signature provides Non-repudiation.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(6,'tf','كلمتا مرور تعتبران MFA.','Two passwords are MFA.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. تحتاج فئتين مختلفتين.','False. Needs different categories.'),
+
+// L7
 q(7,'mcq','Worm vs Virus؟','Worm vs Virus?',
   [['Worm ينتشر ذاتياً','Worm self-replicates'],['Virus يحتاج ملف','Virus needs file'],['لا فرق','No diff'],['Worm غير ضار','Worm harmless']],0,
   'Worm ذاتي.','Worm self-replicates.'),
@@ -1215,10 +1085,52 @@ q(7,'mcq','DoS vs DDoS؟','DoS vs DDoS?',
 q(7,'mcq','Firewall = ؟','Firewall?',
   [['يرشح الترافيك','Filter traffic'],['يشفر','Encrypts'],['يفحص فيروسات','Scans viruses'],['يصدر شهادات','Issues certs']],0,
   'يرشح حسب قواعد.','Filters by rules.'),
+q(7,'mcq','ما هو Virus؟','What is Virus?',
+  [['يحتاج ملف مضيف','Needs host file'],['ينتشر ذاتياً','Self-replicates'],['متنكر','Disguised'],['جدار ناري','Firewall']],0,
+  'Virus يحتاج ملف مضيف.','Virus needs host file.'),
+q(7,'mcq','ما هو Worm؟','What is Worm?',
+  [['ينتشر ذاتياً عبر الشبكة','Self-replicates over network'],['يحتاج ملف مضيف','Needs host file'],['متنكر','Disguised'],['جدار ناري','Firewall']],0,
+  'Worm ينتشر ذاتياً.','Worm self-replicates.'),
+q(7,'mcq','ما هو Trojan؟','What is Trojan?',
+  [['متنكر كتطبيق شرعي','Disguised as legit app'],['فيروس','Virus'],['ديدان','Worm'],['جدار','Firewall']],0,
+  'Trojan يتنكر.','Trojan disguises.'),
+q(7,'mcq','ما هو Phishing؟','What is Phishing?',
+  [['هجوم تصيد برسائل مزيفة','Deceptive message attack'],['هجوم شبكة','Network attack'],['تشفير','Encryption'],['جدار ناري','Firewall']],0,
+  'Phishing يصيد المستخدمين.','Phishing tricks users.'),
+q(7,'mcq','ما هو DDoS؟','What is DDoS?',
+  [['هجوم من مصادر متعددة','Attack from many sources'],['هجوم من مصدر واحد','Attack from one source'],['تشفير قوي','Strong encryption'],['توقيع رقمي','Digital signature']],0,
+  'DDoS = distributed.','DDoS = distributed.'),
+q(7,'mcq','ما هي وظيفة Firewall؟','Firewall function?',
+  [['ترشيح حركة الشبكة','Filter network traffic'],['تشفير الملفات','Encrypt files'],['فحص الفيروسات','Scan viruses'],['توقيع المستندات','Sign docs']],0,
+  'Firewall يرشح الترافيك.','Firewall filters traffic.'),
+q(7,'mcq','ما هي وظيفة IDS؟','IDS function?',
+  [['يكتشف ويُنبّه','Detect and alert'],['يكتشف ويحجب','Detect and block'],['يشفر','Encrypts'],['يضغط','Compresses']],0,
+  'IDS يكتشف ويُنبّه.','IDS detects and alerts.'),
+q(7,'mcq','ما هي وظيفة IPS؟','IPS function?',
+  [['يكتشف ويحجب','Detect and block'],['يكتشف ويُنبّه','Detect and alert'],['يشفر','Encrypts'],['يضغط','Compresses']],0,
+  'IPS يكتشف ويحجب.','IPS detects and blocks.'),
+q(7,'mcq','أفضل بروتوكول لاسلكي أمني:','Best secure wireless protocol:',
+  [['WPA3','WPA3'],['WEP','WEP'],['WPA','WPA'],['WPA2','WPA2']],0,
+  'WPA3 هو الأحدث والأكثر أماناً.','WPA3 is the latest and most secure.'),
+q(7,'mcq','كيف نحمي الشبكات السلكية؟','How to secure wired networks?',
+  [['تقييد الوصول الفيزيائي','Restrict physical access'],['استخدام WEP','Use WEP'],['فتح المنافذ','Open ports'],['إيقاف المصادقة','Disable auth']],0,
+  'تقييد الوصول للمنافذ والمفاتيح.','Restrict physical access to ports.'),
+q(7,'mcq','كيف نحمي شبكات الزوار اللاسلكية؟','How to secure guest Wi-Fi?',
+  [['عزل شبكة الزوار','Isolate guest network'],['فتح الشبكة','Open network'],['استخدام WEP','Use WEP'],['إلغاء التشفير','Disable encryption']],0,
+  'عزل شبكة الزوار يحمي الشبكة الرئيسية.','Isolating guest network protects main network.'),
+q(7,'mcq','ماذا يعني Social Engineering؟','What is Social Engineering?',
+  [['التلاعب بالأشخاص','Manipulating people'],['اختراق الشبكة','Network hacking'],['تشفير البيانات','Encrypt data'],['ضغط الملفات','Compress files']],0,
+  'التلاعب بالأشخاص للحصول على معلومات.','Manipulating people for info.'),
 q(7,'tf','WPA3 أفضل من WEP','WPA3 better than WEP',
   [['صواب','True'],['خطأ','False']],0,'WEP مكسور.','WEP broken.'),
 q(7,'tf','DDoS من مصدر واحد','DDoS single source',
   [['صواب','True'],['خطأ','False']],1,'خطأ. distributed.','False. distributed.'),
+q(7,'tf','Firewall يرشح حركة الشبكة.','Firewall filters network traffic.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(7,'tf','IDS يحجب الترافيك تلقائياً.','IDS blocks traffic automatically.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. IDS ينبه فقط.','False. IDS only alerts.'),
+
+// L8
 q(8,'mcq','حماية SQLi؟','SQLi defense?',
   [['Parameterized Queries','Parameterized Queries'],['حذف DB','Drop DB'],['كلمة مرور','Password'],['تعطيل','Disable']],0,
   'Prepared statements.','Prepared statements.'),
@@ -1228,10 +1140,52 @@ q(8,'mcq','XSS = ؟','XSS?',
 q(8,'mcq','FDE = ؟','FDE?',
   [['تشفير كامل القرص','Encrypts entire drive'],['ملف','One file'],['حذف','Delete'],['ضغط','Compress']],0,
   'تشفير كامل.','Full disk.'),
+q(8,'mcq','ما هو SQL Injection؟','What is SQL Injection?',
+  [['تلاعب باستعلامات DB','Manipulating DB queries'],['تشفير SQL','Encrypting SQL'],['نسخ احتياطي','Backup'],['فهرسة','Indexing']],0,
+  'SQLi يتلاعب بالاستعلامات.','SQLi manipulates queries.'),
+q(8,'mcq','ما هو XSS؟','What is XSS?',
+  [['تنفيذ سكريبت في سياق موثوق','Script in trusted context'],['هجوم DNS','DNS attack'],['هجوم شبكة','Network attack'],['فيروس','Virus']],0,
+  'XSS ينفذ سكريبت.','XSS executes script.'),
+q(8,'mcq','ما هي حماية XSS؟','XSS defense?',
+  [['Context-aware Output Encoding','Context-aware Output Encoding'],['حذف DB','Drop DB'],['كلمة مرور','Password'],['تعطيل','Disable']],0,
+  'Output encoding يمنع XSS.','Output encoding prevents XSS.'),
+q(8,'mcq','ما هو FDE؟','What is FDE?',
+  [['تشفير كامل القرص','Full Disk Encryption'],['تشفير ملف واحد','Single file encryption'],['حذف البيانات','Delete data'],['ضغط البيانات','Compress data']],0,
+  'FDE = تشفير كامل القرص.','FDE = full disk encryption.'),
+q(8,'mcq','ما هي قيود FDE؟','FDE limitation?',
+  [['لا يحمي جهازاً مفتوحاً',"Doesn't protect open device"],['بطيء جداً','Too slow'],["لا يعمل على الهواتف","Doesn't work on phones"],['يستهلك طاقة','Uses power']],0,
+  'FDE لا يحمي جهازاً مفتوحاً.',"FDE doesn't protect open device."),
+q(8,'mcq','كيف نحمي البيانات In Transit؟','How to protect Data in Transit?',
+  [['TLS/HTTPS','TLS/HTTPS'],['تشفير القرص','Disk encryption'],['كلمة مرور','Password'],['نسخ احتياطي','Backup']],0,
+  'TLS يحمي البيانات أثناء النقل.','TLS protects data in transit.'),
+q(8,'mcq','كيف نحمي البيانات At Rest؟','How to protect Data at Rest?',
+  [['Storage encryption','Storage encryption'],['TLS','TLS'],['كلمة مرور','Password'],['نسخ احتياطي','Backup']],0,
+  'Storage encryption يحمي البيانات المخزنة.','Storage encryption protects stored data.'),
+q(8,'mcq','ما هي حماية SQLi؟','SQLi protection?',
+  [['Parameterized Queries','Parameterized Queries'],['حذف DB','Drop DB'],['كلمة مرور','Password'],['تعطيل','Disable']],0,
+  'Parameterized queries تمنع SQLi.','Parameterized queries prevent SQLi.'),
+q(8,'mcq','ما هو Input Validation؟','What is Input Validation?',
+  [['التحقق من المدخلات','Check input'],['تشفير البيانات','Encrypt data'],['ضغط الملفات','Compress files'],['حذف الملفات','Delete files']],0,
+  'Input Validation = التحقق من المدخلات.','Input Validation = check input.'),
+q(8,'mcq','ما هو Least Privilege؟','What is Least Privilege?',
+  [['صلاحيات محدودة','Limited permissions'],['كل الصلاحيات','All permissions'],['بدون صلاحيات','No permissions'],['صلاحيات مؤقتة','Temporary permissions']],0,
+  'Least Privilege = الحد الأدنى من الصلاحيات.','Least Privilege = minimum permissions.'),
+q(8,'mcq','ما هي حماية XSS؟','XSS protection?',
+  [['Output Encoding','Output Encoding'],['حذف DB','Drop DB'],['كلمة مرور','Password'],['تعطيل','Disable']],0,
+  'Output Encoding يمنع XSS.','Output Encoding prevents XSS.'),
+q(8,'mcq','ما هو Context-aware Output Encoding؟','What is Context-aware Output Encoding?',
+  [['ترميز المخرجات حسب السياق','Encode output based on context'],['تشفير الملفات','Encrypt files'],['ضغط البيانات','Compress data'],['حذف الملفات','Delete files']],0,
+  'الترميز حسب السياق يمنع XSS.','Context-based encoding prevents XSS.'),
 q(8,'tf','FDE يحمي جهازاً مفتوحاً','FDE protects open device',
   [['صواب','True'],['خطأ','False']],1,'خطأ. لا يحميه.','False. Does not.'),
 q(8,'tf','Parameterized Queries تمنع SQLi','Parameterized Queries prevent SQLi',
   [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(8,'tf','TLS يحمي البيانات أثناء النقل.','TLS protects data in transit.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(8,'tf','XSS هو هجوم على الشبكة.','XSS is a network attack.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. XSS هجوم ويب.','False. XSS is a web attack.'),
+
+// L9
 q(9,'mcq','Policy vs Procedure؟','Policy vs Procedure?',
   [['Policy=WHAT, Procedure=HOW','Policy=WHAT, Procedure=HOW'],['لا فرق','No diff'],['Policy أسرع','Policy faster'],['Procedure أعلى','Procedure higher']],0,
   'Policy = ماذا. Procedure = كيف.','Policy = what. Procedure = how.'),
@@ -1241,10 +1195,52 @@ q(9,'mcq','Containment في IR = خطوة؟','Containment step?',
 q(9,'mcq','NIST CSF محور؟','NIST CSF center?',
   [['GOVERN','GOVERN'],['IDENTIFY','IDENTIFY'],['PROTECT','PROTECT'],['RECOVER','RECOVER']],0,
   'GOVERN محور.','GOVERN central.'),
+q(9,'mcq','ما هو Incident Response؟','What is Incident Response?',
+  [['خطة للاستجابة للحوادث','Plan for responding to incidents'],['سياسة أمنية','Security policy'],['تشفير الملفات','Encrypt files'],['ضغط البيانات','Compress data']],0,
+  'IR هي خطة الاستجابة.','IR is the response plan.'),
+q(9,'mcq','ما هي خطوات Incident Response؟','IR steps?',
+  [['6','6'],['3','3'],['5','5'],['7','7']],0,
+  'IR = 6 خطوات.','IR = 6 steps.'),
+q(9,'mcq','ما هي أول خطوة في IR؟','First IR step?',
+  [['Preparation','Preparation'],['Containment','Containment'],['Recovery','Recovery'],['Lessons','Lessons']],0,
+  'Preparation أولاً.','Preparation first.'),
+q(9,'mcq','ما هي آخر خطوة في IR؟','Last IR step?',
+  [['Lessons Learned','Lessons Learned'],['Preparation','Preparation'],['Containment','Containment'],['Recovery','Recovery']],0,
+  'Lessons Learned آخر خطوة.','Lessons Learned is last.'),
+q(9,'mcq','ما هي وظيفة NIST CSF؟','NIST CSF function?',
+  [['إطار عمل مرن','Flexible framework'],['معيار دولي','International standard'],['تشفير','Encryption'],['بروتوكول شبكة','Network protocol']],0,
+  'NIST CSF = إطار عمل.','NIST CSF = framework.'),
+q(9,'mcq','ما هي وظيفة ISO 27001؟','ISO 27001 function?',
+  [['متطلبات ISMS','ISMS requirements'],['إطار مرن','Flexible framework'],['تشفير','Encryption'],['بروتوكول شبكة','Network protocol']],0,
+  'ISO 27001 = ISMS.','ISO 27001 = ISMS.'),
+q(9,'mcq','ما هو الفرق بين ISO و NIST في الشهادة؟','ISO vs NIST cert difference?',
+  [['ISO شهادة، NIST لا','ISO cert, NIST no'],['NIST شهادة، ISO لا','NIST cert, ISO no'],['كلاهما شهادة','Both cert'],['لا شهادة','No cert']],0,
+  'ISO لديها شهادة، NIST لا.','ISO has cert, NIST no.'),
+q(9,'mcq','ما هو ISMS؟','What is ISMS?',
+  [['نظام إدارة أمن المعلومات','Information Security Management System'],['برنامج مضاد','Antivirus'],['شبكة خاصة','VPN'],['مفتاح','Key']],0,
+  'ISMS = نظام إدارة أمن المعلومات.','ISMS = InfoSec Management System.'),
+q(9,'mcq','ما هو الفرق بين Policy و Procedure؟','Difference between Policy and Procedure?',
+  [['Policy=WHAT, Procedure=HOW','Policy=WHAT, Procedure=HOW'],['لا فرق','No diff'],['Policy أسرع','Policy faster'],['Procedure أعلى','Procedure higher']],0,
+  'Policy = ماذا. Procedure = كيف.','Policy = what. Procedure = how.'),
+q(9,'mcq','ما هو Security Policy؟','What is Security Policy?',
+  [['قاعدة مكتوبة','Written rule'],['خطوات تنفيذ','Steps to execute'],['برنامج','Software'],['شبكة','Network']],0,
+  'السياسة هي قاعدة مكتوبة.','Policy is a written rule.'),
+q(9,'mcq','ما هو Security Procedure؟','What is Security Procedure?',
+  [['خطوات تنفيذ','Steps to execute'],['قاعدة مكتوبة','Written rule'],['برنامج','Software'],['شبكة','Network']],0,
+  'الإجراء هو خطوات التنفيذ.','Procedure is the execution steps.'),
+q(9,'mcq','ما هي وظيفة NIST CSF 2.0؟','Function of NIST CSF 2.0?',
+  [['إطار عمل مرن','Flexible framework'],['معيار دولي','International standard'],['تشفير','Encryption'],['بروتوكول شبكة','Network protocol']],0,
+  'NIST CSF = إطار عمل.','NIST CSF = framework.'),
 q(9,'tf','NIST CSF له شهادة رسمية','NIST has official cert',
   [['صواب','True'],['خطأ','False']],1,'خطأ. لا شهادة.','False. No cert.'),
 q(9,'tf','ISO 27001 شهادة اختيارية','ISO 27001 optional',
   [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(9,'tf','Preparation هي أول خطوة في IR.','Preparation is first IR step.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(9,'tf','Lessons Learned هي آخر خطوة في IR.','Lessons Learned is last IR step.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+
+// L10
 q(10,'mcq','تحدي سحابي شائع؟','Cloud challenge?',
   [['Misconfiguration','Misconfiguration'],['السرعة','Speed'],['الطاقة','Energy'],['التخزين','Storage']],0,
   'إعدادات خاطئة.','Wrong settings.'),
@@ -1254,10 +1250,50 @@ q(10,'mcq','Shared: من يحمي DC؟','Shared: who protects DC?',
 q(10,'mcq','IoT botnet في؟','IoT botnet in?',
   [['DDoS','DDoS'],['تشفير','Encryption'],['تخزين','Storage'],['سرعة','Speed']],0,
   'IoT = botnet.','IoT = botnet.'),
+q(10,'mcq','ما هو Misconfiguration في السحابة؟','What is Misconfiguration in cloud?',
+  [['إعدادات خاطئة','Wrong settings'],['تشفير قوي','Strong encryption'],['نسخ احتياطي','Backup'],['مصادقة','Authentication']],0,
+  'Misconfiguration = إعدادات خاطئة.','Misconfiguration = wrong settings.'),
+q(10,'mcq','ما هو Data Exposure؟','What is Data Exposure?',
+  [['ملفات مكشوفة','Exposed files'],['ملفات مشفرة','Encrypted files'],['ملفات مضغوطة','Compressed files'],['ملفات محذوفة','Deleted files']],0,
+  'Data Exposure = كشف البيانات.','Data Exposure = exposed data.'),
+q(10,'mcq','ما هي المسؤولية المشتركة (Shared Responsibility)؟','What is Shared Responsibility?',
+  [['تقسيم المسؤوليات بين المزود والعميل','Split responsibilities between provider and customer'],['المزود مسؤول عن كل شيء','Provider responsible for all'],['العميل مسؤول عن كل شيء','Customer responsible for all'],['لا مسؤولية','No responsibility']],0,
+  'المسؤولية مشتركة.','Responsibility is shared.'),
+q(10,'mcq','ما هو IoT؟','What is IoT?',
+  [['أجهزة فيزيائية متصلة','Connected physical devices'],['برنامج','Software'],['شبكة','Network'],['تشفير','Encryption']],0,
+  'IoT = Internet of Things.','IoT = Internet of Things.'),
+q(10,'mcq','ما هو تحدٍ شائع لأجهزة IoT؟','Common IoT challenge?',
+  [['Default Passwords','Default Passwords'],['تشفير قوي','Strong encryption'],['نسخ احتياطي','Backup'],['سرعة عالية','High speed']],0,
+  'كلمات المرور الافتراضية.','Default passwords.'),
+q(10,'mcq','كيف نحمي أجهزة IoT؟','How to secure IoT?',
+  [['تغيير كلمات المرور الافتراضية','Change default passwords'],['فتح المنافذ','Open ports'],['إلغاء التشفير','Disable encryption'],['استخدام WEP','Use WEP']],0,
+  'تغيير الافتراضية هو الخطوة الأولى.','Changing default passwords is first step.'),
+q(10,'mcq','ما هو تحدٍ مستقبلي للأمن؟','Future security challenge?',
+  [['AI Threats','AI Threats'],['السرعة','Speed'],['الطاقة','Energy'],['التخزين','Storage']],0,
+  'AI Threats = تهديدات الذكاء الاصطناعي.','AI Threats = AI-powered threats.'),
+q(10,'mcq','ما هو تحدٍ مستقبلي آخر؟','Another future challenge?',
+  [['Quantum Computing','Quantum Computing'],['طباعة','Printing'],['تصميم','Design'],['برمجة','Programming']],0,
+  'الحوسبة الكمية تهدد التشفير.','Quantum computing threatens crypto.'),
+q(10,'mcq','كيف نستعد لتهديدات AI؟','How to prepare for AI threats?',
+  [['تدريب المستخدمين','Train users'],['إلغاء التشفير','Disable encryption'],['فتح الشبكة','Open network'],['إهمال التحديثات','Ignore updates']],0,
+  'تدريب المستخدمين ضروري.','User training is essential.'),
+q(10,'mcq','ما هي المسؤولية المشتركة في السحابة؟','Shared Responsibility in cloud?',
+  [['تقسيم المسؤوليات','Split responsibilities'],['المزود فقط','Provider only'],['العميل فقط','Customer only'],['لا مسؤولية','No responsibility']],0,
+  'المسؤولية مشتركة.','Responsibility is shared.'),
+q(10,'mcq','من يحمي البنية التحتية السحابية؟','Who protects cloud infra?',
+  [['المزود','Provider'],['العميل','Customer'],['لا أحد','Nobody'],['الإنترنت','Internet']],0,
+  'المزود يحمي البنية.','Provider protects infra.'),
+q(10,'mcq','من يحمي بيانات العميل في السحابة؟','Who protects customer data in cloud?',
+  [['العميل','Customer'],['المزود','Provider'],['لا أحد','Nobody'],['الإنترنت','Internet']],0,
+  'العميل يحمي بياناته.','Customer protects their data.'),
 q(10,'tf','MFA ضروري في السحابة','MFA in cloud',
   [['صواب','True'],['خطأ','False']],0,'MFA ممارسة أساسية.','MFA basic.'),
 q(10,'tf','IoT خطر DDoS','IoT risks DDoS',
-  [['صواب','True'],['خطأ','False']],0,'IoT مصاب = botnet.','Infected IoT = botnet.')
+  [['صواب','True'],['خطأ','False']],0,'IoT مصاب = botnet.','Infected IoT = botnet.'),
+q(10,'tf','المسؤولية في السحابة مشتركة.','Cloud responsibility is shared.',
+  [['صواب','True'],['خطأ','False']],0,'صحيح.','Correct.'),
+q(10,'tf','كلمات المرور الافتراضية آمنة لأجهزة IoT.','Default IoT passwords are safe.',
+  [['صواب','True'],['خطأ','False']],1,'خطأ. خطيرة جداً.','False. Very dangerous.')
 ];
 
 const TERMS_DICT = [
@@ -1333,29 +1369,6 @@ const GAMES = [
   {id:'truefalse', icon:'✅', color:'#10b981', title:{ar:'صواب أم خطأ', en:'True/False'}, desc:{ar:'15 سؤال TF', en:'15 TF'}, qCount:15, perTime:10, totalTime:null, pointsPerQ:400, timePenalty:false, lives:null, typeFilter:['tf']},
   {id:'marathon', icon:'🏆', color:'#a855f7', title:{ar:'الماراثون', en:'Marathon'}, desc:{ar:'30 سؤال بدون مؤقت', en:'30 q no timer'}, qCount:30, perTime:null, totalTime:null, pointsPerQ:300, timePenalty:false, lives:null, typeFilter:['mcq','tf']},
   {id:'code', icon:'💻', color:'#06b6d4', title:{ar:'تحدي الكود', en:'Code Challenge'}, desc:{ar:'15 سؤال تقني', en:'15 technical q'}, qCount:15, perTime:25, totalTime:null, pointsPerQ:700, timePenalty:false, lives:null, typeFilter:['mcq','tf']}
-];
-
-const EXAM_QUESTIONS = [
-  {lec:1, q:{ar:'ما مبدأ CIA الذي يضمن صحة البيانات؟', en:'Which CIA ensures data correctness?'}, opts:['Confidentiality','Integrity','Availability','Authentication'], answer:1, why:{ar:'Integrity = النزاهة.', en:'Integrity = data correctness.'}},
-  {lec:1, q:{ar:'أي مما يلي ضابط إداري؟', en:'Which is Administrative Control?'}, opts:['Firewall','Security Policy','CCTV','Encryption'], answer:1, why:{ar:'السياسة إدارية.', en:'Policy is administrative.'}},
-  {lec:2, q:{ar:'Caesar key 3: HELLO → ?', en:'Caesar key 3: HELLO → ?'}, opts:['KHOOR','HELLO','ABCDE','XYZ'], answer:0, why:{ar:'H→K, E→H, L→O, O→R.', en:'H→K, E→H, L→O, O→R.'}},
-  {lec:3, q:{ar:'أي خوارزمية متماثلة؟', en:'Which is symmetric?'}, opts:['RSA','ECC','AES','DSA'], answer:2, why:{ar:'AES متماثل.', en:'AES is symmetric.'}},
-  {lec:3, q:{ar:'لماذا DES غير آمن؟', en:'Why is DES insecure?'}, opts:['key 56 بت','block كبير','بطيء','مفتاح طويل'], answer:0, why:{ar:'DES = 56 بت.', en:'DES = 56 bits.'}},
-  {lec:4, q:{ar:'لإرسال سري لـ Bob:', en:'Secret to Bob:'}, opts:['مفتاح Bob العام','مفتاح Bob الخاص','مفتاح Alice','مفتاح مشترك'], answer:0, why:{ar:'بالمفتاح العام للمستقبل.', en:'Recipient public key.'}},
-  {lec:5, q:{ar:'CA = ؟', en:'CA = ?'}, opts:['Certificate Authority','Client','Cloud','Central'], answer:0, why:{ar:'CA = Certificate Authority.', en:'CA = Certificate Authority.'}},
-  {lec:6, q:{ar:'التوقيع يستخدم:', en:'Signature uses:'}, opts:['العام','الخاص','كلمة مرور','لا مفتاح'], answer:1, why:{ar:'خاص للتوقيع.', en:'Private signs.'}},
-  {lec:6, q:{ar:'MFA حقيقي = ؟', en:'True MFA = ?'}, opts:['كلمة مرور + رمز','كلمتان','PIN+PIN','رقم'], answer:0, why:{ar:'فئتان مختلفتان.', en:'Two categories.'}},
-  {lec:7, q:{ar:'Worm vs Virus؟', en:'Worm vs Virus?'}, opts:['Worm ينتشر ذاتياً','Virus يحتاج ملف','لا فرق','Worm غير ضار'], answer:0, why:{ar:'Worm ذاتي.', en:'Worm self-replicates.'}},
-  {lec:7, q:{ar:'DoS vs DDoS؟', en:'DoS vs DDoS?'}, opts:['واحد vs مصادر','DoS أسرع','لا فرق','DDoS أضعف'], answer:0, why:{ar:'واحد vs متعدد.', en:'One vs many.'}},
-  {lec:8, q:{ar:'حماية SQLi؟', en:'SQLi defense?'}, opts:['Parameterized Queries','حذف DB','كلمة مرور','تعطيل'], answer:0, why:{ar:'Prepared statements.', en:'Prepared statements.'}},
-  {lec:8, q:{ar:'XSS = ؟', en:'XSS = ?'}, opts:['سكريبت في سياق موثوق','تعطيل','إغراق','نسخ'], answer:0, why:{ar:'XSS = سكريبت.', en:'XSS = script.'}},
-  {lec:8, q:{ar:'FDE يحمي؟', en:'FDE protects?'}, opts:['القرص كاملاً','ملف','صور','سرعة'], answer:0, why:{ar:'FDE = full disk.', en:'FDE = full disk.'}},
-  {lec:9, q:{ar:'خطوة IR الأولى؟', en:'First IR step?'}, opts:['Preparation','Containment','Recovery','Lessons'], answer:0, why:{ar:'Preparation أولاً.', en:'Preparation first.'}},
-  {lec:9, q:{ar:'NIST CSF محور؟', en:'NIST CSF center?'}, opts:['GOVERN','IDENTIFY','PROTECT','RECOVER'], answer:0, why:{ar:'GOVERN محور.', en:'GOVERN central.'}},
-  {lec:10, q:{ar:'السحابة: من يحمي DC؟', en:'Cloud: DC?'}, opts:['المزود','العميل','لا أحد','الإنترنت'], answer:0, why:{ar:'المزود يحمي البنية.', en:'Provider protects infra.'}},
-  {lec:10, q:{ar:'IoT botnet في؟', en:'IoT botnet in?'}, opts:['DDoS','تشفير','تخزين','سرعة'], answer:0, why:{ar:'IoT مصاب = botnet.', en:'Infected IoT = botnet.'}},
-  {lec:9, q:{ar:'ISO 27001 = ؟', en:'ISO 27001 = ?'}, opts:['معيار ISMS','إطار مرن','لغة','شهادة إلزامية'], answer:0, why:{ar:'معيار دولي.', en:'International standard.'}},
-  {lec:9, q:{ar:'في audit log ما الغرض؟', en:'Audit log purpose?'}, opts:['مساءلة','حذف','تشفير','عرض'], answer:0, why:{ar:'Audit = مساءلة.', en:'Audit = accountability.'}}
 ];
 
 let activeGame = null;
@@ -1489,25 +1502,50 @@ function renderHero(sec){ return `<div class="hero"><div class="hero-icon">${sec
 function renderSection(sec){ contentEl.innerHTML = renderHero(sec) + sec.body[state.lang]; }
 
 function renderExam(sec){
-  const filterHTML = renderLectureFilter(EXAM_QUESTIONS);
-  currentExamQuestions = EXAM_QUESTIONS.filter(q => state.selectedLectures.includes(q.lec));
+  const filterHTML = renderLectureFilter(QUESTIONS);
+  
+  // 1. تجميع الأسئلة الأساسية
+  const basePool = QUESTIONS.filter(q => state.selectedLectures.includes(q.lec));
+  
+  // 2. تحديد العدد المطلوب
+  let limit = state.selectedLectures.length * 20;
+  if (state.selectedLectures.length === 10) limit = 2000; // إذا اختار الكل يعطي 2000 سؤال
+  
+  let currentPool = [...basePool];
+  
+  // 3. إذا العدد المطلوب أكبر من الأسئلة الأساسية، نولد أسئلة إضافية
+  let attempts = 0;
+  while(currentPool.length < limit && attempts < limit * 2) {
+     const genQ = pick(GENERATORS)();
+     genQ.lec = state.selectedLectures[0]; // ننسبه لأول محاضرة مختارة
+     currentPool.push(genQ);
+     attempts++;
+  }
+  
+  // 4. خلط واختيار العدد المطلوب
+  currentExamQuestions = shuffle(currentPool).slice(0, limit);
+  
   let qHTML;
   if(currentExamQuestions.length === 0){
     qHTML = '<div class="callout warn"><span>⚠️</span><div>'+(state.lang==='ar'?'اختر محاضرة واحدة على الأقل':'Select at least one lecture')+'</div></div>';
   } else {
     qHTML = currentExamQuestions.map((q,i) => {
-      const opts = q.opts.map((o,j) => `<label class="opt" data-q="${i}" data-o="${j}"><input type="radio" name="q${i}" value="${j}"><span>${esc(o)}</span></label>`).join('');
+      const opts = q.opts.map((o,j) => `<label class="opt" data-q="${i}" data-o="${j}"><input type="radio" name="q${i}" value="${j}"><span>${esc(o[state.lang])}</span></label>`).join('');
       return `<div class="question" id="q-${i}"><div class="q-head"><span class="q-num">${i+1}</span><h4>${q.q[state.lang]}</h4></div>${opts}<div class="why" hidden></div></div>`;
     }).join('');
   }
+  
   contentEl.innerHTML = `${renderHero(sec)}${filterHTML}
     <div class="callout info"><span>🧠</span><div>${t('examIntro')}</div></div>
     <div class="exam-top"><span>📝 ${currentExamQuestions.length} ${t('question')}</span><span id="progress">0 / ${currentExamQuestions.length}</span></div>
     <div id="exam-body">${qHTML}</div>
     <div class="exam-actions"><button class="btn primary" id="submitExam" ${currentExamQuestions.length===0?'disabled':''}>✅ ${t('submit')}</button><button class="btn" id="resetExam">🔄 ${t('reset')}</button></div>
     <div id="exam-result" class="result" hidden></div>`;
+  
   attachLectureFilter(() => renderExam(sec));
+  
   if(currentExamQuestions.length === 0) return;
+  
   const prog = document.getElementById('progress');
   contentEl.querySelectorAll('input[type="radio"]').forEach(r => {
     r.addEventListener('change', () => {
@@ -1531,7 +1569,7 @@ function checkExam(){
     else if(chosen) optsEls[Number(chosen.value)].classList.add('wrong');
     const why = qEl.querySelector('.why');
     why.hidden = false;
-    why.innerHTML = '<strong>' + t('explanation') + ':</strong> ' + q.why[state.lang];
+    why.innerHTML = '<strong>' + t('explanation') + ':</strong> ' + q.exp[state.lang];
   });
   const pct = Math.round(score/currentExamQuestions.length*100);
   let msg = '📚';
